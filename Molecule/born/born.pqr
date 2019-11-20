@@ -1,0 +1,17 @@
+##############################################################################
+# rcsid="$Id: born.pqr,v 1.1.1.1 2000/10/07 22:57:43 mholst Exp $"
+##############################################################################
+#PDB                   # filetype key
+#9 1                   # number of RGBA colors and number of atoms
+##   RRR GGG BBB AAA   # RGBA order
+#C   0.2 0.2 0.2 1.0   # carbon      -- grey/black
+#O   1.0 0.0 0.0 1.0   # oxygen      -- red
+#N   0.0 0.0 1.0 1.0   # nitrogen    -- blue
+#H   1.0 1.0 1.0 1.0   # hydrogen    -- white/not shown
+#P   0.0 1.0 0.0 1.0   # phosphorous -- green/varies
+#S   1.0 1.0 0.0 1.0   # sulfur      -- yellow
+#L   0.0 0.0 0.0 1.0   # lithium     -- anything/nothing?
+#F   1.0 0.0 1.0 1.0   # fluorine    -- pink/purple/anything
+#I   0.0 1.0 1.0 1.0   # iodine      -- anything
+##############################################################################
+ATOM      1 ION  ION     1      0.0       0.0       0.0      1.0    2.0

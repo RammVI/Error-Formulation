@@ -1,0 +1,3 @@
+sudo docker pull bempp/notebook
+sudo docker run -it --rm -v $(pwd):/home/bempp/work -p 8888:8888 bempp/notebook
+

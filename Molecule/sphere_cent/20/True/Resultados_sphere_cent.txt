@@ -1,0 +1,7 @@
+x_q = 
+[[  1.00000000e-12   1.00000000e-12   1.00000000e-12]]
+ q =   
+[ 1.]  
+Percentaje/100 & Number of elements & Strad & SCoper & SZeb & smooth & time 
+0.20 & 80 & -41.4777994155 & -41.3461869868 & -41.3253337952 & True & 0.3006751537
+Exact solution: -39.663162

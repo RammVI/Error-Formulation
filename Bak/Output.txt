@@ -1,0 +1,2796 @@
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+10 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+10 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 45 iterations
+The linear system for u_r and du_r was solved in 153 iterations
+Three Term Splitting Solvation Energy : -41.34855980 [kCal/mol] 
+The linear system for phi was solved in 128 iterations
+Cooper Solv = -41.233507 
+Zeb Solv = -41.198305 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+10 -s3 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+The linear system for du_h was solved in 44 iterations
+The linear system for u_r and du_r was solved in 168 iterations
+Three Term Splitting Solvation Energy : -41.21555942 [kCal/mol] 
+The linear system for phi was solved in 128 iterations
+Cooper Solv = -41.132729 
+Zeb Solv = -41.078611 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+10 -s4 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+The linear system for du_h was solved in 49 iterations
+The linear system for u_r and du_r was solved in 153 iterations
+Three Term Splitting Solvation Energy : -41.12662625 [kCal/mol] 
+The linear system for phi was solved in 126 iterations
+Cooper Solv = -40.971968 
+Zeb Solv = -40.930367 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+10 -s5 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+The linear system for du_h was solved in 43 iterations
+The linear system for u_r and du_r was solved in 160 iterations
+Three Term Splitting Solvation Energy : -40.99084914 [kCal/mol] 
+The linear system for phi was solved in 119 iterations
+Cooper Solv = -40.789493 
+Zeb Solv = -40.752413 
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+10 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+10 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 47 iterations
+The linear system for u_r and du_r was solved in 168 iterations
+Three Term Splitting Solvation Energy : -41.48011081 [kCal/mol] 
+The linear system for phi was solved in 153 iterations
+Cooper Solv = -41.508058 
+Zeb Solv = -41.514986 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+10 -s3 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+The linear system for du_h was solved in 67 iterations
+The linear system for u_r and du_r was solved in 193 iterations
+Three Term Splitting Solvation Energy : -41.48281483 [kCal/mol] 
+The linear system for phi was solved in 190 iterations
+Cooper Solv = -41.189572 
+Zeb Solv = -41.167787 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+10 -s4 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+The linear system for du_h was solved in 64 iterations
+The linear system for u_r and du_r was solved in 196 iterations
+Three Term Splitting Solvation Energy : -41.48511664 [kCal/mol] 
+The linear system for phi was solved in 178 iterations
+Cooper Solv = -41.492449 
+Zeb Solv = -41.511459 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+10 -s5 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+The linear system for du_h was solved in 60 iterations
+The linear system for u_r and du_r was solved in 190 iterations
+Three Term Splitting Solvation Energy : -41.48815222 [kCal/mol] 
+The linear system for phi was solved in 168 iterations
+Cooper Solv = -41.905294 
+Zeb Solv = -41.997869 
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+30 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+30 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 46 iterations
+The linear system for u_r and du_r was solved in 159 iterations
+Three Term Splitting Solvation Energy : -41.03529625 [kCal/mol] 
+
+The linear system for phi was solved in 126 iterations
+Cooper Solv = -40.617705 
+Zeb Solv = -40.522410 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+30 -s3 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+The linear system for du_h was solved in 51 iterations
+The linear system for u_r and du_r was solved in 198 iterations
+Three Term Splitting Solvation Energy : -40.69030388 [kCal/mol] 
+The linear system for phi was solved in 172 iterations
+Cooper Solv = -40.123957 
+Zeb Solv = -40.047882 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+30 -s4 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+The linear system for du_h was solved in 45 iterations
+The linear system for u_r and du_r was solved in 156 iterations
+Three Term Splitting Solvation Energy : -40.47155547 [kCal/mol] 
+The linear system for phi was solved in 146 iterations
+Cooper Solv = -39.998860 
+Zeb Solv = -39.935795 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+30 -s5 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+The linear system for du_h was solved in 73 iterations
+The linear system for u_r and du_r was solved in 251 iterations
+Three Term Splitting Solvation Energy : -40.34082262 [kCal/mol] 
+The linear system for phi was solved in 237 iterations
+Cooper Solv = -39.977529 
+Zeb Solv = -39.908472 
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+30 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+30 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 52 iterations
+The linear system for u_r and du_r was solved in 173 iterations
+Three Term Splitting Solvation Energy : -41.48545488 [kCal/mol] 
+The linear system for phi was solved in 151 iterations
+Cooper Solv = -41.907314 
+Zeb Solv = -41.990092 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+30 -s3 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+The linear system for du_h was solved in 125 iterations
+The linear system for u_r and du_r was solved in 501 iterations
+Three Term Splitting Solvation Energy : -41.49811666 [kCal/mol] 
+The linear system for phi was solved in 280 iterations
+Cooper Solv = -41.986080 
+Zeb Solv = -42.116356 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+30 -s4 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+The linear system for du_h was solved in 218 iterations
+The linear system for u_r and du_r was solved in 1170 iterations
+Three Term Splitting Solvation Energy : -41.51149936 [kCal/mol] 
+The linear system for phi was solved in 598 iterations
+Cooper Solv = -42.481908 
+Zeb Solv = -42.676085 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+30 -s5 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+The linear system for du_h was solved in 182 iterations
+The linear system for u_r and du_r was solved in 940 iterations
+Three Term Splitting Solvation Energy : -41.52216128 [kCal/mol] 
+The linear system for phi was solved in 540 iterations
+Cooper Solv = -42.121030 
+Zeb Solv = -42.276643 
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+50 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+50 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 53 iterations
+The linear system for u_r and du_r was solved in 212 iterations
+Three Term Splitting Solvation Energy : -40.64973830 [kCal/mol] 
+The linear system for phi was solved in 159 iterations
+Cooper Solv = -40.103821 
+Zeb Solv = -39.978035 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+50 -s3 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+The linear system for du_h was solved in 61 iterations
+The linear system for u_r and du_r was solved in 208 iterations
+Three Term Splitting Solvation Energy : -40.25990325 [kCal/mol] 
+The linear system for phi was solved in 210 iterations
+Cooper Solv = -40.033728 
+Zeb Solv = -39.989852 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+50 -s4 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+The linear system for du_h was solved in 93 iterations
+The linear system for u_r and du_r was solved in 368 iterations
+Three Term Splitting Solvation Energy : -40.06966698 [kCal/mol] 
+The linear system for phi was solved in 257 iterations
+Cooper Solv = -39.943143 
+Zeb Solv = -39.920936 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+50 -s5 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+
+The linear system for du_h was solved in 138 iterations
+The linear system for u_r and du_r was solved in 529 iterations
+Three Term Splitting Solvation Energy : -39.93606277 [kCal/mol] 
+The linear system for phi was solved in 419 iterations
+Cooper Solv = -39.728471 
+Zeb Solv = -39.692361 
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+50 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+50 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 57 iterations
+The linear system for u_r and du_r was solved in 222 iterations
+Three Term Splitting Solvation Energy : -41.49718508 [kCal/mol] 
+The linear system for phi was solved in 180 iterations
+Cooper Solv = -41.907530 
+Zeb Solv = -42.022882 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+50 -s3 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+The linear system for du_h was solved in 108 iterations
+The linear system for u_r and du_r was solved in 478 iterations
+Three Term Splitting Solvation Energy : -41.51886172 [kCal/mol] 
+The linear system for phi was solved in 369 iterations
+Cooper Solv = -42.401193 
+Zeb Solv = -42.603815 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+50 -s4 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+The linear system for du_h was solved in 185 iterations
+The linear system for u_r and du_r was solved in 1092 iterations
+Three Term Splitting Solvation Energy : -41.53729215 [kCal/mol] 
+The linear system for phi was solved in 535 iterations
+Cooper Solv = -41.642892 
+Zeb Solv = -41.738306 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+50 -s5 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+The linear system for du_h was solved in 225 iterations
+The linear system for u_r and du_r was solved in 1262 iterations
+Three Term Splitting Solvation Energy : -41.54854102 [kCal/mol] 
+The linear system for phi was solved in 602 iterations
+Cooper Solv = -41.349249 
+Zeb Solv = -41.409939 
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+70 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+70 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 47 iterations
+The linear system for u_r and du_r was solved in 182 iterations
+Three Term Splitting Solvation Energy : -40.46930750 [kCal/mol] 
+The linear system for phi was solved in 140 iterations
+Cooper Solv = -39.950951 
+Zeb Solv = -39.820148 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+70 -s3 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+The linear system for du_h was solved in 100 iterations
+The linear system for u_r and du_r was solved in 423 iterations
+Three Term Splitting Solvation Energy : -40.07103337 [kCal/mol] 
+The linear system for phi was solved in 382 iterations
+Cooper Solv = -39.800314 
+Zeb Solv = -39.746201 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+70 -s4 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+The linear system for du_h was solved in 214 iterations
+The linear system for u_r and du_r was solved in 831 iterations
+Three Term Splitting Solvation Energy : -39.85701262 [kCal/mol] 
+The linear system for phi was solved in 721 iterations
+Cooper Solv = -39.609736 
+Zeb Solv = -39.567434 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+70 -s5 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+The linear system for du_h was solved in 383 iterations
+The linear system for u_r and du_r was solved in 1491 iterations
+Three Term Splitting Solvation Energy : -39.74467998 [kCal/mol] 
+The linear system for phi was solved in 938 iterations
+Cooper Solv = -39.622523 
+Zeb Solv = -39.606603 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+70 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+70 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 51 iterations
+The linear system for u_r and du_r was solved in 200 iterations
+Three Term Splitting Solvation Energy : -41.50324519 [kCal/mol] 
+The linear system for phi was solved in 163 iterations
+Cooper Solv = -41.284753 
+Zeb Solv = -41.338954 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+70 -s3 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+The linear system for du_h was solved in 84 iterations
+The linear system for u_r and du_r was solved in 360 iterations
+Three Term Splitting Solvation Energy : -41.53532278 [kCal/mol] 
+The linear system for phi was solved in 281 iterations
+Cooper Solv = -41.902009 
+Zeb Solv = -42.023766 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+70 -s4 
+Molecule/sphere_excent/sphere_excent_0-s4.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s4.msh
+The linear system for du_h was solved in 137 iterations
+The linear system for u_r and du_r was solved in 803 iterations
+Three Term Splitting Solvation Energy : -41.55169941 [kCal/mol] 
+The linear system for phi was solved in 586 iterations
+Cooper Solv = -41.364899 
+Zeb Solv = -41.428363 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+70 -s5 
+Molecule/sphere_excent/sphere_excent_0-s5.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s5.msh
+The linear system for du_h was solved in 254 iterations
+The linear system for u_r and du_r was solved in 1713 iterations
+Three Term Splitting Solvation Energy : -41.55784965 [kCal/mol] 
+The linear system for phi was solved in 1107 iterations
+Cooper Solv = -40.894282 
+Zeb Solv = -40.903371 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Molecule/sphere_excent/sphere_excent_0-s6.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+150 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+150 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 19 iterations
+The linear system for u_r and du_r was solved in 25 iterations
+Three Term Splitting Solvation Energy : -40.11853535 [kCal/mol] 
+The linear system for phi was solved in 49 iterations
+Cooper Solv = -40.108257 
+Zeb Solv = -40.105919 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+250 -s0 
+Molecule/sphere_excent/sphere_excent_0-s0.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+150 -s1 
+Molecule/sphere_excent/sphere_excent_0-s1.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+150 -s2 
+Molecule/sphere_excent/sphere_excent_0-s2.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s2.msh
+The linear system for du_h was solved in 15 iterations
+The linear system for u_r and du_r was solved in 23 iterations
+Three Term Splitting Solvation Energy : -41.51768749 [kCal/mol] 
+The linear system for phi was solved in 53 iterations
+Cooper Solv = -41.238028 
+Zeb Solv = -41.302733 
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Molecule/sphere_excent/sphere_excent_0-s3.msh
+Working on Molecule/sphere_excent/sphere_excent_0-s3.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+10 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+10 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+
+The linear system for du_h was solved in 45 iterations
+The linear system for u_r and du_r was solved in 153 iterations
+Three Term Splitting Solvation Energy : -41.34855980 [kCal/mol] 
+The linear system for phi was solved in 128 iterations
+Cooper Solv = -41.233507 
+Zeb Solv = -41.198305 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+10 -s3 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+The linear system for du_h was solved in 44 iterations
+The linear system for u_r and du_r was solved in 168 iterations
+Three Term Splitting Solvation Energy : -41.21555942 [kCal/mol] 
+The linear system for phi was solved in 128 iterations
+Cooper Solv = -41.132729 
+Zeb Solv = -41.078611 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+10 -s4 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+The linear system for du_h was solved in 49 iterations
+The linear system for u_r and du_r was solved in 153 iterations
+Three Term Splitting Solvation Energy : -41.12662625 [kCal/mol] 
+The linear system for phi was solved in 126 iterations
+Cooper Solv = -40.971968 
+Zeb Solv = -40.930367 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+10 -s5 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+The linear system for du_h was solved in 43 iterations
+The linear system for u_r and du_r was solved in 160 iterations
+Three Term Splitting Solvation Energy : -40.99084914 [kCal/mol] 
+The linear system for phi was solved in 119 iterations
+Cooper Solv = -40.789493 
+Zeb Solv = -40.752413 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+10 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+10 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 47 iterations
+The linear system for u_r and du_r was solved in 168 iterations
+Three Term Splitting Solvation Energy : -41.48011081 [kCal/mol] 
+The linear system for phi was solved in 153 iterations
+Cooper Solv = -41.508058 
+Zeb Solv = -41.514986 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+10 -s3 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+The linear system for du_h was solved in 68 iterations
+The linear system for u_r and du_r was solved in 193 iterations
+Three Term Splitting Solvation Energy : -41.48281483 [kCal/mol] 
+The linear system for phi was solved in 190 iterations
+Cooper Solv = -41.189572 
+Zeb Solv = -41.167787 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+10 -s4 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+The linear system for du_h was solved in 64 iterations
+The linear system for u_r and du_r was solved in 196 iterations
+Three Term Splitting Solvation Energy : -41.48511664 [kCal/mol] 
+The linear system for phi was solved in 178 iterations
+Cooper Solv = -41.492449 
+Zeb Solv = -41.511459 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+10 -s5 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+The linear system for du_h was solved in 60 iterations
+The linear system for u_r and du_r was solved in 190 iterations
+Three Term Splitting Solvation Energy : -41.48815222 [kCal/mol] 
+The linear system for phi was solved in 168 iterations
+Cooper Solv = -41.905294 
+Zeb Solv = -41.997869 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+30 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+30 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 46 iterations
+The linear system for u_r and du_r was solved in 159 iterations
+Three Term Splitting Solvation Energy : -41.03529625 [kCal/mol] 
+The linear system for phi was solved in 126 iterations
+Cooper Solv = -40.617705 
+Zeb Solv = -40.522410 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+30 -s3 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+The linear system for du_h was solved in 51 iterations
+The linear system for u_r and du_r was solved in 198 iterations
+Three Term Splitting Solvation Energy : -40.69030388 [kCal/mol] 
+The linear system for phi was solved in 172 iterations
+Cooper Solv = -40.123957 
+Zeb Solv = -40.047882 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+30 -s4 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+The linear system for du_h was solved in 45 iterations
+The linear system for u_r and du_r was solved in 156 iterations
+Three Term Splitting Solvation Energy : -40.47155547 [kCal/mol] 
+The linear system for phi was solved in 146 iterations
+Cooper Solv = -39.998860 
+Zeb Solv = -39.935795 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+30 -s5 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+
+The linear system for du_h was solved in 73 iterations
+The linear system for u_r and du_r was solved in 251 iterations
+Three Term Splitting Solvation Energy : -40.34082262 [kCal/mol] 
+The linear system for phi was solved in 237 iterations
+Cooper Solv = -39.977529 
+Zeb Solv = -39.908472 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+30 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+30 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 52 iterations
+The linear system for u_r and du_r was solved in 173 iterations
+Three Term Splitting Solvation Energy : -41.48545488 [kCal/mol] 
+The linear system for phi was solved in 151 iterations
+Cooper Solv = -41.907314 
+Zeb Solv = -41.990092 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+30 -s3 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+The linear system for du_h was solved in 125 iterations
+The linear system for u_r and du_r was solved in 501 iterations
+Three Term Splitting Solvation Energy : -41.49811666 [kCal/mol] 
+The linear system for phi was solved in 280 iterations
+Cooper Solv = -41.986080 
+Zeb Solv = -42.116356 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+30 -s4 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+The linear system for du_h was solved in 218 iterations
+The linear system for u_r and du_r was solved in 1178 iterations
+Three Term Splitting Solvation Energy : -41.51149936 [kCal/mol] 
+The linear system for phi was solved in 598 iterations
+Cooper Solv = -42.481908 
+Zeb Solv = -42.676085 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+30 -s5 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+The linear system for du_h was solved in 182 iterations
+The linear system for u_r and du_r was solved in 938 iterations
+Three Term Splitting Solvation Energy : -41.52216128 [kCal/mol] 
+The linear system for phi was solved in 540 iterations
+Cooper Solv = -42.121030 
+Zeb Solv = -42.276643 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+50 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+50 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 53 iterations
+The linear system for u_r and du_r was solved in 212 iterations
+Three Term Splitting Solvation Energy : -40.64973830 [kCal/mol] 
+The linear system for phi was solved in 159 iterations
+Cooper Solv = -40.103821 
+Zeb Solv = -39.978035 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+50 -s3 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+The linear system for du_h was solved in 61 iterations
+The linear system for u_r and du_r was solved in 208 iterations
+Three Term Splitting Solvation Energy : -40.25990325 [kCal/mol] 
+The linear system for phi was solved in 210 iterations
+Cooper Solv = -40.033728 
+Zeb Solv = -39.989852 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+50 -s4 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+The linear system for du_h was solved in 93 iterations
+The linear system for u_r and du_r was solved in 368 iterations
+Three Term Splitting Solvation Energy : -40.06966698 [kCal/mol] 
+The linear system for phi was solved in 257 iterations
+Cooper Solv = -39.943143 
+Zeb Solv = -39.920936 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+50 -s5 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+The linear system for du_h was solved in 138 iterations
+The linear system for u_r and du_r was solved in 529 iterations
+Three Term Splitting Solvation Energy : -39.93606277 [kCal/mol] 
+The linear system for phi was solved in 419 iterations
+Cooper Solv = -39.728471 
+Zeb Solv = -39.692361 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+50 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+50 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 57 iterations
+The linear system for u_r and du_r was solved in 222 iterations
+Three Term Splitting Solvation Energy : -41.49718508 [kCal/mol] 
+The linear system for phi was solved in 180 iterations
+Cooper Solv = -41.907530 
+Zeb Solv = -42.022882 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+50 -s3 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+The linear system for du_h was solved in 108 iterations
+The linear system for u_r and du_r was solved in 478 iterations
+Three Term Splitting Solvation Energy : -41.51886172 [kCal/mol] 
+The linear system for phi was solved in 369 iterations
+Cooper Solv = -42.401193 
+Zeb Solv = -42.603815 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+50 -s4 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+The linear system for du_h was solved in 185 iterations
+The linear system for u_r and du_r was solved in 1113 iterations
+Three Term Splitting Solvation Energy : -41.53729215 [kCal/mol] 
+The linear system for phi was solved in 535 iterations
+Cooper Solv = -41.642892 
+Zeb Solv = -41.738306 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+50 -s5 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+The linear system for du_h was solved in 225 iterations
+The linear system for u_r and du_r was solved in 1286 iterations
+Three Term Splitting Solvation Energy : -41.54854102 [kCal/mol] 
+The linear system for phi was solved in 602 iterations
+Cooper Solv = -41.349249 
+Zeb Solv = -41.409939 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+70 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+70 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 47 iterations
+The linear system for u_r and du_r was solved in 182 iterations
+Three Term Splitting Solvation Energy : -40.46930750 [kCal/mol] 
+The linear system for phi was solved in 140 iterations
+Cooper Solv = -39.950951 
+Zeb Solv = -39.820148 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+70 -s3 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+The linear system for du_h was solved in 100 iterations
+The linear system for u_r and du_r was solved in 423 iterations
+Three Term Splitting Solvation Energy : -40.07103337 [kCal/mol] 
+The linear system for phi was solved in 382 iterations
+Cooper Solv = -39.800314 
+Zeb Solv = -39.746201 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+70 -s4 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+The linear system for du_h was solved in 214 iterations
+The linear system for u_r and du_r was solved in 832 iterations
+Three Term Splitting Solvation Energy : -39.85701262 [kCal/mol] 
+The linear system for phi was solved in 721 iterations
+Cooper Solv = -39.609736 
+Zeb Solv = -39.567434 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+70 -s5 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+The linear system for du_h was solved in 383 iterations
+The linear system for u_r and du_r was solved in 1456 iterations
+Three Term Splitting Solvation Energy : -39.74467998 [kCal/mol] 
+The linear system for phi was solved in 939 iterations
+Cooper Solv = -39.622523 
+Zeb Solv = -39.606603 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+70 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+70 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 51 iterations
+The linear system for u_r and du_r was solved in 200 iterations
+Three Term Splitting Solvation Energy : -41.50324519 [kCal/mol] 
+
+The linear system for phi was solved in 163 iterations
+Cooper Solv = -41.284753 
+Zeb Solv = -41.338954 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+70 -s3 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+The linear system for du_h was solved in 84 iterations
+The linear system for u_r and du_r was solved in 360 iterations
+Three Term Splitting Solvation Energy : -41.53532278 [kCal/mol] 
+The linear system for phi was solved in 281 iterations
+Cooper Solv = -41.902009 
+Zeb Solv = -42.023766 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+70 -s4 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s4.msh
+The linear system for du_h was solved in 137 iterations
+The linear system for u_r and du_r was solved in 803 iterations
+Three Term Splitting Solvation Energy : -41.55169941 [kCal/mol] 
+The linear system for phi was solved in 586 iterations
+Cooper Solv = -41.364899 
+Zeb Solv = -41.428363 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+70 -s5 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s5.msh
+The linear system for du_h was solved in 254 iterations
+The linear system for u_r and du_r was solved in 1610 iterations
+Three Term Splitting Solvation Energy : -41.55784965 [kCal/mol] 
+The linear system for phi was solved in 1105 iterations
+Cooper Solv = -40.894282 
+Zeb Solv = -40.903371 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+150 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+150 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 19 iterations
+The linear system for u_r and du_r was solved in 25 iterations
+Three Term Splitting Solvation Energy : -40.11853535 [kCal/mol] 
+The linear system for phi was solved in 49 iterations
+Cooper Solv = -40.108257 
+Zeb Solv = -40.105919 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+150 -s1 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+150 -s2 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s2.msh
+The linear system for du_h was solved in 15 iterations
+The linear system for u_r and du_r was solved in 23 iterations
+Three Term Splitting Solvation Energy : -41.51768749 [kCal/mol] 
+The linear system for phi was solved in 53 iterations
+Cooper Solv = -41.238028 
+Zeb Solv = -41.302733 
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Working on Molecule/sphere_dip_C5/sphere_dip_C5_0-s3.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+10 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+10 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 45 iterations
+The linear system for u_r and du_r was solved in 153 iterations
+Three Term Splitting Solvation Energy : -41.34855980 [kCal/mol] 
+The linear system for phi was solved in 128 iterations
+Cooper Solv = -41.233507 
+Zeb Solv = -41.198305 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+10 -s3 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+The linear system for du_h was solved in 44 iterations
+The linear system for u_r and du_r was solved in 168 iterations
+Three Term Splitting Solvation Energy : -41.21555942 [kCal/mol] 
+The linear system for phi was solved in 128 iterations
+Cooper Solv = -41.132729 
+Zeb Solv = -41.078611 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+10 -s4 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+The linear system for du_h was solved in 49 iterations
+The linear system for u_r and du_r was solved in 153 iterations
+Three Term Splitting Solvation Energy : -41.12662625 [kCal/mol] 
+
+The linear system for phi was solved in 126 iterations
+Cooper Solv = -40.971968 
+Zeb Solv = -40.930367 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+10 -s5 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+The linear system for du_h was solved in 43 iterations
+The linear system for u_r and du_r was solved in 160 iterations
+Three Term Splitting Solvation Energy : -40.99084914 [kCal/mol] 
+The linear system for phi was solved in 119 iterations
+Cooper Solv = -40.789493 
+Zeb Solv = -40.752413 
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+10 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+10 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 47 iterations
+The linear system for u_r and du_r was solved in 168 iterations
+Three Term Splitting Solvation Energy : -41.48011081 [kCal/mol] 
+The linear system for phi was solved in 153 iterations
+Cooper Solv = -41.508058 
+Zeb Solv = -41.514986 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+10 -s3 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+The linear system for du_h was solved in 68 iterations
+The linear system for u_r and du_r was solved in 193 iterations
+Three Term Splitting Solvation Energy : -41.48281483 [kCal/mol] 
+The linear system for phi was solved in 190 iterations
+Cooper Solv = -41.189572 
+Zeb Solv = -41.167787 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+10 -s4 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+The linear system for du_h was solved in 64 iterations
+The linear system for u_r and du_r was solved in 196 iterations
+Three Term Splitting Solvation Energy : -41.48511664 [kCal/mol] 
+The linear system for phi was solved in 178 iterations
+Cooper Solv = -41.492449 
+Zeb Solv = -41.511459 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+10 -s5 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+The linear system for du_h was solved in 60 iterations
+The linear system for u_r and du_r was solved in 190 iterations
+Three Term Splitting Solvation Energy : -41.48815222 [kCal/mol] 
+The linear system for phi was solved in 168 iterations
+Cooper Solv = -41.905294 
+Zeb Solv = -41.997869 
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+30 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+30 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 46 iterations
+The linear system for u_r and du_r was solved in 159 iterations
+Three Term Splitting Solvation Energy : -41.03529625 [kCal/mol] 
+The linear system for phi was solved in 126 iterations
+Cooper Solv = -40.617705 
+Zeb Solv = -40.522410 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+30 -s3 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+The linear system for du_h was solved in 51 iterations
+The linear system for u_r and du_r was solved in 198 iterations
+Three Term Splitting Solvation Energy : -40.69030388 [kCal/mol] 
+The linear system for phi was solved in 172 iterations
+Cooper Solv = -40.123957 
+Zeb Solv = -40.047882 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+30 -s4 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+The linear system for du_h was solved in 45 iterations
+The linear system for u_r and du_r was solved in 156 iterations
+Three Term Splitting Solvation Energy : -40.47155547 [kCal/mol] 
+The linear system for phi was solved in 146 iterations
+Cooper Solv = -39.998860 
+Zeb Solv = -39.935795 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+30 -s5 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+The linear system for du_h was solved in 73 iterations
+The linear system for u_r and du_r was solved in 251 iterations
+Three Term Splitting Solvation Energy : -40.34082262 [kCal/mol] 
+The linear system for phi was solved in 237 iterations
+Cooper Solv = -39.977529 
+Zeb Solv = -39.908472 
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+30 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+30 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+
+The linear system for du_h was solved in 52 iterations
+The linear system for u_r and du_r was solved in 173 iterations
+Three Term Splitting Solvation Energy : -41.48545488 [kCal/mol] 
+The linear system for phi was solved in 151 iterations
+Cooper Solv = -41.907314 
+Zeb Solv = -41.990092 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+30 -s3 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+The linear system for du_h was solved in 125 iterations
+The linear system for u_r and du_r was solved in 501 iterations
+Three Term Splitting Solvation Energy : -41.49811666 [kCal/mol] 
+The linear system for phi was solved in 280 iterations
+Cooper Solv = -41.986080 
+Zeb Solv = -42.116356 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+30 -s4 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+The linear system for du_h was solved in 218 iterations
+The linear system for u_r and du_r was solved in 1145 iterations
+Three Term Splitting Solvation Energy : -41.51149936 [kCal/mol] 
+The linear system for phi was solved in 598 iterations
+Cooper Solv = -42.481908 
+Zeb Solv = -42.676085 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+30 -s5 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+The linear system for du_h was solved in 182 iterations
+The linear system for u_r and du_r was solved in 940 iterations
+Three Term Splitting Solvation Energy : -41.52216128 [kCal/mol] 
+The linear system for phi was solved in 540 iterations
+Cooper Solv = -42.121030 
+Zeb Solv = -42.276643 
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+50 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+50 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 53 iterations
+The linear system for u_r and du_r was solved in 212 iterations
+Three Term Splitting Solvation Energy : -40.64973830 [kCal/mol] 
+The linear system for phi was solved in 159 iterations
+Cooper Solv = -40.103821 
+Zeb Solv = -39.978035 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+50 -s3 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+The linear system for du_h was solved in 61 iterations
+The linear system for u_r and du_r was solved in 208 iterations
+Three Term Splitting Solvation Energy : -40.25990325 [kCal/mol] 
+The linear system for phi was solved in 210 iterations
+Cooper Solv = -40.033728 
+Zeb Solv = -39.989852 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+50 -s4 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+The linear system for du_h was solved in 93 iterations
+The linear system for u_r and du_r was solved in 368 iterations
+Three Term Splitting Solvation Energy : -40.06966698 [kCal/mol] 
+The linear system for phi was solved in 257 iterations
+Cooper Solv = -39.943143 
+Zeb Solv = -39.920936 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+50 -s5 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+The linear system for du_h was solved in 138 iterations
+The linear system for u_r and du_r was solved in 529 iterations
+Three Term Splitting Solvation Energy : -39.93606277 [kCal/mol] 
+The linear system for phi was solved in 419 iterations
+Cooper Solv = -39.728471 
+Zeb Solv = -39.692361 
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+50 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+50 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 57 iterations
+The linear system for u_r and du_r was solved in 222 iterations
+Three Term Splitting Solvation Energy : -41.49718508 [kCal/mol] 
+The linear system for phi was solved in 180 iterations
+Cooper Solv = -41.907530 
+Zeb Solv = -42.022882 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+50 -s3 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+The linear system for du_h was solved in 108 iterations
+The linear system for u_r and du_r was solved in 478 iterations
+Three Term Splitting Solvation Energy : -41.51886172 [kCal/mol] 
+The linear system for phi was solved in 369 iterations
+Cooper Solv = -42.401193 
+Zeb Solv = -42.603815 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+50 -s4 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+The linear system for du_h was solved in 185 iterations
+The linear system for u_r and du_r was solved in 1121 iterations
+Three Term Splitting Solvation Energy : -41.53729215 [kCal/mol] 
+The linear system for phi was solved in 535 iterations
+Cooper Solv = -41.642892 
+Zeb Solv = -41.738306 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+50 -s5 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+The linear system for du_h was solved in 225 iterations
+The linear system for u_r and du_r was solved in 1279 iterations
+Three Term Splitting Solvation Energy : -41.54854102 [kCal/mol] 
+The linear system for phi was solved in 602 iterations
+Cooper Solv = -41.349249 
+Zeb Solv = -41.409939 
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+70 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+70 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 47 iterations
+The linear system for u_r and du_r was solved in 182 iterations
+Three Term Splitting Solvation Energy : -40.46930750 [kCal/mol] 
+The linear system for phi was solved in 140 iterations
+Cooper Solv = -39.950951 
+Zeb Solv = -39.820148 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+70 -s3 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+The linear system for du_h was solved in 100 iterations
+The linear system for u_r and du_r was solved in 423 iterations
+Three Term Splitting Solvation Energy : -40.07103337 [kCal/mol] 
+The linear system for phi was solved in 382 iterations
+Cooper Solv = -39.800314 
+Zeb Solv = -39.746201 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+70 -s4 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+The linear system for du_h was solved in 214 iterations
+The linear system for u_r and du_r was solved in 830 iterations
+Three Term Splitting Solvation Energy : -39.85701262 [kCal/mol] 
+The linear system for phi was solved in 721 iterations
+Cooper Solv = -39.609736 
+Zeb Solv = -39.567434 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+70 -s5 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+The linear system for du_h was solved in 383 iterations
+The linear system for u_r and du_r was solved in 1491 iterations
+Three Term Splitting Solvation Energy : -39.74467998 [kCal/mol] 
+The linear system for phi was solved in 939 iterations
+Cooper Solv = -39.622523 
+Zeb Solv = -39.606603 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+70 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+70 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 51 iterations
+The linear system for u_r and du_r was solved in 200 iterations
+Three Term Splitting Solvation Energy : -41.50324519 [kCal/mol] 
+The linear system for phi was solved in 163 iterations
+Cooper Solv = -41.284753 
+Zeb Solv = -41.338954 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+70 -s3 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+The linear system for du_h was solved in 84 iterations
+The linear system for u_r and du_r was solved in 360 iterations
+Three Term Splitting Solvation Energy : -41.53532278 [kCal/mol] 
+The linear system for phi was solved in 281 iterations
+Cooper Solv = -41.902009 
+Zeb Solv = -42.023766 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+70 -s4 
+Molecule/sphere_dip/sphere_dip_0-s4.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s4.msh
+The linear system for du_h was solved in 137 iterations
+The linear system for u_r and du_r was solved in 803 iterations
+Three Term Splitting Solvation Energy : -41.55169941 [kCal/mol] 
+The linear system for phi was solved in 586 iterations
+Cooper Solv = -41.364899 
+Zeb Solv = -41.428363 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+70 -s5 
+Molecule/sphere_dip/sphere_dip_0-s5.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s5.msh
+The linear system for du_h was solved in 254 iterations
+The linear system for u_r and du_r was solved in 1670 iterations
+Three Term Splitting Solvation Energy : -41.55784965 [kCal/mol] 
+The linear system for phi was solved in 1082 iterations
+Cooper Solv = -40.894283 
+Zeb Solv = -40.903372 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Molecule/sphere_dip/sphere_dip_0-s6.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+150 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+150 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 19 iterations
+The linear system for u_r and du_r was solved in 25 iterations
+Three Term Splitting Solvation Energy : -40.11853535 [kCal/mol] 
+The linear system for phi was solved in 49 iterations
+Cooper Solv = -40.108257 
+Zeb Solv = -40.105919 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+250 -s0 
+Molecule/sphere_dip/sphere_dip_0-s0.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+150 -s1 
+Molecule/sphere_dip/sphere_dip_0-s1.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+150 -s2 
+Molecule/sphere_dip/sphere_dip_0-s2.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s2.msh
+The linear system for du_h was solved in 15 iterations
+The linear system for u_r and du_r was solved in 23 iterations
+Three Term Splitting Solvation Energy : -41.51768749 [kCal/mol] 
+The linear system for phi was solved in 53 iterations
+Cooper Solv = -41.238028 
+Zeb Solv = -41.302733 
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Molecule/sphere_dip/sphere_dip_0-s3.msh
+Working on Molecule/sphere_dip/sphere_dip_0-s3.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+10 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+10 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 45 iterations
+The linear system for u_r and du_r was solved in 153 iterations
+Three Term Splitting Solvation Energy : -41.34855980 [kCal/mol] 
+The linear system for phi was solved in 128 iterations
+Cooper Solv = -41.233507 
+Zeb Solv = -41.198305 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+10 -s3 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+The linear system for du_h was solved in 44 iterations
+The linear system for u_r and du_r was solved in 168 iterations
+Three Term Splitting Solvation Energy : -41.21555942 [kCal/mol] 
+The linear system for phi was solved in 128 iterations
+Cooper Solv = -41.132729 
+Zeb Solv = -41.078611 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+10 -s4 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+The linear system for du_h was solved in 49 iterations
+The linear system for u_r and du_r was solved in 153 iterations
+Three Term Splitting Solvation Energy : -41.12662625 [kCal/mol] 
+The linear system for phi was solved in 126 iterations
+Cooper Solv = -40.971968 
+Zeb Solv = -40.930367 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+10 -s5 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+The linear system for du_h was solved in 43 iterations
+The linear system for u_r and du_r was solved in 160 iterations
+Three Term Splitting Solvation Energy : -40.99084914 [kCal/mol] 
+The linear system for phi was solved in 119 iterations
+Cooper Solv = -40.789493 
+Zeb Solv = -40.752413 
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+10 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+10 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 47 iterations
+The linear system for u_r and du_r was solved in 168 iterations
+Three Term Splitting Solvation Energy : -41.48011081 [kCal/mol] 
+The linear system for phi was solved in 153 iterations
+Cooper Solv = -41.508058 
+Zeb Solv = -41.514986 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+10 -s3 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+
+The linear system for du_h was solved in 67 iterations
+The linear system for u_r and du_r was solved in 193 iterations
+Three Term Splitting Solvation Energy : -41.48281483 [kCal/mol] 
+The linear system for phi was solved in 190 iterations
+Cooper Solv = -41.189572 
+Zeb Solv = -41.167787 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+10 -s4 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+The linear system for du_h was solved in 64 iterations
+The linear system for u_r and du_r was solved in 196 iterations
+Three Term Splitting Solvation Energy : -41.48511664 [kCal/mol] 
+The linear system for phi was solved in 178 iterations
+Cooper Solv = -41.492449 
+Zeb Solv = -41.511459 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+10 -s5 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+The linear system for du_h was solved in 60 iterations
+The linear system for u_r and du_r was solved in 190 iterations
+Three Term Splitting Solvation Energy : -41.48815222 [kCal/mol] 
+The linear system for phi was solved in 168 iterations
+Cooper Solv = -41.905294 
+Zeb Solv = -41.997869 
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+30 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+30 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 46 iterations
+The linear system for u_r and du_r was solved in 159 iterations
+Three Term Splitting Solvation Energy : -41.03529625 [kCal/mol] 
+The linear system for phi was solved in 126 iterations
+Cooper Solv = -40.617705 
+Zeb Solv = -40.522410 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+30 -s3 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+The linear system for du_h was solved in 51 iterations
+The linear system for u_r and du_r was solved in 198 iterations
+Three Term Splitting Solvation Energy : -40.69030388 [kCal/mol] 
+The linear system for phi was solved in 172 iterations
+Cooper Solv = -40.123957 
+Zeb Solv = -40.047882 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+30 -s4 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+The linear system for du_h was solved in 45 iterations
+The linear system for u_r and du_r was solved in 156 iterations
+Three Term Splitting Solvation Energy : -40.47155547 [kCal/mol] 
+The linear system for phi was solved in 146 iterations
+Cooper Solv = -39.998860 
+Zeb Solv = -39.935795 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+30 -s5 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+The linear system for du_h was solved in 73 iterations
+The linear system for u_r and du_r was solved in 251 iterations
+Three Term Splitting Solvation Energy : -40.34082262 [kCal/mol] 
+The linear system for phi was solved in 237 iterations
+Cooper Solv = -39.977529 
+Zeb Solv = -39.908472 
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+30 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+30 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 52 iterations
+The linear system for u_r and du_r was solved in 173 iterations
+Three Term Splitting Solvation Energy : -41.48545488 [kCal/mol] 
+The linear system for phi was solved in 151 iterations
+Cooper Solv = -41.907314 
+Zeb Solv = -41.990092 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+30 -s3 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+The linear system for du_h was solved in 125 iterations
+The linear system for u_r and du_r was solved in 501 iterations
+Three Term Splitting Solvation Energy : -41.49811666 [kCal/mol] 
+The linear system for phi was solved in 280 iterations
+Cooper Solv = -41.986080 
+Zeb Solv = -42.116356 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+30 -s4 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+The linear system for du_h was solved in 218 iterations
+The linear system for u_r and du_r was solved in 1170 iterations
+Three Term Splitting Solvation Energy : -41.51149936 [kCal/mol] 
+The linear system for phi was solved in 598 iterations
+Cooper Solv = -42.481908 
+Zeb Solv = -42.676085 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+30 -s5 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+The linear system for du_h was solved in 182 iterations
+The linear system for u_r and du_r was solved in 937 iterations
+Three Term Splitting Solvation Energy : -41.52216128 [kCal/mol] 
+The linear system for phi was solved in 540 iterations
+Cooper Solv = -42.121030 
+Zeb Solv = -42.276643 
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+50 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+50 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 53 iterations
+The linear system for u_r and du_r was solved in 212 iterations
+Three Term Splitting Solvation Energy : -40.64973830 [kCal/mol] 
+The linear system for phi was solved in 159 iterations
+Cooper Solv = -40.103821 
+Zeb Solv = -39.978035 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+50 -s3 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+The linear system for du_h was solved in 61 iterations
+The linear system for u_r and du_r was solved in 208 iterations
+Three Term Splitting Solvation Energy : -40.25990325 [kCal/mol] 
+The linear system for phi was solved in 210 iterations
+Cooper Solv = -40.033728 
+Zeb Solv = -39.989852 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+50 -s4 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+The linear system for du_h was solved in 93 iterations
+The linear system for u_r and du_r was solved in 368 iterations
+Three Term Splitting Solvation Energy : -40.06966698 [kCal/mol] 
+The linear system for phi was solved in 257 iterations
+Cooper Solv = -39.943143 
+Zeb Solv = -39.920936 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+50 -s5 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+The linear system for du_h was solved in 138 iterations
+The linear system for u_r and du_r was solved in 529 iterations
+Three Term Splitting Solvation Energy : -39.93606277 [kCal/mol] 
+The linear system for phi was solved in 419 iterations
+Cooper Solv = -39.728471 
+Zeb Solv = -39.692361 
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+50 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+50 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 57 iterations
+The linear system for u_r and du_r was solved in 222 iterations
+Three Term Splitting Solvation Energy : -41.49718508 [kCal/mol] 
+The linear system for phi was solved in 180 iterations
+Cooper Solv = -41.907530 
+Zeb Solv = -42.022882 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+50 -s3 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+The linear system for du_h was solved in 108 iterations
+The linear system for u_r and du_r was solved in 478 iterations
+Three Term Splitting Solvation Energy : -41.51886172 [kCal/mol] 
+The linear system for phi was solved in 369 iterations
+Cooper Solv = -42.401193 
+Zeb Solv = -42.603815 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+50 -s4 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+The linear system for du_h was solved in 185 iterations
+The linear system for u_r and du_r was solved in 1134 iterations
+Three Term Splitting Solvation Energy : -41.53729215 [kCal/mol] 
+The linear system for phi was solved in 535 iterations
+Cooper Solv = -41.642892 
+Zeb Solv = -41.738306 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+50 -s5 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+The linear system for du_h was solved in 225 iterations
+The linear system for u_r and du_r was solved in 1272 iterations
+Three Term Splitting Solvation Energy : -41.54854102 [kCal/mol] 
+The linear system for phi was solved in 602 iterations
+Cooper Solv = -41.349249 
+Zeb Solv = -41.409939 
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+70 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+70 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 47 iterations
+The linear system for u_r and du_r was solved in 182 iterations
+Three Term Splitting Solvation Energy : -40.46930750 [kCal/mol] 
+The linear system for phi was solved in 140 iterations
+Cooper Solv = -39.950951 
+Zeb Solv = -39.820148 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+70 -s3 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+The linear system for du_h was solved in 100 iterations
+The linear system for u_r and du_r was solved in 423 iterations
+Three Term Splitting Solvation Energy : -40.07103337 [kCal/mol] 
+The linear system for phi was solved in 382 iterations
+Cooper Solv = -39.800314 
+Zeb Solv = -39.746201 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+70 -s4 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+The linear system for du_h was solved in 214 iterations
+The linear system for u_r and du_r was solved in 831 iterations
+Three Term Splitting Solvation Energy : -39.85701262 [kCal/mol] 
+The linear system for phi was solved in 721 iterations
+Cooper Solv = -39.609736 
+Zeb Solv = -39.567434 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+70 -s5 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+The linear system for du_h was solved in 383 iterations
+The linear system for u_r and du_r was solved in 1520 iterations
+Three Term Splitting Solvation Energy : -39.74467998 [kCal/mol] 
+The linear system for phi was solved in 939 iterations
+Cooper Solv = -39.622523 
+Zeb Solv = -39.606603 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+70 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+70 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 51 iterations
+The linear system for u_r and du_r was solved in 200 iterations
+Three Term Splitting Solvation Energy : -41.50324519 [kCal/mol] 
+The linear system for phi was solved in 163 iterations
+Cooper Solv = -41.284753 
+Zeb Solv = -41.338954 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+70 -s3 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+The linear system for du_h was solved in 84 iterations
+The linear system for u_r and du_r was solved in 360 iterations
+Three Term Splitting Solvation Energy : -41.53532278 [kCal/mol] 
+The linear system for phi was solved in 281 iterations
+Cooper Solv = -41.902009 
+Zeb Solv = -42.023766 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+70 -s4 
+Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s4.msh
+The linear system for du_h was solved in 137 iterations
+The linear system for u_r and du_r was solved in 803 iterations
+Three Term Splitting Solvation Energy : -41.55169941 [kCal/mol] 
+The linear system for phi was solved in 586 iterations
+Cooper Solv = -41.364899 
+Zeb Solv = -41.428363 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+70 -s5 
+Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s5.msh
+The linear system for du_h was solved in 254 iterations
+The linear system for u_r and du_r was solved in 1732 iterations
+Three Term Splitting Solvation Energy : -41.55784965 [kCal/mol] 
+The linear system for phi was solved in 1103 iterations
+Cooper Solv = -40.894282 
+Zeb Solv = -40.903371 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Adapting the mesh is taking too long! - Breaking 
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s6.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+150 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+150 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 19 iterations
+The linear system for u_r and du_r was solved in 25 iterations
+Three Term Splitting Solvation Energy : -40.11853535 [kCal/mol] 
+
+The linear system for phi was solved in 49 iterations
+Cooper Solv = -40.108257 
+Zeb Solv = -40.105919 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Exact Solution: -39.663162--------------------------------------------
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+250 -s0 
+Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s0.msh
+The linear system for du_h was solved in 2 iterations
+The linear system for u_r and du_r was solved in 2 iterations
+Three Term Splitting Solvation Energy : -46.65214219 [kCal/mol] 
+The linear system for phi was solved in 5 iterations
+Cooper Solv = -46.789792 
+Zeb Solv = -46.789792 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+150 -s1 
+Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s1.msh
+The linear system for du_h was solved in 10 iterations
+The linear system for u_r and du_r was solved in 13 iterations
+Three Term Splitting Solvation Energy : -41.47779929 [kCal/mol] 
+The linear system for phi was solved in 10 iterations
+Cooper Solv = -41.346187 
+Zeb Solv = -41.325334 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+150 -s2 
+Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s2.msh
+The linear system for du_h was solved in 15 iterations
+The linear system for u_r and du_r was solved in 23 iterations
+Three Term Splitting Solvation Energy : -41.51768749 [kCal/mol] 
+The linear system for phi was solved in 53 iterations
+Cooper Solv = -41.238028 
+Zeb Solv = -41.302733 
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Working on Molecule/sphere_dip_12/sphere_dip_12_0-s3.msh
+Exact Solution: -39.663162--------------------------------------------
+
