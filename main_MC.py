@@ -27,7 +27,7 @@ import trimesh
 
 global mol_name , mesh_density , suffix , path , q , x_q , phi_space , phi_order , u_space , u_order
 
-def main_MC(name , dens , input_suffix ):
+def main_MC(name , dens , input_suffix , N , h):
     
     mesh_info.mol_name     = name
     mesh_info.mesh_density = dens
@@ -64,7 +64,7 @@ def main_MC(name , dens , input_suffix ):
     mesh = trimesh.Trimesh(vertices = vert_array , faces = face_array-1)
     
     depreciated_term , used_points = scalar_times_laplacian(mesh , local_U_interior , 
-                           local_U_Reac_interior , 40 , 0.001)   
+                           local_U_Reac_interior , N , h)   
     
     
     return depreciated_term , used_points
@@ -72,21 +72,22 @@ def main_MC(name , dens , input_suffix ):
     
 
 if True:
-    Resultados = open( 'Resultados_MC_15_11.txt' , 'w+' )
+    Resultados = open( 'Resultados_MC_16_11.txt' , 'w+' )
 
     Resultados.write( ' molecule & Density & Vol integral & N Points \n')
 
     for molecule in ('arg' , 'methanol'):
         
-        for dens in ( 0.5 , 1.0 , 2.0 ):
+        for dens in (0.5 , 1.0 ):
             
-            text = '{0} & {1}'.format( molecule , str(dens)  )
+            for n in (20 , 30 , 40):
+            
+                text = '{0} & {1}'.format( molecule , str(dens)  )
 
-            depreciated_term , used_points = main_MC(molecule , dens , '-0' )
-                
-                
-            text = text + ' & {0:.10f} & {1:d}'.format( depreciated_term , used_points )
-            Resultados.write( text )
+                depreciated_term , used_points = main_MC(molecule , dens , '-0' , n , 0.001 )
+
+                text = text + ' & {0:.10e} & {1:d} \n'.format( depreciated_term[0,0] , used_points )
+                Resultados.write( text )
                             
     Resultados.write('Conditions\n')
     Resultados.write('Smooth and Use_Gamer: both Disabled \n')

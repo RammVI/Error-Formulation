@@ -291,6 +291,8 @@ def creates_random_points( mesh , N ):
            direction. Minimal of 3 points.
     '''
     
+    print('Creating a box that contains the mesh')
+    
     x_lims = np.array( ( np.amin(mesh.vertices[:,0]) , np.max(mesh.vertices[:,0])) )
     y_lims = np.array( ( np.amin(mesh.vertices[:,1]) , np.max(mesh.vertices[:,1])) )
     z_lims = np.array( ( np.amin(mesh.vertices[:,2]) , np.max(mesh.vertices[:,2])) )
@@ -301,6 +303,8 @@ def creates_random_points( mesh , N ):
     y_length = y_lims[1] - y_lims[0]
     z_length = z_lims[1] - z_lims[0]
     
+    print('Generating the points inside the box')
+    
     points_in_box = np.empty((0,3))
     for i in range(N):
         for j in range(N):
@@ -310,11 +314,13 @@ def creates_random_points( mesh , N ):
                 new_point     = Ref_point + np.array((x_length * i , y_length * j , z_length * k )) / float(N-1)
                 
                 points_in_box = np.vstack( [new_point , points_in_box ] )
-    
+    print('Filtering the interior points')
     filtered_vert     = mesh.contains(points_in_box)
     #rearranged_filter = np.array((filtered_vert,filtered_vert,filtered_vert)).transpose()*1    
     
     num_points = np.sum(filtered_vert*1)
+    
+    print('Ended Filtering data')
         
     return filtered_vert , points_in_box , num_points
 

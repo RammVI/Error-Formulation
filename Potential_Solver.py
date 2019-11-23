@@ -19,6 +19,9 @@ from quadrature import *
 from Mesh_Ref_V2 import *
 from Grid_Maker_R2 import *
 
+# for debuging
+from random import randint
+
 # --------------------------------------------------------------------------------
 
 def zero_i(x, n, domain_index, result):
@@ -382,6 +385,8 @@ def normals_to_element( face_array , vert_array ):
 def z_value(x, n, domain_index, result):
     result[:] = x[0]
     
+from constants import potential
+    
 def local_U_Reac_interior( x ):
     '''
     Computes the local reaction potential value for a given position and the boundary solution
@@ -391,12 +396,12 @@ def local_U_Reac_interior( x ):
     x         : Position or array of points
     '''
     
-    from mesh_info import potential
+    aux_x = np.array([x]).transpose()
     
-    slp_in_O = lp.single_layer(potential.neumann_space_u, mesh_info.x_q.transpose()) 
-    dlp_in_O = lp.double_layer(potential.dirichl_space_u, mesh_info.x_q.transpose())
+    slp_in_O = lp.single_layer(potential.neumann_space_u, aux_x ) 
+    dlp_in_O = lp.double_layer(potential.dirichl_space_u, aux_x )
     
-    U_reac   =  slp_in_O * potential.dU  -  dlp_in_O * potential.U
+    U_reac   =  slp_in_O * potential.dU.real  -  dlp_in_O * potential.U.real
     
     return U_reac
 
@@ -409,4 +414,5 @@ def local_U_interior( x ):
     U_S = u_s_Teo( x )
     
     return local_U_Reac_interior( x ) + U_S
+
 

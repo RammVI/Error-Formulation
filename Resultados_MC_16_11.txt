@@ -1,0 +1,19 @@
+ molecule & Density & Vol integral & N Points 
+arg & 0.5 & 3.5603642030e-02 & 2409 
+arg & 0.5 & 9.1525760677e-07 & 8575 
+arg & 0.5 & 1.6424138791e-03 & 20902 
+arg & 1.0 & -3.1682868034e-06 & 2442 
+arg & 1.0 & -9.0157814297e-05 & 8670 
+arg & 1.0 & 1.6564379563e-05 & 21102 
+methanol & 0.5 & 2.5022163200e-08 & 2725 
+methanol & 0.5 & 2.7184485497e-06 & 9690 
+methanol & 0.5 & -2.6039691200e-05 & 23558 
+methanol & 1.0 & -1.8162831523e-08 & 3199 
+methanol & 1.0 & 6.2153449447e-03 & 11463 
+methanol & 1.0 & 3.7021988271e-07 & 27840 
+Conditions
+Smooth and Use_Gamer: both Disabled 
+Adjoint mesh with uniform refinement: Disabled 
+Note: Used for Monte Carlo integration, but points are not strictly random, 
+      points distance is constant in each direction, but not controlable. See quadrature 
+      for more information 

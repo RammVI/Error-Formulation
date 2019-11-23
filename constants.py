@@ -1,4 +1,8 @@
 
+'''
+Saves values, constants, mesh info and obtained solutions from others .py files
+'''
+
 import os
 import numpy as np
 
@@ -23,7 +27,7 @@ class values():
     
 class mesh_info():
     
-    global mol_name , mesh_density , suffix , path , q , x_q , phi_space , phi_order , u_space , u_order
+    #global mol_name , mesh_density , suffix , path , q , x_q , phi_space , phi_order , u_space , u_order
     
     mol_name = ''
     mesh_density = 2.0
