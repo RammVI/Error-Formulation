@@ -1,0 +1,7 @@
+ molecule & Density & Vol integral & N Points 
+methanol & 0.5 & 0.0000000250 & 2725Conditions
+Smooth and Use_Gamer: both Disabled 
+Adjoint mesh with uniform refinement: Disabled 
+Note: Used for Monte Carlo integration, but points are not strictly random, 
+      points distance is constant in each direction, but not controlable. See quadrature 
+      for more information 
