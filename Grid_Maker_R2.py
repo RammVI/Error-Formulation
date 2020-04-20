@@ -320,7 +320,6 @@ def factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suf
         
         for line in face_Text[:-1]:
             line = line.split()
-
             A, B, C = np.array(line).astype(int)
             side1, side2  = vertex[B-1]-vertex[A-1], vertex[C-1]-vertex[A-1]
             face_area = 0.5*np.linalg.norm(np.cross(side1, side2))
@@ -470,7 +469,7 @@ def vert_and_face_arrays_to_text_and_mesh(mol_name , vert_array , face_array , s
     min_area = 0
 
     factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador='Self', suffix=suffix)
-    triangle_areas(mol_directory , mol_name , str(dens) , suffix = suffix , Self_build = Self_build)
+    #triangle_areas(mol_directory , mol_name , str(dens) , suffix = suffix , Self_build = Self_build)
     
     return None
 
@@ -507,3 +506,9 @@ def Grid_loader(mol_name , mesh_density , suffix , GAMer=False):
         grid = bempp.api.import_grid(grid_name_File)
     
     return grid
+
+
+
+
+
+    

@@ -12,6 +12,9 @@ from constants import mesh_info
 from constants import values
 import trimesh
 
+import bempp.api
+from constants import *
+
 
 def unpack_info( face , face_array, vert_array , soln , space , order):
     
@@ -81,6 +84,7 @@ def matrix_lineal_transform( v1 , v2 , v3 ):
     V =   np.transpose( np.array( ( v1 , v2 , v3) ) )
     
     if np.linalg.det(V) == 0:
+        print(V)
         print('No invertible matrix encountered!')
         
     
@@ -195,9 +199,47 @@ def int_calc_i( face , face_array , vert_array , soln1 , space1 , order1 , soln2
         
     return integral_i.real*Area
 
+def integral_per_element(f , df , face_array , vert_array , f_space , f_order , df_space , df_order ,
+                         N , grid = None):
+    '''
+    Returns 2 arrays containing the integral per element of f and df.
+    f : Solution from Bempp
+    df: Solution from Bempp
+    face_array starting from 0
+    vert_array
+    f_space
+    f_order
+    df_space
+    df_order
+    grid : The grid
+    '''
+    if grid == None:
+        print('Fatal error, didnt find the grid.')
+        
+    f_array = np.empty((0,1))
+    df_array= np.empty((0,1))
+    
+    sol_ones = np.ones((N+1 , 1))
+    
+    const_space = bempp.api.function_space(grid, "DP", 0)
+    
+    ones = bempp.api.GridFunction(const_space, coefficients=np.ones((len(face_array),)))
+    
+    for face in face_array:
+        f_aux = int_calc_i( face+1  , face_array+1 , vert_array ,
+                           f ,  f_space ,  f_order , ones , 'DP' , 0 , N)
+        df_aux= int_calc_i( face+1  , face_array+1  , vert_array ,
+                           df , df_space , df_order , ones , 'DP' , 0 , N)
+        f_array  = np.vstack((f_array  , f_aux ))
+        df_array = np.vstack((df_array , df_aux))
+        
+    return f_array , df_array
+        
+
 def edge_counter(face_array):
     '''
     Counts non repited combinations for every triangle edge using their index position in vert_array.
+    The grid must be a closed surface.
     '''
     aristas = np.empty((0,2))
 
@@ -240,12 +282,12 @@ def Theorical_int_P1_times_P1( sol1 , sol2 , Area):
 
 # Volume integrals over the inner domain - Via Monte Carlo November 3th
 
-def laplacian(func , x , h , mesh , avoid_charges = True):
+def laplacian(func , x , h , mesh , x_q , q , avoid_charges = True):
     '''
     Calculates the laplacian of a given function, using a constant spacing. 
     Laplacian = sum(f(x+h) - 2f(x) + f(x-h) )/h**2  for each component.
     
-    MUST ADD a [.iscontained] function in the future or branch function. Parameters:
+    Parameters:
     func : Function
     x    : Point
     h    : Spacing
@@ -257,7 +299,7 @@ def laplacian(func , x , h , mesh , avoid_charges = True):
         
     mid_col = - 2. * func(x)
     
-    # Data also migth be filtered in this stage
+    # Data is also filtered in this stage
     
     evolving_points = np.array((x + h*i , x - h*i , x + h*j , x - h*j , x + h*k , x - h*k ))
     
@@ -265,20 +307,22 @@ def laplacian(func , x , h , mesh , avoid_charges = True):
         return False , 0
     
     if avoid_charges:
-        if np.linalg.norm(x-mesh_info.x_q)<10**-8:
-            print('avoided charge')
-            return False , 0
-        for proximity_point in evolving_points:
-            if np.linalg.norm(x-mesh_info.x_q)<10**-8:
-                print('avoided charge')
-                return False , 0
+        if len(q)==1:
+            for x_p in evolving_points: 
+                if np.linalg.norm(x_p-x_q) < 10**-8:
+                    return False , 0
+        else:
+            for x_p in evolving_points:
+                for x_q_i  in x_q:
+                    if np.linalg.norm(x_p-x_q_i) < 10**-8:
+                        return False , 0
     
     
     matrix = np.array( [ [ func(evolving_points[0]) , mid_col , func(evolving_points[1]) ],
                          [ func(evolving_points[2]) , mid_col , func(evolving_points[3]) ],
                          [ func(evolving_points[4]) , mid_col , func(evolving_points[5]) ] ] )
     
-    return True , matrix.sum(axis=1).sum() / h**2
+    return True , matrix.sum() / h**2
 
 def creates_random_points( mesh , N ):
     '''
@@ -801,6 +845,9 @@ def getWeights(K):
     return w
 # yapf: enable
 
+
+# -------------- Volume integrals ---------------
+
 def volume_integral_laplacian_MC(mesh , func , N , h):
     '''Calculates volume integrals via Monte Carlo integration
     Checks if points are inside the desired domain.
@@ -832,13 +879,15 @@ def volume_integral_laplacian_MC(mesh , func , N , h):
 
     return suma_int * mesh.volume / total_points , total_points
 
-def scalar_times_laplacian(mesh , scalar_func , laplacian_func , N , h):
+def scalar_times_laplacian_boxed(mesh , scalar_func , laplacian_func , x_q , q , N , h):
     '''
     Calculates {int_Vol (f Laplacian[g]) dV} integrals
     
     mesh : Trimesh mesh
     scalar_func    : Function ponderating the laplacian term
     laplacian_func : Function for which the Laplacian is calculated
+    x_q  : Charges position (N,3)
+    q    : Charges value (N,1)
     N    : Number of points in a box edge, final used points might be arround 0.6*N**3.
     h    : Spacing
     '''
@@ -851,7 +900,8 @@ def scalar_times_laplacian(mesh , scalar_func , laplacian_func , N , h):
     for point_inside in points_cond:
         
         if point_inside:
-            Worked , lapl = laplacian( laplacian_func , internal_points[point_count] , h , mesh )
+            Worked , lapl = laplacian( laplacian_func , internal_points[point_count] , h , mesh ,
+                                     x_q , q , avoid_charges = True)
             if Worked:
                 suma_int+= lapl * scalar_func( internal_points[point_count] )
             elif not Worked:
@@ -862,3 +912,61 @@ def scalar_times_laplacian(mesh , scalar_func , laplacian_func , N , h):
     total_points = num_points - not_worked
     
     return suma_int * mesh.volume / total_points , total_points
+
+def scalar_times_laplacian_trimesh(mesh , scalar_func , laplacian_func , N , h ,
+                                   x_q , q , return_points = False , return_values = False):
+    '''
+    Calculates {int_Vol (f Laplacian[g]) dV} integrals with a random distribution of points.
+    
+    mesh : Trimesh mesh
+    scalar_func    : Function ponderating the laplacian term
+    laplacian_func : Function for which the Laplacian is calculated
+    N    : Number of points inside the mesh.
+    h    : Spacing
+    return_points = False/True : if the used point is in the output. Changes brach functinos!!! Test only.
+    '''
+    points = trimesh.sample.volume_mesh(mesh , N)
+        
+    point_count = 0 ; not_worked = 0;
+    suma = 0.
+    
+    if return_points:   points_W  = np.empty((0,1)) # Saves the points that worked for mc int
+    
+    if return_values:   values_W  = np.empty((0,1))
+    
+    for point in points:
+        
+        Worked , lapl = laplacian( laplacian_func , point , h , mesh ,x_q , q , avoid_charges = True)
+        
+        if Worked:
+            
+            value = lapl * scalar_func( point )
+            
+            suma+= value
+            
+            if return_points:
+                points_W = np.vstack((points_W , point_count))
+        
+            if return_values:
+                values_W = np.vstack((values_W , value))
+                
+        elif not Worked:
+            not_worked+=1
+        point_count+=1
+    
+    total_points = point_count - not_worked
+    
+    
+    # Test mode
+    if return_points:
+        points_r = np.empty((0,3))
+        for i in points_W.astype(int):
+            points_r = np.vstack([points_r , points[i]])
+            
+        if return_values:
+            return suma*mesh.volume / total_points , total_points , points , values_W
+        
+    if return_values:
+        return suma*mesh.volume / total_points , total_points , values_W
+            
+    return suma*mesh.volume / total_points , total_points

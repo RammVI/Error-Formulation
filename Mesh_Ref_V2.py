@@ -18,7 +18,8 @@
 
 # 11-09 Adjoint mesh usefull
 
-import bempp.api, numpy as np
+#import bempp.api
+import numpy as np
 from math import pi
 import os
 
@@ -422,7 +423,6 @@ def mesh_refiner(face_array , vert_array , soln , percentaje ):
     
     status = final_status(face_array , soln , percentaje )
     
-    
     new_faces_array = np.empty((0,3))
     new_vert_array = vert_array.copy()
     
@@ -630,15 +630,322 @@ def elements_position_in_normal_grid(adj_face_array , adj_vert_array , face_arra
         c+=1
 
     return adj_relation
+
+
+def normals(face_array , vert_array):
+    '''
+    Returns an array (N,3) containing the normal vectors to each face.
+    '''
     
-#def adjoint_mesh(face_array, vert_array , mol_name , output_suffix , dens):
-#    '''
-#    Returns a mesh with a uniform mesh refinement.
-#    '''
-#    aux_sol = np.ones((len(face_array),1))
+    normals_array = np.empty((0,3))
+    for f in face_array:
+        f1 , f2 , f3 = f
+
+        v1 , v2 , v3 = vert_array[f1] , vert_array[f2] , vert_array[f3]
+        
+        normal = np.cross(v2-v1 , v3 - v1 )
     
-#    face_array_adj , vert_array_adj = mesh_refiner(face_array , vert_array , aux_sol , 1.5 )
+        unit_n = normal/np.linalg.norm(normal)
+        
+        normals_array = np.vstack((normals_array , unit_n))
     
-#    vert_and_face_arrays_to_text_and_mesh( name , vert_array_adj ,
-#                            face_array_adj.astype(int)[:] , output_suffix +'_adj', dens , Self_build=True)
+    return normals_array.astype(float)
+
+def check_coplanar(triangle_1 , triangle_2 , n_1):
+    
+    v1_1 , v1_2 , v1_3 = triangle_1
+    
+    coplanar = True
+    
+    for point in triangle_2:
+        
+        condition = np.dot(n_1 , point - v1_1)
+        
+        if condition > 10.**-6:
+            coplanar = False
+            break
             
+    return coplanar
+
+def Area_of_a_Triangle(A,B,C):
+    '''
+    Returns the Area of a triangle for a trio of vertices.
+    Params: 
+    Vertex_1 , Vertex_2 , Vertex_3
+    '''
+    AB = B-A
+    AC = C-A
+    return 0.5 * np.linalg.norm( np.cross(AB,AC))
+
+def check_contained_triangles_alternative_2(mesh_1 , mesh_2 , N_ref , assume_uniform = True , Tolerance=10**-10
+                                           ,check_for_unnasigned_faces=True):
+    '''
+    Condicion de area y normales para revisar si el triangulo se encuentra dentro de la cara determinada.
+    Params:
+    mesh_1 : Coarse mesh
+    mesh_2 : Finner mesh
+    N_ref  : Number of refinements
+    Assume_uniform : True o False
+    Tolerance : Maximum observable difference between the area triangles and the normals.
+    '''
+    face_1 , vert_1 = np.transpose(mesh_1.leaf_view.elements) , np.transpose(mesh_1.leaf_view.vertices)
+    face_2 , vert_2 = np.transpose(mesh_2.leaf_view.elements) , np.transpose(mesh_2.leaf_view.vertices)
+    
+    normal_1 , normal_2 = normals(face_1 , vert_1 ) , normals(face_2 , vert_2)
+    
+    relationship = np.zeros((len(face_2),)) - 1
+    
+    c1=0
+    for f1 in face_1:
+        
+        v1_1 , v1_2 , v1_3 = vert_1[f1[0]] , vert_1[f1[1]] , vert_1[f1[2]]
+        
+        Area_1 = Area_of_a_Triangle(v1_1 , v1_2 , v1_3)
+        
+        n_1 = normal_1[c1]
+        
+        c2 = 0
+        for f2 in face_2:
+            if relationship[c2]<0:
+                
+                v2_1 , v2_2 , v2_3 = vert_2[f2[0]] , vert_2[f2[1]] , vert_2[f2[2]]
+                
+                n_2 = normal_2[c2]
+                
+                condition_counter = 0 
+                for point in [v2_1 , v2_2 , v2_3]:
+                    A1 , A2 , A3 = [Area_of_a_Triangle(v1_1,v1_2,point) , 
+                                    Area_of_a_Triangle(v1_1,v1_3,point) ,
+                                    Area_of_a_Triangle(v1_2,v1_3,point)   ]
+                    
+                    if np.abs((A1+A2+A3)-Area_1)<=Tolerance and np.linalg.norm(n_1 - n_2)<=Tolerance:
+                        condition_counter +=1
+                
+                if condition_counter == 3:
+                    
+                    relationship[c2] = c1
+
+                
+            c2+=1
+        c1+=1
+        
+    relationship = relationship.astype(int)
+        
+    if -1 in relationship:
+        print('ERROR - DID NOT ASSIGN A FACE TO COARSE MESH')
+        print(relationship)
+        
+    if check_for_unnasigned_faces:
+        counter_check(relationship , mesh_1 , mesh_2 , N_ref )
+
+    if assume_uniform:
+        counter_check(relationship , mesh_1 , mesh_2 , N_ref)
+    
+    return relationship
+
+def check_contained_triangles(mesh_1 , mesh_2 , N_ref , assume_uniform = True):
+    
+    face_1 , vert_1 = np.transpose(mesh_1.leaf_view.elements) , np.transpose(mesh_1.leaf_view.vertices)
+    face_2 , vert_2 = np.transpose(mesh_2.leaf_view.elements) , np.transpose(mesh_2.leaf_view.vertices)
+    
+    normal_1 , normal_2 = normals(face_1 , vert_1 ) , normals(face_2 , vert_2)
+    
+    #print(normal_1 , normal_2)
+    
+    relationship = np.zeros((len(face_2),)) - 1
+    
+    c1=0
+    for f1 in face_1:
+        
+        v1_1 , v1_2 , v1_3 = vert_1[f1[0]] , vert_1[f1[1]] , vert_1[f1[2]]
+        
+        n_1 = normal_1[c1]
+        
+        c2 = 0
+        for f2 in face_2:
+            if relationship[c2]<0:
+                n_2 = normal_2[c2]
+                v2_1 , v2_2 , v2_3 = vert_2[f2[0]] , vert_2[f2[1]] , vert_2[f2[2]]
+                
+                if np.linalg.norm(n_1-n_2)<10.**-6 or np.linalg.norm(n_1+n_2)<10.**-6 :
+                    if check_coplanar([ v1_1 , v1_2 , v1_3 ] , [v2_1 , v2_2 , v2_3] , n_1 ):
+                        relationship[c2] = c1
+            c2+=1
+        c1+=1
+        
+    relationship = relationship.astype(int)
+        
+    if -1 in relationship:
+        print('ERROR - DID NOT ASSIGN A FACE TO COARSE MESH')
+        print(relationship)
+    
+    
+    
+    if assume_uniform:
+        counter_check(relationship , mesh_1 , mesh_2 , N_ref)
+    
+    #print(relationship)
+    
+    return relationship
+                    
+def counter_check(relationship , mesh_1 , mesh_2 , N_ref ):
+    '''
+    Counts the number of faces assigned to the coarse mesh, for a given number of unifrom refinement cycles.
+    '''
+    
+    check_list = np.zeros(( len(np.transpose(mesh_1.leaf_view.elements)) , 2 )) 
+    
+    check_list[:,0] = np.arange(0, len(np.transpose(mesh_1.leaf_view.elements)) )
+    
+    for i in relationship:
+        check_list[i,1]+=1
+    
+    if np.any(check_list[:,1].astype(int)!=4**N_ref):
+        
+        print('ERROR - TRIANGLE ASSIGNED TO OTHER TRIANGLE OF THE COARSE MESH')
+        print(check_list)
+        
+    return None
+
+def uniform_refinement_points(v1 , v2 , v3 ):
+    '''
+    Creates an array that contains ALL the points generated when doing 1 uniform refinement.
+    '''
+    Points = np.array([v1 , v2 , v3 , (v1+v2)/2. , (v2+v3)/2. , (v1+v3)/2.])
+    N_face = np.array( [[0 , 3 , 5 ] , [3 , 1 , 4] , [4 , 2 , 5] , [3 , 4 , 5] ] )
+    
+    sorted_points = np.zeros([4 * 3 , 3])
+    face_count = 0
+    for face in N_face:
+        for f in face:
+            sorted_points[face_count] = Points[f]
+            face_count +=1
+            
+    return sorted_points
+
+def recursive_refinement_points(v1 , v2 , v3 , N_Ref , delete_repeated_points = False ):
+    '''
+    Creates an array that contains ALL the points generated when doing N_Ref uniform refinements.
+    Params:
+    v1 , v2 , v3 : Vertices
+    N_Ref : Number of uniform refinements
+    '''
+    Ref = 0
+    
+    points = np.zeros((4**N_Ref*3 , 3))
+    points[0] , points[1] , points[2] = v1 , v2 , v3
+    
+    while Ref<=N_Ref:
+        
+        aux_points = np.zeros((4**N_Ref*3 , 3))
+        
+        for c in range(4**(N_Ref-1)):
+            v1 , v2 , v3 = points[3*c] , points[3*c+1] , points[3*c+2]
+            
+            if np.all(np.array([v1,v2,v3])<10**-8):
+                break
+        
+            new_points = uniform_refinement_points( v1 , v2 , v3 )
+            
+            for aux_c in range(12):
+                aux_points[12*c+aux_c] = new_points[aux_c]
+            
+        points = aux_points.copy()
+        
+        Ref+=1
+    
+    if delete_repeated_points:
+        clean_set = np.empty((0,3))
+        clean_set = np.vstack((clean_set , points[0] , points[1]))
+           
+        for p in points:
+            
+            is_contained = False
+            for clean_p in clean_set:
+                if np.linalg.norm(clean_p - p ) < 10**-8:
+                    is_contained = True
+            if not is_contained:
+                clean_set = np.vstack([clean_set , p])
+                
+            
+        points=clean_set.copy()
+        
+    return points*2
+
+def similarities_counter(Small_Array , Big_Array , Tol = 10**-4):
+    '''
+    Returns True if all the Small_Array values are contained into the Big_Array for a given
+    Tolerance
+    '''
+    c=0
+    for small_point in Small_Array:
+        for big_point in Big_Array:
+            if np.linalg.norm(big_point-small_point)<Tol:
+                c+=1
+    
+    if c==len(Small_Array)-1:
+        return True
+    return False
+
+def unitary_refinement_generator(N_ref):
+    '''
+    Generates an array containing all the points inside the unitary triangle
+    (0,0) , (1,0) , (0,1)
+    Params:
+    N_ref: Number of refinements
+    '''
+    Unit = np.array([ [0.,0.,0.] , [1. , 0. ,0.] , [0.,1., 0.] ])
+    points = recursive_refinement_points(Unit[0],Unit[1],Unit[2], N_ref , delete_repeated_points=True)
+    return points
+
+def not_lineal_transformation(v1 , v2 , v3 , x_k):
+    '''
+    Moves the point x_k from a triangle with vertices [[0,0],[1,0],[0,1]]
+    to a point in the triangle built by v1,v2,v3
+    '''
+    X_k = v1 + (v2-v1)*x_k[0] + (v3-v1)*x_k[1]
+    return X_k
+        
+def check_contained_triangles_alternative(mesh_1 , mesh_2 , N_ref , assume_uniform = True):
+    
+    face_1 , vert_1 = np.transpose(mesh_1.leaf_view.elements) , np.transpose(mesh_1.leaf_view.vertices)
+    face_2 , vert_2 = np.transpose(mesh_2.leaf_view.elements) , np.transpose(mesh_2.leaf_view.vertices)
+    
+    normal_1 , normal_2 = normals(face_1 , vert_1 ) , normals(face_2 , vert_2)
+        
+    relationship = np.zeros((len(face_2),)) - 1
+    
+    unitary_ref_points  = unitary_refinement_generator(N_ref)
+    
+    c1=0
+    for f1 in face_1:
+        
+        v1_1 , v1_2 , v1_3 = vert_1[f1[0]] , vert_1[f1[1]] , vert_1[f1[2]]
+        
+        n_1 = normal_1[c1]
+        
+        aux_points = np.empty([0,3])
+        for x_k in unitary_ref_points:
+            aux_points = np.vstack([aux_points ,
+                                    not_lineal_transformation(v1_1 , v1_2 , v1_3 , x_k) ])      
+        
+        
+        c2 = 0    
+        for f2 in face_2:
+            
+            v2_1 , v2_2 , v2_3 = vert_2[f2[0]] , vert_2[f2[1]] , vert_2[f2[2]]
+            
+            n_2 = normal_2[c2]
+            
+            if relationship[c2]<0:
+                
+                if np.linalg.norm(n_1-n_2)<10**-8:
+                    
+                    if similarities_counter(np.array([v2_1 , v2_2 , v2_3]) , aux_points ):                  
+                        relationship[c2] = c1
+                            
+            c2+=1
+        c1+=1
+        
+    relationship = relationship.astype(int)
+    return relationship

@@ -21,6 +21,7 @@ from Grid_Maker_R2 import *
 
 # for debuging
 from random import randint
+from constants import potential
 
 # --------------------------------------------------------------------------------
 
@@ -29,12 +30,12 @@ def zero_i(x, n, domain_index, result):
 
 def u_s_G(x,n,domain_index,result):
     global ep_m 
-    result[:] =  1. / (4.*np.pi*ep_m)  * np.sum( mesh_info.q / np.linalg.norm( x - mesh_info.x_q, axis=1 ) )
+    result[:] =  1. / (4.*np.pi*ep_m)  * np.sum( mesh_info.q / np.linalg.norm( x - mesh_info.x_q , axis = 1 )  )
 
 def du_s_G(x,n,domain_index,result):
     global ep_m
     result[:] = -1./(4.*np.pi*ep_m)  * np.sum( np.dot( x-
-                            mesh_info.x_q , n  )  * mesh_info.q / np.linalg.norm( x - mesh_info.x_q, axis=1 )**3 )
+                            mesh_info.x_q , n  )  * mesh_info.q / np.linalg.norm( x - mesh_info.x_q , axis = 1  )**3  )
 
 def harmonic_component(dirichl_space , neumann_space , dual_to_dir_s , u_s , du_s):
     
@@ -98,13 +99,34 @@ def carga_i(x, n, domain_index, result):
     # Right side of the eqn, with the Green function convolution
     result[:] = np.sum(mesh_info.q/np.linalg.norm( x - mesh_info.x_q, axis=1 ))/(4.*np.pi*ep_m)
 
+def U_tot_boundary(grid , return_time =False):
+    '''
+    Returns the total electrostatic potential in the boundary.
+    Parameters:
+    grid   : Bempp object
+    '''
+    
+    potential.dirichl_space_u = bempp.api.function_space(grid,  mesh_info.u_space, mesh_info.u_order)
+    potential.neumann_space_u = bempp.api.function_space(grid,  mesh_info.u_space, mesh_info.u_order) 
+    potential.dual_to_dir_s_u = bempp.api.function_space(grid,  mesh_info.u_space, mesh_info.u_order)
+    
+    U, dU , operators_time , assembly_time , solving_time , it_count= U_tot(potential.dirichl_space_u ,
+                        potential.neumann_space_u , potential.dual_to_dir_s_u)
+    
+    if return_time:
+        return U, dU , operators_time , assembly_time , solving_time , it_count
+    
+    return U , dU
 
 
 def U_tot(dirichl_space , neumann_space , dual_to_dir_s):
     '''
-    Computes the Total electrostatic mean potential on the boundary.  
+    Computes the Total electrostatic mean potential on the boundary.
+    Params:
+    dirichl_space
+    neumann_space
+    dual_to_dir_s
     '''
-    global ep_m , ep_s , k
     
     starting_time = time.time()
 
@@ -149,10 +171,6 @@ def U_Reac(U, dU , dirichl_space , neumann_space ):
     return U_R , dU_R
 
 def S_trad_calc_R( dirichl_space, neumann_space , U , dU ):
-    
-    # En base a los puntos donde se encuentran las cargas, calculemos el potencial u_r y u_h
-    # Esto luego de que podemos escribir la energia de solvatacion como
-    # G_solv = Sum_i q_i *u_reac = Sum_i q_i * (u_h+u_r)           evaluado en cada carga.
 
     # Se definen los operadores
     slp_in_O = lp.single_layer(neumann_space, mesh_info.x_q.transpose()) 
@@ -171,6 +189,95 @@ def S_trad_calc_R( dirichl_space, neumann_space , U , dU ):
 
 # --------------------------------------------------------------------------------
 
+
+
+
+def phi_in_Adjoint_Mesh(mol_name , face_array , vert_array , dens , input_suffix , return_grid = False ):
+    '''
+    Finds and create the adjoint mesh.
+    mol_name : Molecule/Ion name, only for files saving.
+    face_array : array of faces 
+    vert_array : array of vertices
+    dens       : used mesh density
+    input_suffix : Normaly related to a number of iterations. If doing for a mesh obtained via MSMS/NanoShaper
+                   use "-0".
+    return_grid : Boolean 
+    '''
+    
+    adj_face , adj_vertex = mesh_refiner(face_array , vert_array , np.ones((len(face_array[0:,]))) , 1.5 )
+
+    vert_and_face_arrays_to_text_and_mesh( mol_name , adj_vertex , adj_face.astype(int) , input_suffix + '_adj' ,
+                                          dens=dens, Self_build=True)
+    
+    adj_grid = Grid_loader( mol_name , dens , input_suffix + '_adj' )
+
+    adj_face_array = np.transpose(adj_grid.leaf_view.elements) + 1
+    adj_vert_array = np.transpose(adj_grid.leaf_view.vertices)
+
+    adj_el_pos = elements_position_in_normal_grid(adj_face_array , adj_vert_array , face_array , vert_array )
+    
+    potential.dirichl_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space ,
+                                                           mesh_info.phi_order)
+    potential.neumann_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space ,
+                                                           mesh_info.phi_order) 
+    potential.dual_to_dir_s_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space ,
+                                                           mesh_info.phi_order)
+    
+    phi , dphi , it_count = adjoint_equation( potential.dirichl_space_phi , 
+                        potential.neumann_space_phi , potential.dual_to_dir_s_phi)
+    
+    if return_grid:
+        return phi , dphi , adj_grid
+    
+    
+    return phi , dphi
+
+
+def S_Zeb_in_Adjoint_Mesh_with_N_Ref(mol_name , grid , face_array , vert_array , dens , input_suffix , N , N_ref):
+    
+    aux_face = face_array.copy()
+    aux_vert = vert_array.copy()
+    
+    ref_count = 0
+        
+    while ref_count <= N_ref:
+        
+        new_face , new_vertex = mesh_refiner(aux_face , aux_vert , np.ones((len(aux_face[0:,]))) , 1.5 )
+        
+        vert_and_face_arrays_to_text_and_mesh( mol_name , new_vertex , new_face.astype(int) , input_suffix + '_adj_'+
+                                              str(ref_count), dens=dens, Self_build=True)
+        aux_face , aux_vert = new_face.copy() , new_vertex.copy()
+        
+        ref_count+=1
+    
+    adj_grid = Grid_loader( mol_name , dens , input_suffix + '_adj_' + str(N_ref) )
+        
+        
+    
+    adj_face_array = np.transpose(adj_grid.leaf_view.elements) + 1
+    adj_vert_array = np.transpose(adj_grid.leaf_view.vertices)
+
+    adj_el_pos = check_contained_triangles( grid , adj_grid , N_ref )
+    
+    dirichl_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order)
+    neumann_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order) 
+    dual_to_dir_s_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order)
+    
+    phi , dphi , it_count = adjoint_equation( dirichl_space_phi , neumann_space_phi , dual_to_dir_s_phi)
+    
+    S_Zeb    , S_Zeb_i = Zeb_aproach_with_u_s_Teo( adj_face_array , adj_vert_array , phi , dphi , N)
+    
+    rearange_S_Zeb_i = np.zeros((len(face_array),1))
+    
+    c=0
+    for G_i in S_Zeb_i:
+        rearange_S_Zeb_i[int(adj_el_pos[c])] += G_i
+        c+=1
+    
+    return S_Zeb , rearange_S_Zeb_i , it_count
+
+
+    
 def S_Zeb_in_Adjoint_Mesh(mol_name , face_array , vert_array , dens , input_suffix , N):
     
     adj_face , adj_vertex = mesh_refiner(face_array , vert_array , np.ones((len(face_array[0:,]))) , 1.5 )
@@ -276,12 +383,54 @@ def S_Cooper_calc( face_array , vert_array , phi_r , dphi_r , U_Reac , dU_Reac ,
 
         c+=1
 
-    S_Cooper_i = Solv_Cooper
-    S_Cooper = K*np.sum(Solv_Cooper )
+    S_Cooper_i = K*Solv_Cooper
+    S_Cooper = np.sum(S_Cooper_i )
     print('Cooper Solv = {0:10f} '.format(S_Cooper)) 
     
     return S_Cooper , S_Cooper_i
 
+
+def Aproximated_Sol_Adj_UDP0(U_R , dU_R , phi , dphi , face_array , vert_array , 
+                             face_array_adj , vert_array_adj , N , coarse_grid , adj_grid , N_ref ,
+                            return_relation=False):
+    '''
+    Returns the integral over Gamma for phi and dphi per element.
+    U MUST BE IN DP0 IN ORDER TO WORK.
+    Params: U_R , dU_R , phi , dphi , face_array , vert_array , face_array_adj , vert_array_adj , N 
+    face_array , vert_array         : Array of faces and vertices from the coarse mesh
+    face_array_adj , vert_array_adj : Array of faces and vertices from the adjoint mesh
+    N: number of quadrature points used (Only for phi), as U is in DP0 means is constant per element.
+    '''
+    
+    phi_array , dphi_array = integral_per_element(phi , dphi , face_array_adj , vert_array_adj ,
+                                                  mesh_info.phi_space , mesh_info.phi_order ,
+                                                  mesh_info.phi_space , mesh_info.phi_order , N , adj_grid)
+    
+    
+    relationship = check_contained_triangles_alternative_2( coarse_grid , adj_grid , N_ref)
+        
+    rearange_S_Aprox_i = np.zeros((len(face_array),1))
+    
+    c_adj=0
+    for c in relationship:
+        rearange_S_Aprox_i[c] += ep_m *(  dU_R.coefficients.real[c]*phi_array[c_adj] - 
+                                           U_R.coefficients.real[c]*dphi_array[c_adj]   )
+        c_adj+=1
+        
+    rearange_S_Aprox_i = K*rearange_S_Aprox_i.copy()
+
+    S_Aprox = np.sum(rearange_S_Aprox_i )#[0]
+    
+    print('Aproximated Solvation Energy : {0:10f}'.format(S_Aprox))
+        
+    if return_relation==True:
+        return S_Aprox , rearange_S_Aprox_i , relationship
+    
+    
+    
+    return S_Aprox , rearange_S_Aprox_i
+       
+       
 def S_Zeb_calc( face_array , vert_array , phi , dphi , u_s , du_s , N):
     
     Solv_Zeb = np.zeros((len(face_array),1))
@@ -304,9 +453,15 @@ def S_Zeb_calc( face_array , vert_array , phi , dphi , u_s , du_s , N):
 
     
     return S_Zeb , Solv_Zeb_i
+       
 
 
-def Zeb_aproach_with_u_s_Teo( face_array , vert_array , phi , dphi , N):
+
+
+def Zeb_aproach_with_u_s_Teo( face_array , vert_array , phi , dphi , N , grid_relation=None):
+    
+    if np.min(face_array)==0:
+        face_array += 1
     
     normals = normals_to_element( face_array , vert_array )
     
@@ -350,11 +505,27 @@ def Zeb_aproach_with_u_s_Teo( face_array , vert_array , phi , dphi , N):
         Solv_Zeb[c] = (I1-I2)*Area
 
         c+=1
-    Solv_Zeb_i = Solv_Zeb
-    S_Zeb = K*np.sum(Solv_Zeb )
-    print('Zeb Solv = {0:10f} '.format(S_Zeb)) 
+        
+    Solv_Zeb_i = K * Solv_Zeb
     
-    return S_Zeb , Solv_Zeb_i
+    S_Zeb = np.sum(Solv_Zeb_i )
+    print('Estimated Exact Solvation Energy : {0:10f} '.format(S_Zeb)) 
+    
+    if type(grid_relation)!=None:
+        c=0
+        
+        rearange_S_Ex_i = np.zeros((np.max(grid_relation)+1,1))
+        
+        for G_i in Solv_Zeb_i:
+            rearange_S_Ex_i[int(grid_relation[c])] += G_i
+            c+=1
+        
+    elif type(grid_relation)==None:
+        print('Fatal Error')
+        return None
+        
+    
+    return S_Zeb , rearange_S_Ex_i
 
 def u_s_Teo( x ):
     
@@ -385,7 +556,7 @@ def normals_to_element( face_array , vert_array ):
 def z_value(x, n, domain_index, result):
     result[:] = x[0]
     
-from constants import potential
+
     
 def local_U_Reac_interior( x ):
     '''
@@ -416,3 +587,56 @@ def local_U_interior( x ):
     return local_U_Reac_interior( x ) + U_S
 
 
+def phi_with_N_ref(mol_name , coarse_grid , face_array , vert_array , dens ,
+                     input_suffix , N_ref , return_grid = False ):
+    '''
+    Finds and creates the adjoint mesh using N_ref cycles of UNIFORM refinement.
+    mol_name : Molecule/Ion name, only for files saving.
+    face_array : array of faces 
+    vert_array : array of vertices
+    dens       : used mesh density
+    input_suffix : Normaly related to a number of iterations. If doing for a mesh obtained via MSMS/NanoShaper
+                   use "-0".
+    return_grid : Boolean
+    '''
+    
+    aux_face = face_array.copy()
+    aux_vert = vert_array.copy().astype(float)
+    
+    for i in range(1,N_ref+1):
+        
+        new_face , new_vertex = mesh_refiner(aux_face +1 , aux_vert , np.ones((len(aux_face[0:,]))) , 1.5 )
+        
+        vert_and_face_arrays_to_text_and_mesh( mol_name , new_vertex , new_face.astype(int), input_suffix +
+                                              '_adj_'+ str(i), dens=dens, Self_build=True)
+        
+        aux_face , aux_vert = new_face.copy()- 1 , new_vertex.copy()
+    
+    if N_ref == 0:
+        adj_grid = Grid_loader( mol_name , dens , input_suffix )
+    
+    else:
+        adj_grid = Grid_loader( mol_name , dens , input_suffix + '_adj_' + str(N_ref) )
+
+    adj_face_array = np.transpose(adj_grid.leaf_view.elements)
+    adj_vert_array = np.transpose(adj_grid.leaf_view.vertices)
+
+    adj_el_pos = check_contained_triangles_alternative_2(coarse_grid , adj_grid , N_ref )
+    
+    potential.dirichl_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space ,
+                                                           mesh_info.phi_order)
+    potential.neumann_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space ,
+                                                           mesh_info.phi_order) 
+    potential.dual_to_dir_s_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space ,
+                                                           mesh_info.phi_order)
+    
+    phi , dphi , it_count = adjoint_equation( potential.dirichl_space_phi , 
+                        potential.neumann_space_phi , potential.dual_to_dir_s_phi)
+    
+    potential.phi , potential.dphi = phi , dphi
+        
+    if return_grid:
+        return phi , dphi , adj_grid
+    
+    
+    return phi , dphi

@@ -63,8 +63,29 @@ def main_MC(name , dens , input_suffix , N , h):
     
     mesh = trimesh.Trimesh(vertices = vert_array , faces = face_array-1)
     
-    depreciated_term , used_points = scalar_times_laplacian(mesh , local_U_interior , 
-                           local_U_Reac_interior , N , h)   
+    ### adj mesh
+    
+    potential.phi, potential.dphi , adj_grid = phi_in_Adjoint_Mesh(mesh_info.mol_name ,
+                                    face_array , vert_array , dens , input_suffix , return_grid = True )
+    
+    def local_phi_interior(x):
+        
+        aux_x = np.array([x]).transpose()
+    
+        slp_in_O = lp.single_layer(potential.neumann_space_phi, aux_x ) 
+        dlp_in_O = lp.double_layer(potential.dirichl_space_phi, aux_x )
+        
+        U_R = slp_in_O * potential.dphi.real  -  dlp_in_O * potential.phi.real
+        
+        return U_R
+        
+        
+    
+    depreciated_term , used_points = scalar_times_laplacian_trimesh(mesh , local_U_interior , 
+                                     local_phi_interior , N, h , mesh_info.x_q , mesh_info.q )
+    
+                            #scalar_times_laplacian(mesh , local_U_interior , 
+                           #local_U_Reac_interior , N , h)   
     
     
     return depreciated_term , used_points
@@ -72,27 +93,33 @@ def main_MC(name , dens , input_suffix , N , h):
     
 
 if True:
-    Resultados = open( 'Resultados_MC_16_11.txt' , 'w+' )
+    Resultados = open( 'Resultados_test_23_dic_meth.txt' , 'w+' )
 
     Resultados.write( ' molecule & Density & Vol integral & N Points \n')
 
-    for molecule in ('arg' , 'methanol'):
-        
-        for dens in (0.5 , 1.0 ):
+    #for molecule in ('arg' , 'methanol'):
+    if True:
+        molecule = 'methanol'
+    
+        if True:
+            dens = 2.0;
             
-            for n in (20 , 30 , 40):
+            for n in (40000 ,  70000 ):# , 150000):
+                
+                for h in (1.e-3 , 1.e-4 , 1.e-5 ):
+                
             
-                text = '{0} & {1}'.format( molecule , str(dens)  )
+                    text = '{0} & {1}'.format( molecule , str(dens)  )
 
-                depreciated_term , used_points = main_MC(molecule , dens , '-0' , n , 0.001 )
-
-                text = text + ' & {0:.10e} & {1:d} \n'.format( depreciated_term[0,0] , used_points )
-                Resultados.write( text )
+                    depreciated_term , used_points = main_MC(molecule , dens , '-0' , n , h )
+                    print('Depreciated term = ' , depreciated_term)
+                    text = text + ' & {0:.10e} & {1:d} \n'.format( depreciated_term[0,0] , used_points )
+                    Resultados.write( text )
                             
-    Resultados.write('Conditions\n')
+    Resultados.write('Conditions: mesh density = 2.0 \n')
     Resultados.write('Smooth and Use_Gamer: both Disabled \n')
     Resultados.write('Adjoint mesh with uniform refinement: Disabled \n')
-    Resultados.write('Note: Used for Monte Carlo integration, but points are not strictly random, \n')
-    Resultados.write('      points distance is constant in each direction, but not controlable. See quadrature \n')
-    Resultados.write('      for more information \n')
+    Resultados.write('Note: Used for Monte Carlo integration \n')
+    Resultados.write('      U is from DP-0 and phi from P-1 \n')
+    Resultados.write('      ... \n')
     Resultados.close()
