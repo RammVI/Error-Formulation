@@ -350,7 +350,7 @@ def final_status(face_array , soln , percentaje ):
     
     Calculating = True
     
-    while 2 in status and iteration_restrictor<20 or Calculating:
+    while (2 in status or 3 in status) and iteration_restrictor<50 or Calculating:
         
         if iteration_restrictor == 15:
             print('Adapting the mesh is taking too long! - Breaking ')
@@ -677,6 +677,8 @@ def Area_of_a_Triangle(A,B,C):
     AC = C-A
     return 0.5 * np.linalg.norm( np.cross(AB,AC))
 
+
+
 def check_contained_triangles_alternative_2(mesh_1 , mesh_2 , N_ref , assume_uniform = True , Tolerance=10**-10
                                            ,check_for_unnasigned_faces=True):
     '''
@@ -949,3 +951,22 @@ def check_contained_triangles_alternative(mesh_1 , mesh_2 , N_ref , assume_unifo
         
     relationship = relationship.astype(int)
     return relationship
+
+
+def check_contained_triangles__(mesh_1,mesh_2):
+    '''
+    BEMPP probable rearrange
+    '''
+    face_1 , vert_1 = np.transpose(mesh_1.leaf_view.elements) , np.transpose(mesh_1.leaf_view.vertices)
+    face_2 , vert_2 = np.transpose(mesh_2.leaf_view.elements) , np.transpose(mesh_2.leaf_view.vertices)
+    
+    N_ref = len(face_2)/len(face_1)
+    
+    A = np.arange(0,len(face_1))
+    B = np.ones([ len(face_2)/len(face_1) ,  len(face_1)])
+
+    relationship = np.reshape( A*B , len(face_2) , order = 'F'  )
+    
+    #print(relationship ) 
+    
+    return relationship.astype(int)

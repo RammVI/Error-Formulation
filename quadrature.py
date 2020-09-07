@@ -160,6 +160,8 @@ def int_calc_i( face , face_array , vert_array , soln1 , space1 , order1 , soln2
     '''
     f1 , f2 , f3 = face - 1 
     
+    #print(f1,f2,f3)
+    
     v1 , v2 , v3 = vert_array[f1] , vert_array[f2] , vert_array[f3]
     
     s1 = unpack_info( face , face_array, vert_array , soln1 , space1 , order1)
@@ -222,14 +224,15 @@ def integral_per_element(f , df , face_array , vert_array , f_space , f_order , 
     sol_ones = np.ones((N+1 , 1))
     
     const_space = bempp.api.function_space(grid, "DP", 0)
-    
     ones = bempp.api.GridFunction(const_space, coefficients=np.ones((len(face_array),)))
     
     for face in face_array:
         f_aux = int_calc_i( face+1  , face_array+1 , vert_array ,
                            f ,  f_space ,  f_order , ones , 'DP' , 0 , N)
+        
         df_aux= int_calc_i( face+1  , face_array+1  , vert_array ,
                            df , df_space , df_order , ones , 'DP' , 0 , N)
+        
         f_array  = np.vstack((f_array  , f_aux ))
         df_array = np.vstack((df_array , df_aux))
         
@@ -357,7 +360,7 @@ def creates_random_points( mesh , N ):
                 # Proportional to each box edge
                 new_point     = Ref_point + np.array((x_length * i , y_length * j , z_length * k )) / float(N-1)
                 
-                points_in_box = np.vstack( [new_point , points_in_box ] )
+                points_in_box = np.vstack( [points_in_box , new_point] )
     print('Filtering the interior points')
     filtered_vert     = mesh.contains(points_in_box)
     #rearranged_filter = np.array((filtered_vert,filtered_vert,filtered_vert)).transpose()*1    

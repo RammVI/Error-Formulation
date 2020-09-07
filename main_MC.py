@@ -68,6 +68,17 @@ def main_MC(name , dens , input_suffix , N , h):
     potential.phi, potential.dphi , adj_grid = phi_in_Adjoint_Mesh(mesh_info.mol_name ,
                                     face_array , vert_array , dens , input_suffix , return_grid = True )
     
+    def local_U_interior(x):
+        
+        aux_x = np.array([x]).transpose()
+    
+        slp_in_O = lp.single_layer(potential.neumann_space_u, aux_x ) 
+        dlp_in_O = lp.double_layer(potential.dirichl_space_u, aux_x )
+        
+        U_x = slp_in_O * potential.dU.real  -  dlp_in_O * potential.U.real
+        
+        return U_x
+    
     def local_phi_interior(x):
         
         aux_x = np.array([x]).transpose()
@@ -75,9 +86,9 @@ def main_MC(name , dens , input_suffix , N , h):
         slp_in_O = lp.single_layer(potential.neumann_space_phi, aux_x ) 
         dlp_in_O = lp.double_layer(potential.dirichl_space_phi, aux_x )
         
-        U_R = slp_in_O * potential.dphi.real  -  dlp_in_O * potential.phi.real
+        phi_x = slp_in_O * potential.dphi.real  -  dlp_in_O * potential.phi.real
         
-        return U_R
+        return phi_x
         
         
     
@@ -93,18 +104,17 @@ def main_MC(name , dens , input_suffix , N , h):
     
 
 if True:
-    Resultados = open( 'Resultados_test_23_dic_meth.txt' , 'w+' )
+    Resultados = open( 'Resultados/Resultados_MC_15_07_2020.txt' , 'w+' )
 
     Resultados.write( ' molecule & Density & Vol integral & N Points \n')
 
-    #for molecule in ('arg' , 'methanol'):
-    if True:
-        molecule = 'methanol'
+    for molecule in ('methanol' , '1Br2Etano'):
+    
     
         if True:
-            dens = 2.0;
+            dens = 0.5;
             
-            for n in (40000 ,  70000 ):# , 150000):
+            for n in (40000 ,  70000 , 150000 , 300000 , 700000):
                 
                 for h in (1.e-3 , 1.e-4 , 1.e-5 ):
                 
@@ -113,10 +123,10 @@ if True:
 
                     depreciated_term , used_points = main_MC(molecule , dens , '-0' , n , h )
                     print('Depreciated term = ' , depreciated_term)
-                    text = text + ' & {0:.10e} & {1:d} \n'.format( depreciated_term[0,0] , used_points )
+                    text = text + ' & {0:.10e} & {1:d} \n'.format( depreciated_term[0,0]*K*ep_m , used_points )
                     Resultados.write( text )
                             
-    Resultados.write('Conditions: mesh density = 2.0 \n')
+    Resultados.write('Conditions: mesh density = 0.5 \n')
     Resultados.write('Smooth and Use_Gamer: both Disabled \n')
     Resultados.write('Adjoint mesh with uniform refinement: Disabled \n')
     Resultados.write('Note: Used for Monte Carlo integration \n')
