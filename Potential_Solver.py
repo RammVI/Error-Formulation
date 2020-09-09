@@ -779,3 +779,496 @@ def phi_with_N_ref(mol_name , coarse_grid , face_array , vert_array , dens ,
     
     
     return phi , dphi
+
+def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref ,
+             smooth = False , refine = True, Use_GAMer = False , sphere=False , Estimator = 'E_u',
+             x_q = None, q=None , r = np.nan):
+    '''
+    Calculates the solvation energy and refines the mesh.
+    Params:
+    name  : Name of the molecule. Must have a Molecule/{name} folder with the .pqr if not running sphere cases
+    dens  : Mesh density. Set this to 0 if using sphere_cases
+    input_suffix  : Mesh to be refined. If this is equal to "-0" the mesh will be build using MSMS
+    output_suffix : suffix of the refined mesh.
+    percentaje    : Percentaje of elements to be refined, which absolute error contribution is
+                    less than percentaje*sum of the total absoulute error
+    N             : Number of points used in the Gauss cuadrature. Can be {1,7,13,17,19,25,37,48,52,61,79}
+    N_ref         : Number of UNIFORM refinements used to calculate phi. 
+    smooth        : Smooths the mesh using a 40.0 [el/A2] grid, must be created before with MSMS
+    refine        : True if the mesh is going to be refined, False if not
+    Use_GAMer     : True if using GAMer or False if not. Read the README to use this.
+    sphere        : True if the mesh is a spherical grid, and False if not
+    Estimator     : E_phi or E_u
+    x_q           : For the SPHERE case, can be defined in np.array([N_q , 3]) format
+    q             : For the SPHERE case, can be defined in np.array([N_q , 1]) format
+    r             : For the SPHERE case, this is the radius of the sphere
+    
+    This function gives the following output
+    S_trad : Solvation energy using bempp potential operators
+    S_Ap   : I
+    S_Ex   : II
+    N_elements : Number of elements of the input_suffix grid
+    N_El_adj   : Number of elements of the adjoint grid
+    total_solving_time : Time needed to create the operators and solving.
+    S_trad_time        : Time needed to calculate S_trad, not counting total_solving_time
+    S_Ap_time          : Time needed to calculate I, not counting total_solving_time
+    S_Ex_time          : Time needed to calculate II
+    operators_time_U   : Time needed to build the associated U operators [Not used]
+    assembly_time_U    : Time needed to assembly the blocked operator    [Not used]
+    solving_time_U     : Time needed to solve the U system
+    it_count_U         : Number of iterations to solve the U system
+    '''
+    
+    if sphere:
+        
+        if x_q == None or q==None or r == np.nan:
+            print('x_q, q or sphere radius where not defined. Add x_q=..., q=..., r=...')
+        
+        if Estimator ==   'E_u':
+            
+            mesh_info.mol_name     = name
+            mesh_info.mesh_density = dens
+            mesh_info.suffix       = input_suffix
+            mesh_info.path         = os.path.join('Molecule' , mesh_info.mol_name)
+
+            print('{1:.0f} {0} '.format(mesh_info.suffix , percentaje * 100.) )
+
+            mesh_info.q , mesh_info.x_q = q , x_q
+
+            mesh_info.u_space , mesh_info.u_order     = 'DP' , 0
+            mesh_info.phi_space , mesh_info.phi_order = 'P' , 1
+            mesh_info.u_s_space , mesh_info.u_s_order = 'P' , 1
+
+
+            bempp.api.set_ipython_notebook_viewer()
+            bempp.api.PLOT_BACKEND = "ipython_notebook"
+
+            if input_suffix == '-0' and not sphere:
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix , GAMer = Use_GAMer)
+            else:
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix )
+
+            init_time = time.time()
+            U, dU , operators_time_U , assembly_time_U , solving_time_U , it_count_U = U_tot_boundary(grid
+                                                        , return_time = True , save_plot=True)
+            total_solving_time = time.time() - init_time
+
+            ################
+
+            init_time = time.time()
+            S_trad = S_trad_calc_R( potential.dirichl_space_u, potential.neumann_space_u , U , dU ) 
+            S_trad_time = time.time()-init_time
+
+            ################
+
+            init_time = time.time()
+            S_Ap , S_Ap_i = delta_G_exact( grid , U , dU , mesh_info.u_space , mesh_info.u_order  , N ,
+                                                            save_energy_plot=True                    )
+            S_Ap_time = time.time() - init_time
+
+            #################
+
+            init_time = time.time()
+            S_Ex , S_Ex_i , _ , N_El_adj = S_Exact_in_Adjoint_Mesh_with_N_Ref(name , grid , dens , input_suffix , N ,
+                                                    N_ref , save_energy_plot=True  , test_mode = True )
+            S_Ex_time = time.time() - init_time
+
+            ################
+
+            const_space = bempp.api.function_space(grid,  "DP", 0)
+
+            S_Ap_bempp = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ap_i[:,0])
+            S_Ex_bempp    = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ex_i[:,0])
+
+            dif =S_Ap_i-S_Ex_i
+
+            dif_F = bempp.api.GridFunction(const_space, fun=None, coefficients=np.abs(dif[:,0] ) )
+
+            bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_N_ref_{2:d}.vtk'.format( dens,
+                                                                input_suffix , N_ref )
+                             , grid_function = dif_F , data_type = 'element')
+
+            if True:
+
+
+                face_array = np.transpose(grid.leaf_view.elements) + 1        
+                status = value_assignor_starter(face_array , np.abs(dif[:,0]) , percentaje)
+                const_space = bempp.api.function_space(grid,  "DP", 0)
+                Status    = bempp.api.GridFunction(const_space, fun=None, coefficients=status)
+                bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_Marked_elements_{2}.vtk'.format( 
+                                                dens, input_suffix , N_ref )
+                             , grid_function = Status , data_type = 'element')
+
+            face_array = np.transpose(grid.leaf_view.elements)+1
+            vert_array = np.transpose(grid.leaf_view.vertices)
+
+            N_elements = len(face_array)
+
+            if refine:
+
+                new_face_array , new_vert_array = mesh_refiner(face_array , vert_array , np.abs(dif[:,0]) , percentaje )
+
+                if smooth:
+
+                    aux_vert_array = np.zeros(( len(new_vert_array),3 ))
+
+                    c=0
+                    for vert in new_vert_array:
+                        aux_vert_array[c] = smothing_func(vert , r) 
+                        c+=1
+
+                elif not smooth:
+
+                    aux_vert_array = new_vert_array.copy()
+
+
+
+                if Use_GAMer:
+
+                    new_face_array , aux_vert_array = Improve_Mesh(new_face_array , aux_vert_array , mesh_info.path , 
+                                                                  mesh_info.mol_name+ '_' + str(dens) + output_suffix )
+
+                    vert_and_face_arrays_to_text_and_mesh( name , aux_vert_array , new_face_array.astype(int)[:] ,
+                                                           output_suffix, dens , Self_build=True)
+
+                    grid = Grid_loader( name , dens , output_suffix )
+
+            return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
+                     S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
+            
+        elif Estimator == 'E_phi':
+            
+            mesh_info.mol_name     = name
+            mesh_info.mesh_density = dens
+            mesh_info.suffix       = input_suffix
+            mesh_info.path         = os.path.join('Molecule' , mesh_info.mol_name)
+
+            print('{1:.0f} {0} '.format(mesh_info.suffix , percentaje * 100.) )
+
+            mesh_info.q , mesh_info.x_q = q , x_q
+
+            mesh_info.u_space , mesh_info.u_order     = 'DP' , 0
+            mesh_info.phi_space , mesh_info.phi_order = 'P' , 1
+            mesh_info.u_s_space , mesh_info.u_s_order = 'P' , 1
+
+
+            bempp.api.set_ipython_notebook_viewer()
+            bempp.api.PLOT_BACKEND = "ipython_notebook"
+
+            if input_suffix == '-0' and not sphere:
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix , GAMer = Use_GAMer)
+            else:
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix )
+
+            face_array = np.transpose(grid.leaf_view.elements)
+            vert_array = np.transpose(grid.leaf_view.vertices)
+
+            init_time = time.time()
+            U, dU , operators_time_U , assembly_time_U , solving_time_U , it_count_U = U_tot_boundary(grid
+                                                        , return_time = True , save_plot=True)
+            total_solving_time = time.time() - init_time
+            ################
+
+            phi , dphi , adj_grid = phi_with_N_ref(name , grid , face_array , vert_array ,
+                            dens , input_suffix , N_ref , return_grid = True)
+
+            U_R , dU_R = U_Reac( U, dU , potential.dirichl_space_u , potential.neumann_space_u )
+
+            ################
+
+            init_time = time.time()
+            S_trad = S_trad_calc_R( potential.dirichl_space_u, potential.neumann_space_u , U , dU ) 
+            S_trad_time = time.time()-init_time
+
+            ################
+
+            adj_face_array = np.transpose(adj_grid.leaf_view.elements)
+            adj_vert_array = np.transpose(adj_grid.leaf_view.vertices)
+
+            init_time = time.time()
+            S_Ap , S_Ap_i , relation = Aproximated_Sol_Adj_UDP0( U_R , dU_R , phi , dphi , face_array , vert_array , 
+                                     adj_face_array , adj_vert_array , 1 , grid , adj_grid , N_ref ,
+                                                        return_relation=True)
+            S_Ap_time = time.time() - init_time
+
+            #################
+
+            init_time = time.time()
+            S_Ex , S_Ex_i , _ , N_El_adj = S_Exact_in_Adjoint_Mesh_with_N_Ref(name , grid , dens , input_suffix , N ,
+                                                    N_ref , save_energy_plot=True  , test_mode = True )
+            S_Ex_time = time.time() - init_time
+
+            ################
+
+            const_space = bempp.api.function_space(grid,  "DP", 0)
+
+            S_Ap_bempp = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ap_i[:,0])
+            S_Ex_bempp    = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ex_i[:,0])
+
+            dif =S_Ap_i-S_Ex_i
+
+            dif_F = bempp.api.GridFunction(const_space, fun=None, coefficients=np.abs(dif[:,0] ) )
+
+            bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_N_ref_{2:d}.vtk'.format( dens,
+                                                                input_suffix , N_ref )
+                             , grid_function = dif_F , data_type = 'element')
+
+            if True: #Marked elements        
+                face_array = np.transpose(grid.leaf_view.elements) + 1        
+                status = value_assignor_starter(face_array , np.abs(dif[:,0]) , percentaje)
+                const_space = bempp.api.function_space(grid,  "DP", 0)
+                Status    = bempp.api.GridFunction(const_space, fun=None, coefficients=status)
+                bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_Marked_elements_{2}.vtk'.format( 
+                                                dens, input_suffix , N_ref )
+                             , grid_function = Status , data_type = 'element')
+
+            face_array = np.transpose(grid.leaf_view.elements)+1
+            vert_array = np.transpose(grid.leaf_view.vertices)
+
+            N_elements = len(face_array)
+
+            if refine:
+
+                new_face_array , new_vert_array = mesh_refiner(face_array , vert_array , np.abs(dif[:,0]) , percentaje )
+
+                if smooth:
+
+                    aux_vert_array = np.zeros(( len(new_vert_array),3 ))
+
+                    c=0
+                    for vert in new_vert_array:
+                        aux_vert_array[c] = smothing_func(vert , r) 
+                        c+=1
+
+                elif not smooth:
+
+                    aux_vert_array = new_vert_array.copy()
+
+
+
+                if Use_GAMer:
+
+                    new_face_array , aux_vert_array = Improve_Mesh(new_face_array , aux_vert_array , mesh_info.path , 
+                                                                  mesh_info.mol_name+ '_' + str(dens) + output_suffix )
+
+                    vert_and_face_arrays_to_text_and_mesh( name , aux_vert_array , new_face_array.astype(int)[:] ,
+                                                           output_suffix, dens , Self_build=True)
+
+                    grid = Grid_loader( name , dens , output_suffix )
+
+            return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
+                     S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
+        
+    else:
+        
+        if Estimator ==   'E_u':
+            
+            mesh_info.mol_name     = name
+            mesh_info.mesh_density = dens
+            mesh_info.suffix       = input_suffix
+            mesh_info.path         = os.path.join('Molecule' , mesh_info.mol_name)
+
+            mesh_info.q , mesh_info.x_q = run_pqr(mesh_info.mol_name)
+
+            mesh_info.u_space , mesh_info.u_order     = 'DP' , 0
+            mesh_info.phi_space , mesh_info.phi_order = 'P' , 1
+            mesh_info.u_s_space , mesh_info.u_s_order = 'P' , 1
+
+            if input_suffix == '-0' and not sphere:
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix , GAMer = Use_GAMer)
+            else:
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix )
+
+            init_time = time.time()
+            U, dU , operators_time_U , assembly_time_U , solving_time_U , it_count_U = U_tot_boundary(grid
+                                                        , return_time = True , save_plot=True , tolerance = 1e-5)
+            total_solving_time = time.time() - init_time
+
+            ################
+
+            init_time = time.time()
+            S_trad = S_trad_calc_R( potential.dirichl_space_u, potential.neumann_space_u , U , dU ) 
+            S_trad_time = time.time()-init_time
+
+            ################
+
+            init_time = time.time()
+            S_Ap , S_Ap_i = delta_G_exact( grid , U , dU , mesh_info.u_space , mesh_info.u_order  , N ,
+                                                            save_energy_plot=True                    )
+            S_Ap_time = time.time() - init_time
+
+            #################
+
+            init_time = time.time()
+            S_Ex , S_Ex_i , _ , N_El_adj = S_Exact_in_Adjoint_Mesh_with_N_Ref(name , grid , dens , input_suffix , N ,
+                                                    N_ref , save_energy_plot=True  , test_mode = True )
+            S_Ex_time = time.time() - init_time
+
+            ################
+
+            const_space = bempp.api.function_space(grid,  "DP", 0)
+
+            S_Ap_bempp = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ap_i[:,0])
+            S_Ex_bempp    = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ex_i[:,0])
+
+            dif =S_Ap_i-S_Ex_i
+
+            dif_F = bempp.api.GridFunction(const_space, fun=None, coefficients=np.abs(dif[:,0] ) )
+
+            bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_N_ref_{2:d}.vtk'.format( dens,
+                                                                input_suffix , N_ref )
+                             , grid_function = dif_F , data_type = 'element')
+
+            if True: #Marked elements        
+                face_array = np.transpose(grid.leaf_view.elements) + 1        
+                status = value_assignor_starter(face_array , np.abs(dif[:,0]) , percentaje)
+                const_space = bempp.api.function_space(grid,  "DP", 0)
+                Status    = bempp.api.GridFunction(const_space, fun=None, coefficients=status)
+                bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_Marked_elements_{2}.vtk'.format( 
+                                                dens, input_suffix , N_ref )
+                             , grid_function = Status , data_type = 'element')
+
+            face_array = np.transpose(grid.leaf_view.elements)+1
+            vert_array = np.transpose(grid.leaf_view.vertices)
+
+            N_elements = len(face_array)
+
+            if refine:
+
+                new_face_array , new_vert_array = mesh_refiner(face_array , vert_array , np.abs(dif[:,0]) , percentaje )
+
+                if smooth:
+
+                    fine_vert_array = text_to_list(name , '_40.0-0' , '.vert' , info_type=float)                
+                    aux_vert_array  = smoothing_vertex( new_vert_array , fine_vert_array )
+
+                elif not smooth:
+
+                    aux_vert_array = new_vert_array.copy()
+
+                if Use_GAMer:
+
+                    new_face_array , aux_vert_array = Improve_Mesh(new_face_array , aux_vert_array , mesh_info.path , 
+                                                                  mesh_info.mol_name+ '_' + str(dens) + output_suffix )
+
+                    vert_and_face_arrays_to_text_and_mesh( name , aux_vert_array , new_face_array.astype(int)[:] ,
+                                                           output_suffix, dens , Self_build=True)
+
+                    grid = Grid_loader( name , dens , output_suffix )
+
+            return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
+                     S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
+        
+        elif Estimator == 'E_phi':
+            
+            mesh_info.mol_name     = name
+            mesh_info.mesh_density = dens
+            mesh_info.suffix       = input_suffix
+            mesh_info.path         = os.path.join('Molecule' , mesh_info.mol_name)
+
+            mesh_info.q , mesh_info.x_q = run_pqr(mesh_info.mol_name)
+
+            mesh_info.u_space , mesh_info.u_order     = 'DP' , 0
+            mesh_info.phi_space , mesh_info.phi_order = 'P' , 1
+            mesh_info.u_s_space , mesh_info.u_s_order = 'P' , 1
+
+            if input_suffix == '-0' and not sphere:
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix , GAMer = Use_GAMer)
+            elif input_suffix!='-0':
+                print('Loading previus mesh')
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix )
+
+            face_array = np.transpose(grid.leaf_view.elements)
+            vert_array = np.transpose(grid.leaf_view.vertices)
+
+            init_time = time.time()
+            U, dU , operators_time_U , assembly_time_U , solving_time_U , it_count_U = U_tot_boundary(grid
+                                                        , return_time = True , save_plot=True, tolerance = 1e-8)
+            total_solving_time = time.time() - init_time
+            ################
+
+            phi , dphi , adj_grid = phi_with_N_ref(name , grid , face_array , vert_array ,
+                            dens , input_suffix , N_ref , return_grid = True)
+
+            U_R , dU_R = U_Reac( U, dU , potential.dirichl_space_u , potential.neumann_space_u )
+
+            ################
+
+            init_time = time.time()
+            S_trad = S_trad_calc_R( potential.dirichl_space_u, potential.neumann_space_u , U , dU ) 
+            S_trad_time = time.time()-init_time
+
+            ################
+
+            adj_face_array = np.transpose(adj_grid.leaf_view.elements)
+            adj_vert_array = np.transpose(adj_grid.leaf_view.vertices)
+
+            init_time = time.time()
+            S_Ap , S_Ap_i , relation = Aproximated_Sol_Adj_UDP0( U_R , dU_R , phi , dphi , face_array , vert_array , 
+                                     adj_face_array , adj_vert_array , 1 , grid , adj_grid , N_ref ,
+                                                        return_relation=True)
+            S_Ap_time = time.time() - init_time
+
+            #################
+
+            init_time = time.time()
+            S_Ex , S_Ex_i , _ , N_El_adj = S_Exact_in_Adjoint_Mesh_with_N_Ref(name , grid , dens , input_suffix , N ,
+                                                    N_ref , save_energy_plot=True  , test_mode = True )
+            S_Ex_time = time.time() - init_time
+
+            ################
+
+            const_space = bempp.api.function_space(grid,  "DP", 0)
+
+            S_Ap_bempp = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ap_i[:,0])
+            S_Ex_bempp    = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ex_i[:,0])
+
+            dif =S_Ap_i-S_Ex_i
+
+            dif_F = bempp.api.GridFunction(const_space, fun=None, coefficients=np.abs(dif[:,0] ) )
+
+            bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_N_ref_{2:d}.vtk'.format( dens,
+                                                                input_suffix , N_ref )
+                             , grid_function = dif_F , data_type = 'element')
+
+            if True: #Marked elements        
+                face_array = np.transpose(grid.leaf_view.elements) + 1        
+                status = value_assignor_starter(face_array , np.abs(dif[:,0]) , percentaje)
+                const_space = bempp.api.function_space(grid,  "DP", 0)
+                Status    = bempp.api.GridFunction(const_space, fun=None, coefficients=status)
+                bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_Marked_elements_{2}.vtk'.format( 
+                                                dens, input_suffix , N_ref )
+                             , grid_function = Status , data_type = 'element')
+
+            face_array = np.transpose(grid.leaf_view.elements)+1
+            vert_array = np.transpose(grid.leaf_view.vertices)
+
+            N_elements = len(face_array)
+
+            if refine:
+
+                new_face_array , new_vert_array = mesh_refiner(face_array , vert_array , np.abs(dif[:,0]) , percentaje )
+
+                if smooth:
+
+                    fine_vert_array = text_to_list(name , '_40.0-0' , '.vert' , info_type=float)                
+                    aux_vert_array  = smoothing_vertex( new_vert_array , fine_vert_array )
+
+                elif not smooth:
+
+                    aux_vert_array = new_vert_array.copy()
+
+                if Use_GAMer:
+
+                    new_face_array , aux_vert_array = Improve_Mesh(new_face_array , aux_vert_array , mesh_info.path , 
+                                                                  mesh_info.mol_name+ '_' + str(dens) + output_suffix )
+
+                    vert_and_face_arrays_to_text_and_mesh( name , aux_vert_array , new_face_array.astype(int)[:] ,
+                                                           output_suffix, dens , Self_build=True)
+
+                    grid = Grid_loader( name , dens , output_suffix )
+
+            return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
+                     S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
+            
+    
