@@ -1,8 +1,0 @@
-#! /bin/sh
-pushd ../../../../build/sg
-make install
-cd tools
-make clean
-make install
-popd
-
