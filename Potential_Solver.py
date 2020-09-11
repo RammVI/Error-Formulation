@@ -671,7 +671,12 @@ def du_s_Teo(x,n):
                             mesh_info.x_q , n)  * mesh_info.q / np.linalg.norm( x - mesh_info.x_q, axis=1 )**3 )
 
 def normals_to_element( face_array , vert_array ):
-
+    '''
+    Calculates the normals pointing outwards the inner domain
+    Inputs
+    face_array  : Array containing vertices position in vert_array for each element.
+    vert_array  : Array of vertices [N,3]
+    '''
     normals = np.empty((0,3))
     element_cent = np.empty((0,3))
     
@@ -1120,7 +1125,7 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
                              , grid_function = dif_F , data_type = 'element')
 
             if True: #Marked elements        
-                face_array = np.transpose(grid.leaf_view.elements) + 1        
+                face_array = np.transpose(grid.leaf_view.elements) + 1    
                 status = value_assignor_starter(face_array , np.abs(dif[:,0]) , percentaje)
                 const_space = bempp.api.function_space(grid,  "DP", 0)
                 Status    = bempp.api.GridFunction(const_space, fun=None, coefficients=status)
@@ -1332,3 +1337,60 @@ def append_txt_file(txt_name , text):
     Text_file.close()
     
     return None
+
+def parse_aux_func():
+    
+    import argparse
+    from datetime import datetime
+    
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-Molecule" , "-M"   , help="Molecule name in Molecule/mol_name/.")
+    parser.add_argument("-Density"  , "-D"   , help="Starting mesh density", type=float)
+    parser.add_argument("-N_it"     , "-n"   , help="Number of iterations/consecutive mesh refinements",type=int)
+    parser.add_argument("-E"        , help="Error estimator. Can be E_u or E_phi",type=str)
+
+    #Optional input here
+    parser.add_argument("-N_ref"      , help="[Optional] Number of elements for the phi mesh. Default=0" ,
+                        default=0,type=int)
+    parser.add_argument("-Percentaje" , "-P" , help="[Optional] Percentaje of the elements to be refined, acording to their error contribution",
+                                        default=0.1, type=float)
+    parser.add_argument("-sphere"            , help="[Optional] True if the geometry is a sphere, and false if not" ,
+                                        action="store_true", default=False)
+    parser.add_argument("-Results_name"      , help="[Optional] Result text file name in Results/." ,
+                                        default="Results_{0}_{1}_{2}.txt".format(datetime.now().year ,
+                                        datetime.now().month, datetime.now().day), type=str)
+    parser.add_argument("-radius"      , help="[Optional] Radius of the spherical geometry" ,
+                                        default= 1.0 , type=float)
+
+    args = parser.parse_args()
+    
+    return args
+
+def saved_sphere_distributions(name , r):
+    '''
+    Useful when running spherical grids.
+    Inputs
+    name  : Name of the distribution. Can be 'sphere_cent', 'sphere_offcent' or 'charge-dipole'.
+    r     : Sphere radius
+    Returns x_q , q 
+    '''
+        
+    if name == 'sphere_cent':
+        x_q = np.array( [[  1.E-12 ,  1.E-12 ,  1.E-12 ]]  )
+        q = np.array( [1.] )
+    
+    if name == 'sphere_offcent':
+        x_q = np.array( [[  1.E-12 ,  1.E-12 ,   r/2. ]]  )
+        q = np.array( [1.] )
+        
+    if name == 'charge-dipole':
+        x_q = np.array( [[  1.E-12 ,  1.E-12 ,  0.62 ],
+                 [  1.E-12 ,  0.62*np.cos(np.pi*1.5 + 5.*np.pi/180.) ,
+                                                      0.62*np.sin(np.pi*1.5 + 5.*np.pi/180. ) ] ,
+                 [  1.E-12 ,  0.62*np.cos(np.pi*1.5 - 5.*np.pi/180.) ,
+                                                      0.62*np.sin(np.pi*1.5 - 5.*np.pi/180. )  ]
+                       ] )
+        q = np.array( [1. , 1. , -1.]) 
+    
+    return x_q , q

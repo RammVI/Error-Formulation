@@ -508,7 +508,24 @@ def Grid_loader(mol_name , mesh_density , suffix , GAMer=False):
     return grid
 
 
-
+def fine_grid_maker(mol_name , dens_f=40.0):
+    '''
+    Does a 40.0 grid
+    Input 
+    mol_name : Name of the molecule
+    dens     : Mesh density
+    Output
+    None
+    '''
+    path = os.path.join('Molecule' , mol_name , mol_name + '_{0:.1f}'.format(dens_f))
+    if os.path.isfile( path + '.vert' ):
+        return None        
+    
+    from constants import *
+    x_q , q = run_pqr(mol_name)
+    Grid_loader( mol_name , dens_f , '-0' , GAMer = False)
+    
+    return None
 
 
     
