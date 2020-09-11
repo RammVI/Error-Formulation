@@ -1271,4 +1271,64 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
             return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
                      S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
             
+
+def suffixes(N_ref):
+    '''
+    Defines the suffixes for the .msh/.vert/.off/.face/.... for the molecule
+    Params
+    N_ref   : Number of refinements
+    Returns
+    An array with N_ref+1 elements
+    '''
+    suf = np.array(['-0'])
     
+    for i in (np.arange(N_ref+1)[1:]*(-1)).astype(str):
+        suf = np.vstack([suf,i])
+        
+    suf = np.reshape(suf,[1,N_ref+1])[0]
+    
+    return suf
+
+def create_txt_file(txt_name , headings = 'Molecule & density  & Times-Refinated & Elem & Adj Elem & S_Trad & S_Ap & S_Ex ' 
+                    + ' solving_time & S_trad_time & S_Ap_time & S_Ex_time & Operators_Build_Time_U & Assembly_Time_U & Linear_Sys_Solv_time_U & Iterations_U'):
+    '''
+    Creates the txt file in Results/.
+    Input
+    txt_name  : Name of the text file
+    headings  : Headings of the text file, separated by  & .
+    Output
+    None
+    '''
+    
+    if txt_name[-4:]!='.txt':
+        print(txt_name[-4:])
+        txt_name = txt_name+'.txt'
+    
+    Text_file = open( 'Results/'+txt_name , 'w+' )
+    Text_file.write( headings + '\n')
+    Text_file.close()   
+
+    return None
+
+def append_txt_file(txt_name , text):
+    '''
+    Add info to Results/txt_name.txt
+    Input 
+    txt_name : Name of the text file
+    text     : Line to be added to the txt file
+    Output
+    None
+    '''
+    if text[-2:]!='\n':
+        print('hi')
+        text=text + '\n'
+        
+    if txt_name[-4:]!='.txt':
+        print(txt_name[-4:])
+        txt_name = txt_name+'.txt'
+    
+    Text_file = open( 'Results/'+txt_name , 'a' )  
+    Text_file.write( text )             
+    Text_file.close()
+    
+    return None
