@@ -31,4 +31,4 @@ Refines grids, based on adjoint error formulations of the Solvation Energy.
   The local error will be saved in a file named as \Molecule\{mol_name}\{mol_name}\_{dens}-{N_it}\_N_ref-{N_ref}.vtk
   
   ### Warnings
-  Avoid using more than 4 refinements. RAM memory usage will be arround x4 times higher each time and the process can crash the computer, also, the number of iterations for solving phi when increasing this factor raises significally.
+  Avoid using -N_ref grather than 4. RAM memory usage will be arround x4 times higher each time and the process can crash the computer, also, the number of iterations for solving phi when increasing this factor raises significally.
