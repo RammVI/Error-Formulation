@@ -786,13 +786,12 @@ def phi_with_N_ref(mol_name , coarse_grid , face_array , vert_array , dens ,
     return phi , dphi
 
 def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref ,
-             smooth = False , refine = True, Use_GAMer = False , sphere=False , Estimator = 'E_u',
-             x_q = None, q=None , r = np.nan):
+             smooth = False , refine = True, Use_GAMer = False , sphere=False , Estimator = 'E_u' , r=1.):
     '''
     Calculates the solvation energy and refines the mesh.
     Params:
     name  : Name of the molecule. Must have a Molecule/{name} folder with the .pqr if not running sphere cases
-    dens  : Mesh density. Set this to 0 if using sphere_cases
+    dens  : Mesh density. Set this to 0 if using sphere_cases.
     input_suffix  : Mesh to be refined. If this is equal to "-0" the mesh will be build using MSMS
     output_suffix : suffix of the refined mesh.
     percentaje    : Percentaje of elements to be refined, which absolute error contribution is
@@ -804,9 +803,7 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
     Use_GAMer     : True if using GAMer or False if not. Read the README to use this.
     sphere        : True if the mesh is a spherical grid, and False if not
     Estimator     : E_phi or E_u
-    x_q           : For the SPHERE case, can be defined in np.array([N_q , 3]) format
-    q             : For the SPHERE case, can be defined in np.array([N_q , 1]) format
-    r             : For the SPHERE case, this is the radius of the sphere
+    r             : Only for the sphere case, this will be the sphere radius.
     
     This function gives the following output
     S_trad : Solvation energy using bempp potential operators
@@ -825,9 +822,17 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
     '''
     
     if sphere:
-        
+        if name == 'Charge-Dipole':
+            x_q = np.array( [ [  1.E-12 ,  1.E-12 ,    0.5    ] ,
+                              [  1.E-12 ,  1.E-12 ,   -0.5    ] , 
+                              [  1.E-12 ,  1.E-12 ,   -0.5    ] ]) # Correct this
+            q   = np.array( [1. , 1. , -1.] )
+        if name == 'Offcentered':
+            x_q = np.array( [[  1.E-12 ,  1.E-12 ,   r/2. ]]  )
+            q = np.array( [1.] )
+            
         if x_q == None or q==None or r == np.nan:
-            print('x_q, q or sphere radius where not defined. Add x_q=..., q=..., r=...')
+            print('x_q, q or sphere radius where not defined. Add name distribution in main function from Potential_Solver.py')
         
         if Estimator ==   'E_u':
             
