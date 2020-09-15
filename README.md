@@ -1,6 +1,6 @@
 # Error-Formulation
 
-Refines grids, based on adjoint error formulations of the Solvation Energy.
+Refines grids obtained from MSMS or NanoShaper, based on adjoint error formulations of the Solvation Energy.
 
 ## Requirements
   The following softwares are needed to run this code.
