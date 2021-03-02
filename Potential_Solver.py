@@ -1,7 +1,7 @@
 
 # checked 19.09
 # 11-09 added adjoint mesh
-
+from pathos.multiprocessing import ProcessingPool as Pool
 import bempp.api
 import numpy as np
 import os
@@ -31,6 +31,7 @@ def zero_i(x, n, domain_index, result):
 def u_s_G(x,n,domain_index,result):
     global ep_m 
     result[:] =  1. / (4.*np.pi*ep_m)  * np.sum( mesh_info.q / np.linalg.norm( x - mesh_info.x_q , axis = 1 )  )
+
 
 def du_s_G(x,n,domain_index,result):
     global ep_m
@@ -105,14 +106,13 @@ def U_tot_boundary(grid , return_time =False , save_plot=False , tolerance = 1e-
     Parameters:
     grid   : Bempp object
     '''
-    
+    init_time_spaces = time.time()
     potential.dirichl_space_u = bempp.api.function_space(grid,  mesh_info.u_space, mesh_info.u_order)
     potential.neumann_space_u = bempp.api.function_space(grid,  mesh_info.u_space, mesh_info.u_order) 
     potential.dual_to_dir_s_u = bempp.api.function_space(grid,  mesh_info.u_space, mesh_info.u_order)
-    
-    U, dU , operators_time , assembly_time , solving_time , it_count= U_tot(potential.dirichl_space_u ,
+    spaces_time      = time.time()-init_time_spaces
+    U, dU , operators_time , assembly_time , GMRES_time , UdU_time , it_count= U_tot(potential.dirichl_space_u ,
                         potential.neumann_space_u , potential.dual_to_dir_s_u , tolerance )
-    
     if save_plot:
         
         U_func  = bempp.api.GridFunction(potential.dirichl_space_u , fun=None, coefficients= U.coefficients.real)
@@ -127,7 +127,7 @@ def U_tot_boundary(grid , return_time =False , save_plot=False , tolerance = 1e-
                      , grid_function = dU_func , data_type = 'element')
     
     if return_time:
-        return U, dU , operators_time , assembly_time , solving_time , it_count
+        return U, dU , spaces_time , operators_time , assembly_time , GMRES_time , UdU_time , it_count
     
     return U , dU
 
@@ -142,7 +142,7 @@ def U_tot(dirichl_space , neumann_space , dual_to_dir_s , tolerance):
     tolerance     : Tolerance of the solver
     '''
     
-    starting_time = time.time()
+    init_time_operators = time.time()
 
     identity = sparse.identity(     dirichl_space, dirichl_space, dual_to_dir_s)
     slp_in   = laplace.single_layer(neumann_space, dirichl_space, dual_to_dir_s)
@@ -150,12 +150,13 @@ def U_tot(dirichl_space , neumann_space , dual_to_dir_s , tolerance):
 
     slp_out  = modified_helmholtz.single_layer(neumann_space, dirichl_space, dual_to_dir_s, k)
     dlp_out  = modified_helmholtz.double_layer(dirichl_space, dirichl_space, dual_to_dir_s, k)
-
+    
     charged_grid_fun = bempp.api.GridFunction(dirichl_space, fun=q_times_G_L)
     zero_grid_fun    = bempp.api.GridFunction(neumann_space, fun=zero_i     )
     
-    operators_time = time.time() - starting_time
+    operators_time = time.time() - init_time_operators
 
+    init_time_matrix = time.time()
     blocked = bempp.api.BlockedOperator(2, 2)
     blocked[0, 0] = 0.5*identity + dlp_in
     blocked[0, 1] = -slp_in
@@ -164,18 +165,20 @@ def U_tot(dirichl_space , neumann_space , dual_to_dir_s , tolerance):
 
     rhs = [charged_grid_fun, zero_grid_fun]
     
-    assembly_time = time.time() - operators_time - starting_time
+    assembly_time = time.time() - init_time_matrix
     
-    print(tolerance)
-    
+    print('GMRES Tolerance = {0}'.format(str(tolerance)))
+    init_time_GMRES = time.time()
     sol, info,it_count = bempp.api.linalg.gmres( blocked, rhs , return_iteration_count=True , tol=tolerance ,
                                                use_strong_form=True)
+    GMRES_time = time.time()-init_time_GMRES
     print("The linear system for U_tot was solved in {0} iterations".format(it_count))
+    init_time_UdU = time.time()
     U , dU = sol
+    UdU_time      = time.time()-init_time_UdU
     
-    solving_time  = time.time() - assembly_time - operators_time - starting_time
-        
-    return U, dU , operators_time , assembly_time , solving_time , it_count
+           
+    return U, dU , operators_time , assembly_time , GMRES_time , UdU_time , it_count
 
 def U_Reac(U, dU , dirichl_space , neumann_space ):
     
@@ -199,7 +202,7 @@ def S_trad_calc_R( dirichl_space, neumann_space , U , dU ):
     # Donde agregando algunas constantes podemos calcular la energia de solvatacion S
     
     S     = K * np.sum(mesh_info.q * U_R_O).real
-    print("Three Term Splitting Solvation Energy : {:7.8f} [kCal/mol] ".format(S) )
+    print("Solvation Energy : {:7.8f} [kcal/mol] ".format(S) )
     
     return S
 
@@ -251,7 +254,7 @@ def phi_in_Adjoint_Mesh(mol_name , face_array , vert_array , dens , input_suffix
 
 
 def S_Exact_in_Adjoint_Mesh_with_N_Ref(mol_name , grid  , dens , input_suffix , N , N_ref ,
-                                        save_energy_plot=False  , test_mode = False):
+                                        save_energy_plot=False  , test_mode = False , return_times = False):
     
     face_array = np.transpose(grid.leaf_view.elements)
     vert_array = np.transpose(grid.leaf_view.vertices)
@@ -282,19 +285,20 @@ def S_Exact_in_Adjoint_Mesh_with_N_Ref(mol_name , grid  , dens , input_suffix , 
 
     adj_el_pos = check_contained_triangles__(grid , adj_grid)
     
-    print(len(adj_face_array))
+    #print(len(adj_face_array))
     #print(adj_el_pos)
-    
+    init_time_spaces_adj  = time.time()
     dirichl_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order)
     neumann_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order) 
     dual_to_dir_s_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order)
+    spaces_time_adj       = time.time()-init_time_spaces_adj
     
-    phi , dphi , it_count = adjoint_equation( dirichl_space_phi , neumann_space_phi , dual_to_dir_s_phi , 
+    phi , dphi , operators_time_adj , matrix_time_adj , GMRES_time_adj , phidphi_time , it_count = adjoint_equation( dirichl_space_phi , neumann_space_phi , dual_to_dir_s_phi , 
                                             save_plot = True , suffix = '_'+str(N_ref) )
-    
-    S_Ex    , rearange_S_Ex_i  , S_Ex_i , _= Zeb_aproach_with_u_s_Teo( adj_face_array , adj_vert_array , phi , dphi , N , 
+    init_time_S_Ex = time.time()
+    S_Ex    , rearange_S_Ex_i  , S_Ex_i , _= Exact_aproach_with_u_s_Teo( adj_face_array , adj_vert_array , phi , dphi , N , 
                                                  grid_relation = adj_el_pos , return_values_on_Adj_mesh = True)
-    
+    S_Ex_time      = time.time()-init_time_S_Ex
     N_el_adjoint = len(adj_face_array)
     
     
@@ -313,11 +317,12 @@ def S_Exact_in_Adjoint_Mesh_with_N_Ref(mol_name , grid  , dens , input_suffix , 
                                         dens, input_suffix , N_ref )
                      , grid_function = S_Ex_BEMPP , data_type = 'element')
     
-    return S_Ex , rearange_S_Ex_i , it_count , N_el_adjoint
+    return (S_Ex , rearange_S_Ex_i , it_count , N_el_adjoint , spaces_time_adj , operators_time_adj , 
+                matrix_time_adj , GMRES_time_adj , phidphi_time , S_Ex_time )
 
 
     
-def S_Zeb_in_Adjoint_Mesh(mol_name , face_array , vert_array , dens , input_suffix , N):
+def S_Exact_in_Adjoint_Mesh(mol_name , face_array , vert_array , dens , input_suffix , N):
     
     adj_face , adj_vertex = mesh_refiner(face_array , vert_array , np.ones((len(face_array[0:,]))) , 1.5 )
 
@@ -337,19 +342,19 @@ def S_Zeb_in_Adjoint_Mesh(mol_name , face_array , vert_array , dens , input_suff
     
     phi , dphi , it_count = adjoint_equation( dirichl_space_phi , neumann_space_phi , dual_to_dir_s_phi)
     
-    S_Zeb    , S_Zeb_i = Zeb_aproach_with_u_s_Teo( adj_face_array , adj_vert_array , phi , dphi , N ,
+    S_Exact    , S_Exact_i = Exact_aproach_with_u_s_Teo( adj_face_array , adj_vert_array , phi , dphi , N ,
                                                  grid_relation=adj_el_pos)
     
-    rearange_S_Zeb_i = np.zeros((len(face_array),1))
+    rearange_S_Exact_i = np.zeros((len(face_array),1))
     
     c=0
-    for G_i in S_Zeb_i:
-        rearange_S_Zeb_i[int(adj_el_pos[c])] += G_i
+    for G_i in S_Exact_i:
+        rearange_S_Exact_i[int(adj_el_pos[c])] += G_i
         c+=1
         
-    #print(rearange_S_Zeb_i)
+    #print(rearange_S_Exact_i)
     
-    return S_Zeb , rearange_S_Zeb_i , it_count
+    return S_Exact , rearange_S_Exact_i , it_count
 
 
 # ----------------------------------------------------------------
@@ -363,32 +368,42 @@ def adjoint_equation( dirichl_space , neumann_space , dual_to_dir_s , save_plot 
     
     global ep_m , ep_s , k
     
+    init_time_operators = time.time()
     identity = sparse.identity(     dirichl_space, dirichl_space, dual_to_dir_s)
     slp_in   = laplace.single_layer(neumann_space, dirichl_space, dual_to_dir_s)
     dlp_in   = laplace.double_layer(dirichl_space, dirichl_space, dual_to_dir_s)
     slp_out  = modified_helmholtz.single_layer(neumann_space, dirichl_space, dual_to_dir_s, k)
     dlp_out  = modified_helmholtz.double_layer(dirichl_space, dirichl_space, dual_to_dir_s, k)
-
+    operators_time_adj = time.time() - init_time_operators
+    
+    init_time_operators = time.time()
     blocked = bempp.api.BlockedOperator(2, 2)
     blocked[0, 0] = 0.5*identity + dlp_in
     blocked[0, 1] = -slp_in
     blocked[1, 0] = 0.5*identity - dlp_out
     blocked[1, 1] = (ep_m/ep_s)*slp_out
-
+    
+    
     zero = bempp.api.GridFunction(dirichl_space , fun=zero_i)
     P_GL = bempp.api.GridFunction(dirichl_space, fun=q_times_G_L)
     rs_r = [P_GL , zero]
-
-    sol_r, info,it_count = bempp.api.linalg.gmres( blocked, rs_r , return_iteration_count=True, tol=1e-8)
+    matrix_time_adj = time.time() - init_time_operators
+    
+    init_time_GMRES_adj = time.time()
+    sol_r, info,it_count = bempp.api.linalg.gmres( blocked, rs_r , return_iteration_count=True, tol=1e-5,
+                                                  use_strong_form=True )
+    GMRES_time_adj = time.time()-init_time_GMRES_adj
     print("The linear system for phi was solved in {0} iterations".format(it_count))
+    phidphi_time = time.time()
     phi_r , dphi_r = sol_r
+    phidphi_time = time.time()-phidphi_time 
     
     if save_plot:
         
         phi_func  = bempp.api.GridFunction( dirichl_space , fun=None, coefficients= phi_r.coefficients.real)
         dphi_func = bempp.api.GridFunction( neumann_space , fun=None, coefficients=dphi_r.coefficients.real)
         
-        bempp.api.export('Molecule/' + mesh_info.mol_name +'/' + mesh_info.mol_name + '_{0}{1}_phi_{2}.vtk'.format(
+        bempp.api.export('Molecule/' + mesh_info.mol_name +'/' + mesh_info.mol_name + '_{0}{1}_phi_{2}.msh'.format(
                                       mesh_info.mesh_density,   mesh_info.suffix , suffix )
                      , grid_function = phi_func )
         
@@ -396,7 +411,7 @@ def adjoint_equation( dirichl_space , neumann_space , dual_to_dir_s , save_plot 
                                       mesh_info.mesh_density,   mesh_info.suffix , suffix )
                      , grid_function = dphi_func , data_type = 'node')
     
-    return phi_r , dphi_r , it_count
+    return phi_r , dphi_r  , operators_time_adj , matrix_time_adj , GMRES_time_adj , phidphi_time , it_count
 
 def S_trad_calc( dirichl_space, neumann_space , u_h , du_h , u_r , du_r):
     
@@ -417,13 +432,13 @@ def S_trad_calc( dirichl_space, neumann_space , u_h , du_h , u_r , du_r):
     # Donde agregando algunas constantes podemos calcular la energia de solvatacion S
     
     S     = K * np.sum(mesh_info.q * terms).real
-    print("Three Term Splitting Solvation Energy : {:7.8f} [kCal/mol] ".format(S) )
+    print("Solvation Energy : {:7.8f} [kcal/mol] ".format(S) )
     
     return S
 
-def S_Cooper_calc( face_array , vert_array , phi_r , dphi_r , U_Reac , dU_Reac , N):
+def S_Aproximate_calc( face_array , vert_array , phi_r , dphi_r , U_Reac , dU_Reac , N):
     
-    Solv_Cooper = np.zeros((len(face_array),1))
+    Solv_Aproximate = np.zeros((len(face_array),1))
     c = 0
     for face in face_array:
 
@@ -432,15 +447,15 @@ def S_Cooper_calc( face_array , vert_array , phi_r , dphi_r , U_Reac , dU_Reac ,
         
         I2 = int_calc_i( face , face_array , vert_array , ep_m * dphi_r , mesh_info.phi_space
                         , mesh_info.phi_order , U_Reac , mesh_info.u_space , mesh_info.u_order  , N)
-        Solv_Cooper[c] = I1-I2
+        Solv_Aproximate[c] = I1-I2
 
         c+=1
 
-    S_Cooper_i = K*Solv_Cooper
-    S_Cooper = np.sum(S_Cooper_i )
-    print('Cooper Solv = {0:10f} '.format(S_Cooper)) 
+    S_Aproximate_i = K*Solv_Aproximate
+    S_Aproximate = np.sum(S_Aproximate_i )
+    print('Aproximate Solv = {0:10f} '.format(S_Aproximate)) 
     
-    return S_Cooper , S_Cooper_i
+    return S_Aproximate , S_Aproximate_i
 
 
 def Aproximated_Sol_Adj_UDP0(U_R , dU_R , phi , dphi , face_array , vert_array , 
@@ -484,9 +499,9 @@ def Aproximated_Sol_Adj_UDP0(U_R , dU_R , phi , dphi , face_array , vert_array ,
     return S_Aprox , rearange_S_Aprox_i
        
        
-def S_Zeb_calc( face_array , vert_array , phi , dphi , u_s , du_s , N):
+def S_Exact_calc( face_array , vert_array , phi , dphi , u_s , du_s , N):
     
-    Solv_Zeb = np.zeros((len(face_array),1))
+    Solv_Exact = np.zeros((len(face_array),1))
     c = 0
     print(mesh_info.u_s_order)
     for face in face_array:
@@ -496,16 +511,16 @@ def S_Zeb_calc( face_array , vert_array , phi , dphi , u_s , du_s , N):
         
         I2 = int_calc_i( face , face_array , vert_array ,  dphi , mesh_info.phi_space
                          , mesh_info.phi_order , ep_m*(u_s) , mesh_info.u_s_space , mesh_info.u_s_order , N)
-        Solv_Zeb[c] = I2-I1
+        Solv_Exact[c] = I2-I1
 
         c+=1
-    Solv_Zeb_i = Solv_Zeb
-    S_Zeb = K*np.sum(Solv_Zeb )
-    print('Zeb Solv = {0:10f} '.format(S_Zeb)) 
+    Solv_Exact_i = Solv_Exact
+    S_Exact = K*np.sum(Solv_Exact )
+    print('Exact Solv = {0:10f} '.format(S_Exact)) 
     
 
     
-    return S_Zeb , Solv_Zeb_i
+    return S_Exact , Solv_Exact_i
        
 
 def delta_G_exact(grid , U , dU , U_space , U_order , N , save_energy_plot = False):
@@ -551,7 +566,8 @@ def delta_G_exact(grid , U , dU , U_space , U_order , N , save_energy_plot = Fal
         
         I1 , I2 = 0. , 0. 
         
-        point_count = 0        
+        point_count = 0 
+        
         for x in X_K:
             
             U_local  = local_f( x , A , U_aux  , U_order)
@@ -585,8 +601,116 @@ def delta_G_exact(grid , U , dU , U_space , U_order , N , save_energy_plot = Fal
     
     return Solv_Ex_total , Solv_Ex_i
 
+def delta_G_exact_new(grid , U , dU , U_space , U_order , N , save_energy_plot = False):
+    '''
+    Calculates the exact solvation energy using theorical u_c and du_c
+    Params:
+    face_array : Array of faces
+    vert_array : Array of vertices
+    U          : BEMPP object
+    dU         : BEMPP object
+    N          : Number of points for the gauss cuadrature
+    save_energy_plots = True or False : If energy plots wants to be saved in the mesh directory
+    Returns 
+    S**{ex} , np.array(S**{ex} per element) 
+    '''
+    
+    face_array = np.transpose(grid.leaf_view.elements) 
+    vert_array = np.transpose(grid.leaf_view.vertices)
+    
+    normals = normals_to_element( face_array , vert_array )
+    
+    Solv_Ex = np.zeros((len(face_array),1))
+    c = 0
+    
+    if U_order == 0 and U_space == 'DP':
+        
+        for face in face_array:
 
-def Zeb_aproach_with_u_s_Teo( face_array , vert_array , phi , dphi , N , grid_relation=None ,
+            f1 , f2 , f3 = face
+            v1 , v2 , v3 = vert_array[f1] , vert_array[f2] , vert_array[f3]
+
+            normal = normals[c]
+
+            Area = 0.5 * np.linalg.norm( np.cross(v2-v1 , v3-v1) )
+
+            X_K , W = evaluation_points_and_weights(v1,v2,v3 , N)
+
+            u_c_func  = lambda x_i : u_s_Teo(x_i)
+            du_c_func = lambda x_i : du_s_Teo(x_i, normal)
+            u_c_face  = np.array([ u_c_func(x_i) for x_i in X_K]) 
+            du_c_face = np.array([du_c_func(x_i) for x_i in X_K]) 
+
+            U_local , dU_local = U.coefficients.real[c] , dU.coefficients.real[c]
+
+            I2 =  np.sum( U_local  * du_c_face * W )
+            I1 =  np.sum( dU_local * u_c_face  * W )
+
+            Solv_Ex[c] = (I1-I2)*Area         
+
+            c+=1
+
+        Solv_Ex_i = K * ep_m * Solv_Ex
+
+        Solv_Ex_total = np.sum(Solv_Ex_i )
+        print('Estimated Solvation Energy : {0:10f} '.format(Solv_Ex_total)) 
+
+        if save_energy_plot:
+            const_space = bempp.api.function_space(grid,  "DP", 0)
+            S_Ap_BEMPP  = bempp.api.GridFunction(const_space, fun=None, coefficients=Solv_Ex_i[:,0])
+            bempp.api.export('Molecule/' + mesh_info.mol_name +'/' + mesh_info.mol_name +
+                            '_{0}{1}_S_Aprox.vtk'.format( mesh_info.mesh_density, mesh_info.suffix)
+                         , grid_function = S_Ap_BEMPP , data_type = 'element')
+
+
+    return Solv_Ex_total , Solv_Ex_i
+
+def delta_G_tent( grid , U , dU , U_space , U_order , N ):
+    
+    face_array = np.transpose(grid.leaf_view.elements) 
+    vert_array = np.transpose(grid.leaf_view.vertices)
+    
+    if U_space == 'DP' and U_order == 0:
+    
+        Solv_Ex = np.zeros([len(face_array) , 1])
+
+
+        mesh = trimesh.Trimesh(vertices=vert_array , faces=face_array)
+        normals = mesh.face_normals
+        Areas = mesh.area_faces
+
+        quadrule = quadratureRule_fine(N)
+        X_K , W  = quadrule[0].reshape(-1,3) , quadrule[1]
+
+        c=0
+        for face in face_array:
+                        
+            v1 , v2 , v3 = vert_array[face[0]] , vert_array[face[1]] , vert_array[face[2]]
+            
+            X = evaluation_points_and_weights_new(v1,v2,v3 , N , X_K , W)
+            
+            u_c_func  = lambda x_i : u_s_Teo(x_i )
+            du_c_func = lambda x_i : du_s_Teo(x_i, normals[c] )
+            u_c_face  = np.array([ u_c_func(x_i) for x_i in X]) 
+            du_c_face = np.array([du_c_func(x_i) for x_i in X]) 
+
+
+            U_local , dU_local = U.coefficients.real[c] , dU.coefficients.real[c]
+
+            I2 =  np.sum( U_local  * du_c_face * W )
+            I1 =  np.sum( dU_local * u_c_face  * W )
+
+            Solv_Ex[c] = (I1-I2)*Areas[c]       
+
+            c+=1
+    
+    Solv_Ex_i = K * ep_m * Solv_Ex
+    
+    print('Aproximate solvation energy: {0:.6f}[kcal/kmol]'.format(np.sum(Solv_Ex_i)))
+    return np.sum(Solv_Ex_i) , Solv_Ex_i
+
+
+def Exact_aproach_with_u_s_Teo( face_array , vert_array , phi , dphi , N , grid_relation=None ,
                             return_values_on_Adj_mesh = False ):
     
     if np.min(face_array)==0:
@@ -594,7 +718,7 @@ def Zeb_aproach_with_u_s_Teo( face_array , vert_array , phi , dphi , N , grid_re
     
     normals = normals_to_element( face_array , vert_array )
     
-    Solv_Zeb = np.zeros((len(face_array),1))
+    Solv_Exact = np.zeros((len(face_array),1))
     c = 0
     
     for face in face_array:
@@ -631,39 +755,37 @@ def Zeb_aproach_with_u_s_Teo( face_array , vert_array , phi , dphi , N , grid_re
             
             point_count+=1
             
-        Solv_Zeb[c] = (I1-I2)*Area
+        Solv_Exact[c] = (I1-I2)*Area
 
         c+=1
         
-    Solv_Zeb_i = K * Solv_Zeb
+    Solv_Exact_i = K * Solv_Exact
     
-    S_Zeb = np.sum(Solv_Zeb_i )
-    print('Estimated Exact Solvation Energy : {0:10f} '.format(S_Zeb)) 
+    S_Exact = np.sum(Solv_Exact_i )
+    print('Estimated Exact Solvation Energy : {0:10f} '.format(S_Exact)) 
     
     if np.any(type(grid_relation)!=None):
         c=0
         
         rearange_S_Ex_i = np.zeros(( np.max(grid_relation.astype(int))+1,1))
         
-        for G_i in Solv_Zeb_i:
+        for G_i in Solv_Exact_i:
             rearange_S_Ex_i[int(grid_relation[c])] += G_i
             c+=1
             
         if return_values_on_Adj_mesh:
-            return S_Zeb , rearange_S_Ex_i , Solv_Zeb_i , grid_relation
+            return S_Exact , rearange_S_Ex_i , Solv_Exact_i , grid_relation
         
     elif type(grid_relation)==None:
         print('Cant relate elements from the adj with the original mesh. Continuee....')
-        return S_Zeb
+        return S_Exact
         
     
-    return S_Zeb , rearange_S_Ex_i
+    return S_Exact , rearange_S_Ex_i
 
 def u_s_Teo( x ):
     
     return (1. / (4.*np.pi*ep_m) ) * np.sum( mesh_info.q / np.linalg.norm( x - mesh_info.x_q, axis=1 ) )
-    
-    #result[:] =  C / (4.*np.pi*ep_m)  * np.sum( mesh_info.q / np.linalg.norm( x - mesh_info.x_q, axis=1 ) )
 
 def du_s_Teo(x,n):
     
@@ -786,8 +908,8 @@ def phi_with_N_ref(mol_name , coarse_grid , face_array , vert_array , dens ,
     return phi , dphi
 
 def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref ,
-             smooth = False , refine = True, Use_GAMer = False , sphere=False , Estimator = 'E_u',
-             x_q = None, q=None , r = np.nan):
+             smooth = True , Mallador = 'NanoShaper',refine = True, Use_GAMer = True , sphere=False , Estimator = 'E_u',
+             x_q = None, q=None , r = np.nan , fine_vert_array = None):
     '''
     Calculates the solvation energy and refines the mesh.
     Params:
@@ -801,6 +923,7 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
     N_ref         : Number of UNIFORM refinements used to calculate phi. 
     smooth        : Smooths the mesh using a 40.0 [el/A2] grid, must be created before with MSMS
     refine        : True if the mesh is going to be refined, False if not
+    Mallador      : Can be MSMS or NanoShaper
     Use_GAMer     : True if using GAMer or False if not. Read the README to use this.
     sphere        : True if the mesh is a spherical grid, and False if not
     Estimator     : E_phi or E_u
@@ -859,13 +982,13 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
             U, dU , operators_time_U , assembly_time_U , solving_time_U , it_count_U = U_tot_boundary(grid
                                                         , return_time = True , save_plot=True)
             total_solving_time = time.time() - init_time
-
+            
             ################
-
+            print('Total solving time for U and dU: {0:.4f}'.format(total_solving_time))
             init_time = time.time()
             S_trad = S_trad_calc_R( potential.dirichl_space_u, potential.neumann_space_u , U , dU ) 
             S_trad_time = time.time()-init_time
-
+            print('Measured time to obtain S_trad : {0:.4f}'.format(S_trad_time))
             ################
 
             init_time = time.time()
@@ -934,11 +1057,12 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
 
                     new_face_array , aux_vert_array = Improve_Mesh(new_face_array , aux_vert_array , mesh_info.path , 
                                                                   mesh_info.mol_name+ '_' + str(dens) + output_suffix )
+                    print(np.min(aux_face_array))
 
                     vert_and_face_arrays_to_text_and_mesh( name , aux_vert_array , new_face_array.astype(int)[:] ,
                                                            output_suffix, dens , Self_build=True)
 
-                    grid = Grid_loader( name , dens , output_suffix )
+                    grid = Grid_loader( name , dens , output_suffix , 'Self')
 
             return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
                      S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
@@ -1061,7 +1185,7 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
                     vert_and_face_arrays_to_text_and_mesh( name , aux_vert_array , new_face_array.astype(int)[:] ,
                                                            output_suffix, dens , Self_build=True)
 
-                    grid = Grid_loader( name , dens , output_suffix )
+                    grid = Grid_loader( name , dens , output_suffix , 'Self')
 
             return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
                      S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
@@ -1076,61 +1200,74 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
             mesh_info.path         = os.path.join('Molecule' , mesh_info.mol_name)
 
             mesh_info.q , mesh_info.x_q = run_pqr(mesh_info.mol_name)
-
+            
+            init_time_0 = time.time()
             mesh_info.u_space , mesh_info.u_order     = 'DP' , 0
             mesh_info.phi_space , mesh_info.phi_order = 'P' , 1
             mesh_info.u_s_space , mesh_info.u_s_order = 'P' , 1
-
+            
             if input_suffix == '-0' and not sphere:
-                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix , GAMer = Use_GAMer)
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix , Mallador, GAMer = False)
             else:
-                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density , mesh_info.suffix )
+                grid = Grid_loader( mesh_info.mol_name , mesh_info.mesh_density ,  mesh_info.suffix , 'Self')
+            t_0 = time.time() - init_time_0
+            print('Total time to create and load the mesh {0:.6f} [s]'.format(t_0))
 
-            init_time = time.time()
-            U, dU , operators_time_U , assembly_time_U , solving_time_U , it_count_U = U_tot_boundary(grid
+            init_time_solving_out = time.time()
+            U, dU , spaces_time_U , operators_time_U , assembly_time_U , GMRES_time_U , UdU_time, it_count_U = U_tot_boundary(grid
                                                         , return_time = True , save_plot=True , tolerance = 1e-5)
-            total_solving_time = time.time() - init_time
-
+            total_solving_time = time.time() - init_time_solving_out
+            print('Total solving time for U and dU: {0:.4f}'.format(total_solving_time))
             ################
 
-            init_time = time.time()
-            S_trad = S_trad_calc_R( potential.dirichl_space_u, potential.neumann_space_u , U , dU ) 
-            S_trad_time = time.time()-init_time
-
+            init_time_S_trad = time.time()
+            S_trad   = S_trad_calc_R( potential.dirichl_space_u, potential.neumann_space_u , U , dU ) 
+            t_S_trad = time.time()-init_time_S_trad
+            print('Measured time to obtain S_trad : {0:.4f}'.format(t_S_trad))
             ################
 
-            init_time = time.time()
-            S_Ap , S_Ap_i = delta_G_exact( grid , U , dU , mesh_info.u_space , mesh_info.u_order  , N ,
-                                                            save_energy_plot=True                    )
-            S_Ap_time = time.time() - init_time
+            init_time_S_Ap = time.time()
+            S_Ap , S_Ap_i = delta_G_tent_Pool( grid , U.coefficients.real , dU.coefficients.real , mesh_info.u_space ,
+                                           mesh_info.u_order  , N )
+            S_Ap_time = time.time() - init_time_S_Ap
+            print('Time to calculate S_ap: {0:.2f}'.format(S_Ap_time))
 
             #################
 
-            init_time = time.time()
-            S_Ex , S_Ex_i , _ , N_El_adj = S_Exact_in_Adjoint_Mesh_with_N_Ref(name , grid , dens , input_suffix , N ,
-                                                    N_ref , save_energy_plot=True  , test_mode = True )
-            S_Ex_time = time.time() - init_time
-
+            [S_Ex , S_Ex_i , it_count_phi , N_El_adj , flat_ref_time_adj , spaces_time_adj , operators_time_adj , 
+             #(mol_name , grid  , dens , input_suffix , N ,save_energy_plot=False  , test_mode = False , return_times = False)
+            matrix_time_adj , GMRES_time_adj , phidphi_time , S_Ex_time]  = S_Exact_in_Adjoint_Mesh_with_N_Ref_Pool(name , grid , dens , input_suffix , N , N_ref 
+                                                    , save_energy_plot=False , test_mode=True , return_times = True)
+            total_phi_time = matrix_time_adj + GMRES_time_adj + phidphi_time
+            print('Time to solve the adjoint and dependencies: {0:.2f}'.format(total_phi_time))
+            print('Time to calculate S_ex: {0:.2f}'.format(S_Ex_time))
             ################
-
-            const_space = bempp.api.function_space(grid,  "DP", 0)
-
+            
+            total_phi_time = matrix_time_adj + GMRES_time_adj + phidphi_time
+            print('Time to solve the adjoint and dependencies: {0:.2f}'.format(total_phi_time))
+            
+            init_time_E = time.time()
+            const_space = bempp.api.function_space(grid,  "DP", 0)            
             S_Ap_bempp = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ap_i[:,0])
-            S_Ex_bempp    = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ex_i[:,0])
+            S_Ex_bempp    = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ex_i)
 
-            dif =S_Ap_i-S_Ex_i
+            dif =S_Ap_i[:,0]-S_Ex_i
 
-            dif_F = bempp.api.GridFunction(const_space, fun=None, coefficients=np.abs(dif[:,0] ) )
+            dif_F = bempp.api.GridFunction(const_space, fun=None, coefficients=np.abs(dif) )
 
             bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_N_ref_{2:d}.vtk'.format( dens,
                                                                 input_suffix , N_ref )
                              , grid_function = dif_F , data_type = 'element')
-
-            if True: #Marked elements        
+            E_time = time.time()-init_time_E
+      
+            init_time_ref = time.time()
+            if True: #Marked elements      
+                init_time_status = time.time()
                 face_array = np.transpose(grid.leaf_view.elements) + 1    
-                status = value_assignor_starter(face_array , np.abs(dif[:,0]) , percentaje)
+                status = value_assignor_starter(face_array , np.abs(dif) , percentaje)
                 const_space = bempp.api.function_space(grid,  "DP", 0)
                 Status    = bempp.api.GridFunction(const_space, fun=None, coefficients=status)
+                status_time = time.time()-init_time_status
                 bempp.api.export('Molecule/' + name +'/' + name + '_{0}{1}_Marked_elements_{2}.vtk'.format( 
                                                 dens, input_suffix , N_ref )
                              , grid_function = Status , data_type = 'element')
@@ -1141,30 +1278,41 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
             N_elements = len(face_array)
 
             if refine:
-
-                new_face_array , new_vert_array = mesh_refiner(face_array , vert_array , np.abs(dif[:,0]) , percentaje )
-
+                init_time_mesh_refiner = time.time()
+                new_face_array , new_vert_array = mesh_refiner(face_array , vert_array , np.abs(dif) , percentaje )
+                mesh_refiner_time  = time.time()-init_time_mesh_refiner
                 if smooth:
-
-                    fine_vert_array = text_to_list(name , '_40.0-0' , '.vert' , info_type=float)                
+                    init_time_smoothing = time.time()
+                    #fine_vert_array = text_to_list(name , '_40.0-0' , '.vert' , info_type=float)                
                     aux_vert_array  = smoothing_vertex( new_vert_array , fine_vert_array )
-
+                    smoothing_time      = time.time()-init_time_smoothing
                 elif not smooth:
 
                     aux_vert_array = new_vert_array.copy()
 
                 if Use_GAMer:
-
+                    init_time_GAMer = time.time()
                     new_face_array , aux_vert_array = Improve_Mesh(new_face_array , aux_vert_array , mesh_info.path , 
                                                                   mesh_info.mol_name+ '_' + str(dens) + output_suffix )
 
                     vert_and_face_arrays_to_text_and_mesh( name , aux_vert_array , new_face_array.astype(int)[:] ,
                                                            output_suffix, dens , Self_build=True)
 
-                    grid = Grid_loader( name , dens , output_suffix )
-
-            return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
-                     S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
+   
+            
+                    grid = Grid_loader( name , dens , output_suffix ,'Self')
+                    GAMer_time      = time.time()-init_time_GAMer
+            t_ref =time.time()- init_time_ref
+            
+            times = np.array([ t_0 , spaces_time_U , operators_time_U , assembly_time_U ,
+                              GMRES_time_U , UdU_time, t_S_trad, S_Ap_time, flat_ref_time_adj ,spaces_time_adj , 
+                              operators_time_adj , matrix_time_adj , GMRES_time_adj , phidphi_time , 
+                              S_Ex_time , E_time , status_time , mesh_refiner_time , smoothing_time  ,
+                              GAMer_time ])
+            
+            return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , it_count_U  , times )
+            #return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
+            #         S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U , t_ref)
         
         elif Estimator == 'E_phi':
             
@@ -1190,7 +1338,7 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
 
             init_time = time.time()
             U, dU , operators_time_U , assembly_time_U , solving_time_U , it_count_U = U_tot_boundary(grid
-                                                        , return_time = True , save_plot=True, tolerance = 1e-8)
+                                                        , return_time = True , save_plot=True, tolerance = 1e-5)
             total_solving_time = time.time() - init_time
             ################
 
@@ -1224,7 +1372,8 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
             S_Ex_time = time.time() - init_time
 
             ################
-
+            init_time = time.time()
+            
             const_space = bempp.api.function_space(grid,  "DP", 0)
 
             S_Ap_bempp = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ap_i[:,0])
@@ -1258,8 +1407,8 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
 
                 if smooth:
 
-                    fine_vert_array = text_to_list(name , '_40.0-0' , '.vert' , info_type=float)                
-                    aux_vert_array  = smoothing_vertex( new_vert_array , fine_vert_array )
+                    #fine_vert_array = text_to_list(name , '_40.0-0' , '.vert' , info_type=float)                
+                    aux_vert_array  = smoothing_vertex( new_vert_array , vert_array, fine_vert_array )
 
                 elif not smooth:
 
@@ -1273,10 +1422,12 @@ def main( name , dens , input_suffix , output_suffix , percentaje ,  N ,  N_ref 
                     vert_and_face_arrays_to_text_and_mesh( name , aux_vert_array , new_face_array.astype(int)[:] ,
                                                            output_suffix, dens , Self_build=True)
 
-                    grid = Grid_loader( name , dens , output_suffix )
+                    grid = Grid_loader( name , dens , output_suffix ,'Self')
+                
+            t_ref =time.time()- init_time
 
             return ( S_trad , S_Ap , S_Ex , N_elements , N_El_adj , total_solving_time , S_trad_time , S_Ap_time ,
-                     S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U )
+                     S_Ex_time , operators_time_U , assembly_time_U , solving_time_U , it_count_U , t_ref)
             
 
 def suffixes(N_ref):
@@ -1297,7 +1448,12 @@ def suffixes(N_ref):
     return suf
 
 def create_txt_file(txt_name , headings = 'Molecule & density  & Times-Refinated & Elem & Adj Elem & S_Trad & S_Ap & S_Ex ' 
-                    + ' solving_time & S_trad_time & S_Ap_time & S_Ex_time & Operators_Build_Time_U & Assembly_Time_U & Linear_Sys_Solv_time_U & Iterations_U'):
+                    + '& Iterations_U & ' ,times = True):
+
+    # Headings can also be
+    # 'Molecule & density  & Times-Refinated & Elem & Adj Elem & S_Trad & S_Ap & S_Ex ' 
+    #               + ' solving_time & S_trad_time & S_Ap_time & S_Ex_time & Operators_Build_Time_U & Assembly_Time_U & '
+    #               + 'Linear_Sys_Solv_time_U & Iterations_U % t_ref'
     '''
     Creates the txt file in Results/.
     Input
@@ -1306,7 +1462,12 @@ def create_txt_file(txt_name , headings = 'Molecule & density  & Times-Refinated
     Output
     None
     '''
-    
+    if times:
+        headings= headings +   't_0 & spaces_time_U & operators_time_U & assembly_time_U & ' 
+        headings= headings +'GMRES_time_U & UdU_time & S_trad_time & S_Ap_time & Flat ref time & spaces_time_adj & '
+        headings= headings +'operators_time_adj & matrix_time_adj & GMRES_time_adj & phidphi_time & ' 
+        headings= headings +'S_Ex_time , E_time , status_time , mesh_refiner_time , smoothing_time  & GAMer_time '
+        
     if txt_name[-4:]!='.txt':
         print(txt_name[-4:])
         txt_name = txt_name+'.txt'
@@ -1327,7 +1488,6 @@ def append_txt_file(txt_name , text):
     None
     '''
     if text[-2:]!='\n':
-        print('hi')
         text=text + '\n'
         
     if txt_name[-4:]!='.txt':
@@ -1364,6 +1524,8 @@ def parse_aux_func():
                                         datetime.now().month, datetime.now().day), type=str)
     parser.add_argument("-radius"      , help="[Optional] Radius of the spherical geometry" ,
                                         default= 1.0 , type=float)
+    parser.add_argument("-N_Gauss"     , help="[Optional] Number of points for the Gauss Quadrature" ,
+                                        default= 25 , type=int)
 
     args = parser.parse_args()
     
@@ -1396,3 +1558,318 @@ def saved_sphere_distributions(name , r):
         q = np.array( [1. , 1. , -1.]) 
     
     return x_q , q
+
+def Delta_G_tent_int(c , face_array , vert_array , normals , Areas , U , dU , N , X_K , W):
+    
+    face = face_array[c]
+    
+    v1 , v2 , v3 = vert_array[face[0]] , vert_array[face[1]] , vert_array[face[2]]
+            
+    X = evaluation_points_and_weights_new(v1,v2,v3 , N , X_K , W)
+                
+    u_c_face_2  = np.array(list(map( lambda x_i : u_s_Teo(x_i)              , X )))
+    du_c_face_2 = np.array(list(map( lambda x_i : du_s_Teo(x_i, normals[c]) , X )))
+
+    U_local , dU_local = U[c] , dU[c]
+
+    I2 =  np.sum( U_local  * du_c_face_2 * W )
+    I1 =  np.sum( dU_local * u_c_face_2  * W )
+
+    return (I1-I2)* Areas[c]
+
+import time
+
+
+def delta_G_tent_2(grid , U , dU , U_space , U_order , N):
+    # Works good
+    face_array = np.transpose(grid.leaf_view.elements) 
+    vert_array = np.transpose(grid.leaf_view.vertices)
+    
+    if U_space == 'DP' and U_order == 0:
+
+        mesh = trimesh.Trimesh(vertices=vert_array , faces=face_array)
+        normals = mesh.face_normals
+        Areas = mesh.area_faces
+
+        quadrule = quadratureRule_fine(N)
+        X_K , W  = quadrule[0].reshape(-1,3) , quadrule[1]
+        
+        #Integral_func = lambda c : Delta_G_tent_int(c , face_array , vert_array , normals , Areas
+        #                                            ,U , dU , N , X_K , W)
+        init_time_integral = time.time()
+        Integral      = np.array(list(map( lambda c : Delta_G_tent_int(c , face_array ,
+                vert_array , normals , Areas ,U , dU , N , X_K , W) , np.arange(len(face_array)) )))
+        
+        
+
+    Solv_Ex_i = K * ep_m * Integral 
+    
+    print('Aproximated Solvation energy {0:.6f}'.format(np.sum(Solv_Ex_i)))
+    
+    return np.sum(Solv_Ex_i) , np.reshape(Solv_Ex_i , (-1,1))
+
+def delta_G_tent_3(grid , U , dU , U_space , U_order , N):
+    
+    face_array = np.transpose(grid.leaf_view.elements) 
+    vert_array = np.transpose(grid.leaf_view.vertices)
+    
+    init_time_x_i = time.time()
+    
+    quadrule = quadratureRule_fine(N)
+    X_K , W  = quadrule[0].reshape(-1,3) , quadrule[1]
+    
+    x_i = np.concatenate(np.array( [evaluation_points_and_weights_new(vert_array[face[0]] ,
+                                                 vert_array[face[1]] ,
+                                                 vert_array[face[2]] , N , X_K , W) for face in face_array ])
+                        )
+    print('Time to create grid points = {0:.4f}'.format(time.time()-init_time_x_i))
+                         
+    if U_space == 'DP' and U_order == 0:
+
+        mesh = trimesh.Trimesh(vertices=vert_array , faces=face_array)
+        normals = mesh.face_normals
+        Areas = mesh.area_faces
+
+        
+        
+        #Integral_func = lambda c : Delta_G_tent_int(c , face_array , vert_array , normals , Areas
+        #                                            ,U , dU , N , X_K , W)
+        
+        
+        
+        
+        u_c_init_time = time.time()
+        u_c_func  = lambda c : u_s_Teo(x_i[c])
+        u_c_face  = np.array([ u_c_func(c) for c in range(len(x_i))])
+        du_c_func = lambda c : du_s_Teo(x_i[c] , normals[c//N] )
+        u_c_face  = np.array([ u_c_func(c) for c in range(len(x_i))]).reshape((N,-1)) 
+        du_c_face = np.array([du_c_func(c) for c in range(len(x_i))]).reshape((N,-1)) 
+        print('u_c time {0:.4f}'.format(time.time()-u_c_init_time))
+        
+        integrals_init_time = time.time()
+        I1 = np.array([ np.sum( u_c_face[:,i] * W) for i in range(len(face_array))  ]) * dU
+        I2 = np.array([ np.sum(du_c_face[:,i] * W) for i in range(len(face_array))  ]) *  U
+        
+        Integral = (I1-I2)*Areas     
+        print('Integrals time {0:.4f}'.format(time.time()-integrals_init_time))
+
+    Solv_Ex_i = K * ep_m * Integral 
+    
+    print('Aproximated Solvation energy {0:.6f}'.format(np.sum(Solv_Ex_i)))
+    
+    return np.sum(Solv_Ex_i) , np.reshape(Solv_Ex_i , (-1,1))
+
+
+
+def delta_G_tent_Pool(grid , U , dU , U_space , U_order , N):
+    
+    face_array = np.transpose(grid.leaf_view.elements) 
+    vert_array = np.transpose(grid.leaf_view.vertices)
+    
+    if U_space == 'DP' and U_order == 0:
+
+        mesh = trimesh.Trimesh(vertices=vert_array , faces=face_array)
+        normals = mesh.face_normals
+        Areas = mesh.area_faces
+
+        quadrule = quadratureRule_fine(N)
+        X_K , W  = quadrule[0].reshape(-1,3) , quadrule[1]
+        
+        #Integral_func = lambda c : Delta_G_tent_int(c , face_array , vert_array , normals , Areas
+        #                                            ,U , dU , N , X_K , W)
+        def func(c):
+            return Delta_G_tent_int(c , face_array ,
+                        vert_array , normals , Areas ,U , dU , N , X_K , W)
+        
+        Integral      = np.array(Pool().map( func , np.arange(len(face_array)) ))
+        #Pool().terminate()
+        #Pool().join()
+        
+
+    Solv_Ex_i = K * ep_m * Integral 
+    #Pool().clear()
+    #print('Aproximated Solvation energy {0:.6f}'.format(np.sum(Solv_Ex_i)))
+    
+    return np.sum(Solv_Ex_i) , np.reshape(Solv_Ex_i , (-1,1))
+
+def S_Exact_in_Adjoint_Mesh_with_no_Ref_Pool(mol_name , grid  , dens , input_suffix , N ,
+                                            save_energy_plot=False  , return_times = True):
+    
+    face_array = np.transpose(grid.leaf_view.elements)
+    vert_array = np.transpose(grid.leaf_view.vertices)
+    
+    init_time_spaces_adj  = time.time()
+    dirichl_space_phi = bempp.api.function_space(grid,  mesh_info.phi_space , mesh_info.phi_order)
+    neumann_space_phi = bempp.api.function_space(grid,  mesh_info.phi_space , mesh_info.phi_order) 
+    dual_to_dir_s_phi = bempp.api.function_space(grid,  mesh_info.phi_space , mesh_info.phi_order)
+    spaces_time_adj       = time.time()-init_time_spaces_adj
+    
+    phi , dphi , operators_time_adj , matrix_time_adj , GMRES_time_adj , phidphi_time , it_count = adjoint_equation( 
+                    dirichl_space_phi , neumann_space_phi , dual_to_dir_s_phi , save_plot = True )
+    init_time_S_Ex = time.time()
+    S_Ex , S_Ex_i= Exact_aproach_with_u_s_Teo_Pool( face_array , vert_array ,
+                                                   phi.coefficients.real , dphi.coefficients.real , N )
+    S_Ex_time      = time.time()-init_time_S_Ex
+    print('Exact solvation energy solved in {0:.5f} [s]'.format(S_Ex_time))
+    N_el_adjoint   = len(face_array)
+        
+    print('Exact solvation energy {0:.5f} [kcal/kmol]'.format(S_Ex))
+    
+    return (S_Ex , S_Ex_i.reshape((-1,1)) , it_count , N_el_adjoint , spaces_time_adj , operators_time_adj , 
+                matrix_time_adj , GMRES_time_adj , phidphi_time , S_Ex_time )
+
+def S_ex_integrate_face(c , face_array , vert_array , normals, phi , dphi , X_K , W  , N):
+    
+    f1 , f2 , f3 = face_array[c]
+    v1 , v2 , v3 = vert_array[f1] , vert_array[f2] , vert_array[f3]          
+        
+    A = matrix_lineal_transform( v1 , v2 , v3 )    
+    
+    x_i = evaluation_points_and_weights_new(v1,v2,v3 , N , X_K , W)
+        
+    phi_a  = np.array([  phi[f1] ,  phi[f2] ,  phi[f3] ])
+    dphi_a = np.array([ dphi[f1] , dphi[f2] , dphi[f3] ])
+    
+    phi_local  = np.array(list(map( lambda x_g : local_f( x_g , A ,  phi_a  , 1), x_i)))
+    dphi_local = np.array(list(map( lambda x_g : local_f( x_g , A , dphi_a  , 1), x_i)))
+            
+    u_s_local  = np.array(list(map( lambda x_g : u_s_Teo( x_g )                 , x_i)))
+    du_s_local = np.array(list(map( lambda x_g : du_s_Teo( x_g , normals[c] )   , x_i)))
+            
+    Integrate = np.sum( (dphi_local * u_s_local  -  phi_local * du_s_local) * W )    
+                
+    return Integrate
+
+
+def Exact_aproach_with_u_s_Teo_Pool( face_array , vert_array , phi , dphi , N ):
+    
+    mesh    = trimesh.Trimesh(vertices=vert_array , faces=face_array)
+    normals = mesh.face_normals
+    Areas   = mesh.area_faces
+    
+    quadrule = quadratureRule_fine(N)
+    X_K , W  = quadrule[0].reshape(-1,3) , quadrule[1]
+    
+    def integrate_i(c):
+        return S_ex_integrate_face(c , face_array , vert_array  , normals, phi ,
+                                   dphi, X_K , W , N)
+    #def testirijillo(i):
+    #    return 1./(i+10.)**5
+    
+    Integrates = np.array(Pool().map( integrate_i , np.arange(len(face_array)) )) 
+        
+    Solv_Exact_i = K * Integrates * ep_m * Areas
+            
+    
+    return np.sum(Solv_Exact_i) , Solv_Exact_i
+
+
+def S_Exact_in_Adjoint_Mesh_with_N_Ref_Pool(mol_name , grid  , dens , input_suffix , N , N_ref ,
+                                        save_energy_plot=False  , test_mode = False , return_times = False):
+    
+    face_array = np.transpose(grid.leaf_view.elements)
+    vert_array = np.transpose(grid.leaf_view.vertices)
+    
+    aux_face = face_array.copy()
+    aux_vert = vert_array.copy()
+    print(np.shape(face_array))
+    
+    
+    flat_ref_time_init = time.time()
+    if N_ref == 0:
+        adj_grid = grid
+        flat_ref_time = time.time()-flat_ref_time_init
+        
+    elif N_ref>=1:
+        flat_ref_time_init = time.time()
+        
+        aux_grid = grid
+        i=1
+        while i <= N_ref:
+
+            #new_face , new_vertex = mesh_refiner(  aux_face +1 , aux_vert , np.ones((len(aux_face[0:,]))) , 1.5 )
+            
+            #aux_face , aux_vert   = new_face.copy() , new_vertex.copy()
+            
+            #aux_grid =  aux_grid.refine()
+            
+            mesh = trimesh.Trimesh(vertices=aux_vert , faces=aux_face)
+            aux_mesh = mesh.subdivide()
+            aux_vert , aux_face = aux_mesh.vertices , aux_mesh.faces
+
+            i+=1
+        
+        flat_ref_time = time.time()-flat_ref_time_init
+
+    if N_ref>=1:
+        print('The flat refinement was done in {0:.2f} seconds'.format(flat_ref_time))
+    
+    
+    saving_refined_mesh_init = time.time()
+    vert_and_face_arrays_to_text_and_mesh( mol_name , aux_vert , aux_face+1 ,
+                                                  input_suffix +
+                                                  '_adj_'+ str(i-1), dens=dens, Self_build=True)
+    
+    saving_refined_mesh_time = time.time() - saving_refined_mesh_init
+    #adj_grid = aux_grid
+    adj_grid  = Grid_loader( mol_name , dens , input_suffix + '_adj_' + str(N_ref) , 'Self')       
+        
+    print('The grid was uniformly refined in {0:.2f} seconds'.format(flat_ref_time))
+    
+    adj_face_array = np.transpose(adj_grid.leaf_view.elements) 
+    adj_vert_array = np.transpose(adj_grid.leaf_view.vertices)
+    print(np.shape(adj_face_array))
+
+    #adj_el_pos = check_contained_triangles__(grid , adj_grid)
+    
+    #print(len(adj_face_array))
+    #print(adj_el_pos)
+    init_time_spaces_adj  = time.time()
+    dirichl_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order)
+    neumann_space_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order) 
+    dual_to_dir_s_phi = bempp.api.function_space(adj_grid,  mesh_info.phi_space , mesh_info.phi_order)
+    spaces_time_adj   = time.time()-init_time_spaces_adj
+    
+    phi , dphi , operators_time_adj , matrix_time_adj , GMRES_time_adj , phidphi_time , it_count = adjoint_equation( dirichl_space_phi , neumann_space_phi , dual_to_dir_s_phi , 
+                                            save_plot = True , suffix = '_'+str(N_ref) )
+    init_time_S_Ex = time.time()
+    
+    S_Ex , S_Ex_j = Exact_aproach_with_u_s_Teo_Pool( adj_face_array , adj_vert_array ,
+                                                    phi.coefficients.real , dphi.coefficients.real , N )
+    #S_Ex    , rearange_S_Ex_i  , S_Ex_i , _= Exact_aproach_with_u_s_Teo( adj_face_array , adj_vert_array , phi , dphi , N , 
+    #                                             grid_relation = adj_el_pos , return_values_on_Adj_mesh = True)
+        
+    N_el_adjoint = len(adj_face_array)
+    
+    
+    if test_mode:
+        
+        adj_el_pos = (np.arange(len(adj_face_array))/4).astype(int)
+        
+        const_space = bempp.api.function_space(adj_grid,  "DP", 0)
+        counter     = bempp.api.GridFunction(const_space, fun=None, coefficients=adj_el_pos )
+        bempp.api.export('Molecule/' + mol_name +'/' + mol_name + '_{0}{1}_Counter_{2}.msh'.format( 
+                                        dens, input_suffix , N_ref )
+                     , grid_function = counter , data_type = 'element')
+        
+        const_space_u = bempp.api.function_space(grid,  "DP", 0)
+        counter_u     = bempp.api.GridFunction(const_space_u, fun=None, coefficients=np.arange(len(face_array)) )
+        bempp.api.export('Molecule/' + mol_name +'/' + mol_name + '_{0}{1}_Counter_original_{2}.msh'.format( 
+                                        dens, input_suffix , N_ref )
+                     , grid_function = counter_u , data_type = 'element')
+    
+    if save_energy_plot:
+        const_space = bempp.api.function_space(adj_grid,  "DP", 0)
+        S_Ex_BEMPP  = bempp.api.GridFunction(const_space, fun=None, coefficients=S_Ex_i)
+        bempp.api.export('Molecule/' + mol_name +'/' + mol_name + '_{0}{1}_S_Exact_{2}.msh'.format( 
+                                        dens, input_suffix , N_ref )
+                     , grid_function = S_Ex_BEMPP , data_type = 'element')
+    
+    
+    print('Exact solvation energy {0:.5f} [kcal/kmol]'.format(S_Ex))
+    rearange_S_Ex_i = np.sum( np.reshape(S_Ex_j , (-1,4**N_ref) )  , axis = 1)
+    S_Ex_time      = time.time()-init_time_S_Ex
+    
+    
+    return (S_Ex , rearange_S_Ex_i , it_count , N_el_adjoint , flat_ref_time , spaces_time_adj , operators_time_adj , 
+                matrix_time_adj , GMRES_time_adj , phidphi_time , S_Ex_time )

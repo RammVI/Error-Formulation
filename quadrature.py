@@ -23,11 +23,13 @@ def unpack_info( face , face_array, vert_array , soln , space , order):
     
     if space == 'DP' and order == 0:
         
-        fc = 0
-        for f in face_array:
-            if (f==np.array((f1+1,f2+1,f3+1)).astype(int)).all():
-                break
-            fc += 1
+        fc = np.where( np.all(face_array == face + 1 , axis=1  ) )[0][0]
+        
+        #fc = 0
+        #for f in face_array:
+        #    if (f==np.array((f1+1,f2+1,f3+1)).astype(int)).all():
+        #        break
+        #    fc += 1
 
         return soln.coefficients.real[fc]
     
@@ -146,6 +148,12 @@ def evaluation_points_and_weights(v1,v2,v3 , N):
     
     
     return X_K , W
+
+def evaluation_points_and_weights_new(v1,v2,v3 , N , X_K , W):
+    
+    x_k_fun = lambda i : np.dot(X_K[i] , (v1,v2,v3) )
+    x_k =  np.array([ x_k_fun(i) for i in range(N)]) 
+    return x_k
 
 
 
@@ -973,3 +981,49 @@ def scalar_times_laplacian_trimesh(mesh , scalar_func , laplacian_func , N , h ,
         return suma*mesh.volume / total_points , total_points , values_W
             
     return suma*mesh.volume / total_points , total_points
+
+import time
+def delta_G_tent_3(grid , U , dU , U_space , U_order , N):
+    
+    face_array = np.transpose(grid.leaf_view.elements) 
+    vert_array = np.transpose(grid.leaf_view.vertices)
+    
+    init_time_x_i = time.time()
+    
+    quadrule = quadratureRule_fine(N)
+    X_K , W  = quadrule[0].reshape(-1,3) , quadrule[1]
+    
+    x_i = np.array( [evaluation_points_and_weights_new(vert_array[face[0]] ,
+                                                 vert_array[face[1]] ,
+                                                 vert_array[face[2]] , N , X_K , W) for face in face_array ])
+    print('Time to create grid points = {0:.4f}'.format(time.time()-init_time_x_i))
+    
+    if U_space == 'DP' and U_order == 0:
+
+        mesh = trimesh.Trimesh(vertices=vert_array , faces=face_array)
+        normals = mesh.face_normals
+        Areas = mesh.area_faces
+
+        
+        
+        #Integral_func = lambda c : Delta_G_tent_int(c , face_array , vert_array , normals , Areas
+        #                                            ,U , dU , N , X_K , W)
+        
+        u_c_func  = lambda x_i : u_s_Teo(x_i , x_q , q)
+        du_c_func = lambda x_i : du_s_Teo(x_i, normals[c] , x_q , q)
+        u_c_face  = np.array([ u_c_func(x) for x in x_i]) 
+        du_c_face = np.array([du_c_func(x) for x in x_i]) 
+        
+        
+        integrals_init_time = time.time()
+        I1 = np.array([ np.sum( u_c_face[:,i] * W) for i in range(len(face_array))  ]) * dU
+        I2 = np.array([ np.sum(du_c_face[:,i] * W) for i in range(len(face_array))  ]) *  U
+        
+        Integral = (I1-I2)*Areas     
+        print('Integrals time {0:.4f}'.format(time.time()-integrals_init_time))
+
+    Solv_Ex_i = K * ep_m * Integral 
+    
+    print('Aproximated Solvation energy {0:.6f}'.format(np.sum(Solv_Ex_i)))
+    
+    return np.sum(Solv_Ex_i) , np.reshape(Solv_Ex_i , (-1,1))

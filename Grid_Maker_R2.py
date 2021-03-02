@@ -6,6 +6,7 @@ from math import pi
 from bempp.api.operators.boundary import sparse, laplace, modified_helmholtz
 from matplotlib import pylab as plt
 from File_converter_python2 import *
+import trimesh
 
 # This python must be saved in a directory where you have a folder named
 # /Molecule/Molecule_Name, as obviusly Molecule_Name holds a .pdb or .pqr file
@@ -150,8 +151,8 @@ def NanoShaper_config(xyzr_file , dens , probe_radius):
               ,  'Save_PovRay = false'                     )
     return t1
 
-def xyzr_to_msh(mol_name , dens , probe_radius , stern_thickness , min_area , Mallador = 'MSMS',
-               suffix = ''):
+def xyzr_to_msh(mol_name , dens , probe_radius , stern_thickness , min_area , Mallador ,
+               suffix = '' , build_msh=True):
     '''
     Makes msh (mesh format for BEMPP) from xyzr file
     mol_name : Abreviated name of the molecule
@@ -189,7 +190,7 @@ def xyzr_to_msh(mol_name , dens , probe_radius , stern_thickness , min_area , Ma
         os.system(exe)
         print('Normal .vert & .face Done')
 
-        grid = factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suffix = '-0')
+        grid = factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suffix = '-0', build_msh=build_msh)
         print('Normal .msh Done')
         
         # As the possibility of using a stern layer is available:
@@ -203,8 +204,8 @@ def xyzr_to_msh(mol_name , dens , probe_radius , stern_thickness , min_area , Ma
             print('Stern .msh Done')
         
     elif Mallador == 'NanoShaper': 
-        Mallador= os.path.join('Software','nanoshaper','NanoShaper')
-        config  = os.path.join('Software','nanoshaper','config')
+        Ubication = os.path.join('Software','NanoShaper','NanoShaper')
+        config  = os.path.join('Software','NanoShaper','config')
         
         # NanoShaper options can be changed from the config file
         Config_text = open(config,'w')
@@ -215,22 +216,28 @@ def xyzr_to_msh(mol_name , dens , probe_radius , stern_thickness , min_area , Ma
         Config_text.close()
         
         # Files are moved to the same directory
-        os.system(' '.join( ('./'+Mallador,config)  ))
+        os.system(' '.join( ('./'+Ubication,config)  ))
         
         Files = ('triangleAreas{0:s}.txt','triangulatedSurf{0:s}.face' ,'triangulatedSurf{0:s}.vert',
          'exposedIndices{0:s}.txt','exposed{0:s}.xyz  ' , 'stderror{0:s}.txt' )
         for f in Files:
-            os.system(' '.join( ('mv ', f.format('') 
-                                 , os.path.join(mol_directory,f.format('_'+str(dens))))))
+
+            if f[-4:]=='vert':
+                os.system(' '.join( ('mv ', f.format('') 
+                                 , os.path.join(mol_directory,'{0}_{1}{2}.vert'.format(mol_name , str(dens), suffix)))))
+            if f[-4:]=='face':
+                os.system(' '.join( ('mv ', f.format('')  
+                                 , os.path.join(mol_directory,'{0}_{1}{2}.face'.format(mol_name , str(dens), suffix)))))
             
-        if not os.path.isfile(os.path.join(path , 'triangulatedSurf{0:s}.vert'.format('_'+str(dens)))):
-            print('Algo salio mal! .vert no se ha creado')
-            return 'Error'
+        if not os.path.isfile(os.path.join(path , '{0:s}{1:s}{2:s}.vert'.format(mol_name, '_'+str(dens) , suffix))):
+            print('Fatal error : Vert file not created.')
+            
         
         print('Normal .vert & .face Done')
         
-        grid = factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador = 'NanoShaper' )
-        print('msh File Done')
+        #checked until here, everything looks alright
+        grid = factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suffix = '-0',build_msh=build_msh)
+        print('Loaded the grid (.msh format)')
         
         if stern_thickness>0:
             # NanoShaper options can be changed only in the config file
@@ -250,12 +257,12 @@ def xyzr_to_msh(mol_name , dens , probe_radius , stern_thickness , min_area , Ma
                                      , os.path.join(mol_directory,f.format('_stern_'+str(dens)))))) 
             print('Stern .vert & .face Done')
             
-            stern_grid= factory_fun_msh( mol_directory , mol_name+'_stern', min_area , dens , Mallador = 'NanoShaper')
+            stern_grid= factory_fun_msh( mol_directory , mol_name+'_stern', min_area , dens , Mallador = Mallador)
             print('stern_.msh File Done')
     print('Mesh Ready')
     return
 
-def factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suffix = ''):
+def factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suffix = '', build_msh = True):
     '''
     This functions builds msh file adding faces and respective vertices.
     mol_directory : Directory of the molecule
@@ -268,20 +275,35 @@ def factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suf
     '''
     # Factory function for creating a .msh file from .vert & .face files
     factory = bempp.api.grid.GridFactory()
-    
+    print(Mallador)
     # .vert and .face files are readed    
     if Mallador == 'MSMS':
-        vert_Text = open( os.path.join(mol_directory , mol_name +'_{0:s}{1}.vert'.format(str(dens),suffix) ),'r' ).read().split('\n')
-        face_Text = open( os.path.join(mol_directory , mol_name +'_{0:s}{1}.face'.format(str(dens),suffix) ),'r' ).read().split('\n')
+        print('Loading the MSMS grid.')
+        #vert_Text = open( os.path.join(mol_directory , mol_name +'_{0:s}{1}.vert'.format(str(dens),suffix) ),'r' ).read().split('\n')
+        #face_Text = open( os.path.join(mol_directory , mol_name +'_{0:s}{1}.face'.format(str(dens),suffix) ),'r' ).read().split('\n')
+        vert_Text = np.loadtxt(os.path.join(mol_directory , mol_name +'_{0:s}{1}.vert'.format(str(dens),suffix) ) , usecols=(0,1,2))
+        face_Text = np.loadtxt(os.path.join(mol_directory , mol_name +'_{0:s}{1}.face'.format(str(dens),suffix) ) , dtype=int , usecols=(0,1,2))
     elif Mallador == 'NanoShaper':
-        vert_Text = open( os.path.join(mol_directory , 'triangulatedSurf_{0:s}.vert'.format(str(dens)) ),'r' ).read().split('\n')
-        face_Text = open( os.path.join(mol_directory , 'triangulatedSurf_{0:s}.face'.format(str(dens)) ),'r' ).read().split('\n')
+        print('Loading the NanoShaper grid.')
+        #print(os.path.join(mol_directory , mol_name +'_{0:s}{1}.vert'.format(str(dens),suffix) ))
+        #vert_Text = open( os.path.join(mol_directory , mol_name +'_{0:s}{1}.vert'.format(str(dens),suffix) ),'r' ).read().split('\n')
+        #face_Text = open( os.path.join(mol_directory , mol_name +'_{0:s}{1}.face'.format(str(dens),suffix) ),'r' ).read().split('\n') 
+        vert_Text = np.loadtxt(os.path.join(mol_directory , mol_name +'_{0:s}{1}.vert'.format(str(dens),suffix) ) , skiprows=3 , usecols=(0,1,2) )
+        face_Text = np.loadtxt(os.path.join(mol_directory , mol_name +'_{0:s}{1}.face'.format(str(dens),suffix) ) , skiprows=3 , usecols=(0,1,2) , dtype=int)-1
+        
     elif Mallador == 'Self':
+        print('Loading the built grid.')
         vert_Text = open( os.path.join(mol_directory , mol_name +'_{0:s}{1}.vert'.format(str(dens),suffix) ),'r' ).read().split('\n')
         face_Text = open( os.path.join(mol_directory , mol_name +'_{0:s}{1}.face'.format(str(dens),suffix) ),'r' ).read().split('\n')
+        
+        #vert_Text = np.loadtxt(os.path.join(mol_directory , mol_name +'_{0:s}{1}.vert'.format(str(dens),suffix) ) )
+        #face_Text = np.loadtxt(os.path.join(mol_directory , mol_name +'_{0:s}{1}.face'.format(str(dens),suffix) ) )-1
     
+        
     xcount, atotal, a_excl = 0, 0., 0.
     vertex = np.empty((0,3))
+    
+    face_array = np.empty((0,3)) #DELETEX
     
 
     # Lets load the bempp plugging to add elements
@@ -291,27 +313,52 @@ def factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suf
     
     # Let's separe by mallator criteria because of diferent handling of info
     if Mallador !='Self': 
+        if not build_msh:
+            return None
+        print('Assembling the msh file.')
         
-        for line in vert_Text:
-            line = line.split()
-            if len(line) != 9: continue
-            vertex = np.vstack(( vertex, np.array([line[0:3]]).astype(float) ))
-            factory.insert_vertex(vertex[-1])
+        mesh = trimesh.Trimesh(vertices=vert_Text , faces=face_Text)
+        l=-10
+        c=0
+        for meshie in mesh.split():
+            if len(meshie.faces)>l:
+                l=len(meshie.faces)
+                larger = c
+            c+=1
+
+        mesh_t = mesh.split()[larger]
+        
+        for vert in mesh_t.vertices:
+            factory.insert_vertex(vert)
+        
+        for face in mesh_t.faces:
+            factory.insert_element(face)
+            
+        
 
         
-        for line in face_Text:
-            line = line.split()
-            if len(line)!=5 : continue
-            A, B, C, _, _ = np.array(line).astype(int)
-            side1, side2  = vertex[B-1]-vertex[A-1], vertex[C-1]-vertex[A-1]
-            face_area = 0.5*np.linalg.norm(np.cross(side1, side2))
-            atotal += face_area
-            if face_area > min_area:
-                factory.insert_element([A-1, B-1, C-1])
-            else:
-                xcount += 1.4        
-                a_excl += face_area 
-    
+        #for line in vert_Text:
+        #    line = line.split()
+        #    if len(line) != 9: continue
+        #    vertex = np.vstack(( vertex, np.array([line[0:3]]).astype(float) ))
+        #    factory.insert_vertex(vertex[-1])
+        
+        #for line in face_Text:
+        #    line = line.split()
+        #    if len(line)!=5 : continue
+        #    A, B, C, _, _ = np.array(line).astype(int)
+        #    face_array = np.vstack((face_array , np.array([A-1,B-1,C-1])))
+        #    side1, side2  = vertex[B-1]-vertex[A-1], vertex[C-1]-vertex[A-1]
+        #    face_area = 0.5*np.linalg.norm(np.cross(side1, side2))
+        #    atotal += face_area
+        #    if face_area > min_area:
+        #        factory.insert_element([A-1, B-1, C-1])
+        #    else:
+        #        xcount += 1.4        
+        #        a_excl += face_area 
+        #dif_vert = np.linalg.norm( face_Text_2[:,:3]-face_array ,axis=1)
+        #print(dif_vert)
+        
     elif Mallador == 'Self':
         for line in vert_Text[:-1]:
             line = line.split()
@@ -321,6 +368,7 @@ def factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suf
         for line in face_Text[:-1]:
             line = line.split()
             A, B, C = np.array(line).astype(int)
+            face_array = np.vstack((face_array , np.array([A-1,B-1,C-1])))
             side1, side2  = vertex[B-1]-vertex[A-1], vertex[C-1]-vertex[A-1]
             face_area = 0.5*np.linalg.norm(np.cross(side1, side2))
             atotal += face_area
@@ -329,7 +377,8 @@ def factory_fun_msh( mol_directory , mol_name , min_area , dens , Mallador , suf
             else:
                 xcount += 1.4        
                 a_excl += face_area 
-                
+        #dif_face = np.linalg.norm( face_Text_2[:,:3]-face_array ,axis=1)
+        #print(dif_face)
     
     grid = factory.finalize()
     
@@ -473,7 +522,7 @@ def vert_and_face_arrays_to_text_and_mesh(mol_name , vert_array , face_array , s
     
     return None
 
-def Grid_loader(mol_name , mesh_density , suffix , GAMer=False):
+def Grid_loader(mol_name , mesh_density , suffix , Mallador , GAMer=False, build_msh = True):
     
     path = os.path.join('Molecule',mol_name)
     grid_name_File =  os.path.join(path,mol_name + '_'+str(mesh_density)+suffix+'.msh')
@@ -490,10 +539,16 @@ def Grid_loader(mol_name , mesh_density , suffix , GAMer=False):
     if suffix == '-0':
         pqr_to_xyzr(mol_name , stern_thickness=0 , method = 'amber' )
         xyzr_to_msh(mol_name , mesh_density , 1.4 , 0 , 0
-                    , Mallador = 'MSMS', suffix = suffix )
+                    , Mallador, suffix = suffix , build_msh = build_msh)
+    if not build_msh:
         
-    print('Working on '+grid_name_File )
+        return None    
+    
+    #print('Working on '+grid_name_File )
     grid = bempp.api.import_grid(grid_name_File)
+    
+    
+    
     if GAMer:
         face_array = np.transpose(grid.leaf_view.elements)+1
         vert_array = np.transpose(grid.leaf_view.vertices)
@@ -507,7 +562,7 @@ def Grid_loader(mol_name , mesh_density , suffix , GAMer=False):
     
     return grid
 
-
+from constants import *
 def fine_grid_maker(mol_name , dens_f=40.0):
     '''
     Does a 40.0 grid
@@ -521,9 +576,9 @@ def fine_grid_maker(mol_name , dens_f=40.0):
     if os.path.isfile( path + '.vert' ):
         return None        
     
-    from constants import *
+
     x_q , q = run_pqr(mol_name)
-    Grid_loader( mol_name , dens_f , '-0' , GAMer = False)
+    Grid_loader( mol_name , dens_f , '-0' , 'MSMS' , GAMer = False  , build_msh = False)
     
     return None
 

@@ -22,6 +22,7 @@
 import numpy as np
 from math import pi
 import os
+import time
 
 def search_unique_position_in_array(array , main_array):
     '''
@@ -97,6 +98,19 @@ def common_verts_between_2_triangles( face_1 , face_2 ):
                 c+=1
                 
     return common_verts.astype(int)
+
+def vert_to_array(mol_name , total_suffix , txt_format , info_type=float):
+    '''
+    Rutine which builds the vert array from text files that contain the vert data
+    mol_name : Abreviated name of the molecule
+    total_suffix   : text added after molecule name, for an easier handling of files 
+                     may be taken as a total and used like _{density}-{it_count}
+    txt_format : file format
+    info_type  : float or int
+    '''
+    vert_array = np.loadtxt( os.path.join(path , mol_name +total_suffix + txt_format) )
+    
+    return vert_array
         
 def text_to_list(mol_name , total_suffix , txt_format , info_type=float):
     '''
@@ -550,7 +564,7 @@ def mesh_refiner(face_array , vert_array , soln , percentaje ):
 def newvert(vA,vB):
     return 0.5*(vA+vB)
 
-def smoothing_vertex( vert_array , fine_vert_array ):
+def smoothing_vertex_old( vert_array , fine_vert_array ):
     '''
     Smooths verts from a finer mesh
     '''
@@ -575,6 +589,30 @@ def smoothing_vertex( vert_array , fine_vert_array ):
     
     return smooted_vert_array 
  
+def smoothing_vertex( new_vert_array , fine_vert_array ):
+    '''
+    Smooths verts from a finer mesh
+    '''
+    
+    smoothed_vert_array = np.zeros((len(new_vert_array),3))
+    
+    c=0
+    for vert in new_vert_array:
+        #init_time_0 = time.time()
+        
+        radii_i = np.linalg.norm( vert - fine_vert_array , axis = 1)
+        min_radii = np.min(radii_i)
+        
+        #print('radio minimo = {0:.10f}'.format(min_radii))
+        
+        index_min = np.where(abs(radii_i) < min_radii + 1.e-12)
+
+        smoothed_vert_array[c,:] = fine_vert_array[index_min[0][0]]
+        #smoothing_time = time.time()-init_time_0
+        #print('Smoothing time per element: {0:.10f}'.format(smoothing_time))
+        c+=1    
+    
+    return smoothed_vert_array 
     
 def is_interior_triangle(adj_vertices , local_vert_array):
     '''
